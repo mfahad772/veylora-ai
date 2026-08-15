@@ -1,0 +1,12 @@
+asgiref==3.12.1
+babel==2.18.0
+charset-normalizer==3.4.9
+customtkinter==6.0.0
+darkdetect==0.8.0
+Django==6.1
+packaging==26.2
+pillow==12.3.0
+reportlab==5.0.0
+sqlparse==0.6.0
+tkcalendar==1.6.1
+tzdata==2026.3

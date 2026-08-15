@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ tool.name }} - Veylora AI</title>
+
+<meta name="description"
+      content="{{ tool.description }} Explore {{ tool.name }} on Veylora AI.">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0f19;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #202638;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        nav a {
+            color: #cbd0dc;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 0 80px;
+        }
+
+        .back {
+            display: inline-block;
+            color: #9da6b8;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        .detail-card {
+            background: #121827;
+            border: 1px solid #252d40;
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .top {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: #1c2335;
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .top h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #211f45;
+            color: #9d96ff;
+            padding: 7px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        .type {
+            display: inline-block;
+            margin-left: 8px;
+            background: #192333;
+            color: #9da6b8;
+            padding: 7px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        .description {
+            color: #aeb5c5;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+        .section {
+            border-top: 1px solid #252d40;
+            padding-top: 28px;
+            margin-top: 28px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            color: #9da6b8;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #1d2538;
+            color: #aeb7ca;
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        .button-area {
+            margin-top: 30px;
+        }
+
+        .official-button {
+            display: inline-block;
+            padding: 14px 24px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .official-button:hover {
+            background: #584ee8;
+            transform: translateY(-2px);
+        }
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #171d2b;
+            border: 1px solid #252d40;
+            border-radius: 10px;
+            color: #7f899c;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        footer {
+            border-top: 1px solid #202638;
+            text-align: center;
+            padding: 30px;
+            color: #7f8798;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            color: #9da6b8;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .container {
+                width: 90%;
+                padding-top: 35px;
+            }
+
+            .detail-card {
+                padding: 25px;
+            }
+
+            .top {
+                align-items: flex-start;
+            }
+
+            .icon {
+                width: 65px;
+                height: 65px;
+                font-size: 32px;
+            }
+
+            .top h1 {
+                font-size: 27px;
+            }
+
+            .type {
+                margin-left: 0;
+                margin-top: 7px;
+            }
+
+            .official-button {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Veylora <span>AI</span>
+    </div>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/ai-image-tools/">
+            AI Image Tools
+        </a>
+
+        <a href="/ai-video-tools/">
+            AI Video Tools
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+
+    <a href="/" class="back">
+        ← Back to Home
+    </a>
+
+
+    <div class="detail-card">
+
+
+        <div class="top">
+
+
+            <div class="icon">
+                {{ tool.icon }}
+            </div>
+
+
+            <div>
+
+                <h1>
+                    {{ tool.name }}
+                </h1>
+
+                <span class="category">
+                    {{ tool.category }}
+                </span>
+
+                <span class="type">
+                    {{ tool.type }}
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <p class="description">
+            {{ tool.description }}
+        </p>
+
+
+        <div class="section">
+
+            <h2>
+                About {{ tool.name }}
+            </h2>
+
+            <p>
+                {{ tool.name }} is an AI-powered platform
+                designed to help creators work with
+                digital content more efficiently.
+                Explore the official platform to learn
+                about its latest features, capabilities
+                and available options.
+            </p>
+
+        </div>
+
+
+        <div class="section">
+
+            <h2>
+                Features & Categories
+            </h2>
+
+
+            <div class="tags">
+
+
+                {% for tag in tool.tags %}
+
+                    <span class="tag">
+                        {{ tag }}
+                    </span>
+
+                {% empty %}
+
+                    <span class="tag">
+                        AI Tool
+                    </span>
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+
+            <h2>
+                Visit Official Tool
+            </h2>
+
+
+            <p>
+                Visit the official website of
+                {{ tool.name }} to use the platform
+                and explore its available features.
+            </p>
+
+
+            <div class="button-area">
+
+
+                <a href="{{ tool.official_url }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="official-button">
+
+                    Visit Official Tool →
+
+                </a>
+
+
+            </div>
+
+
+            <div class="notice">
+
+                Veylora AI is an independent AI tools
+                directory. The official tool opens on
+                its respective website. Veylora AI is
+                not affiliated with or endorsed by the
+                listed tool providers.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/">
+            About
+        </a>
+
+        <a href="/privacy/">
+            Privacy
+        </a>
+
+        <a href="/terms/">
+            Terms
+        </a>
+
+        <a href="/disclaimer/">
+            Disclaimer
+        </a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+    </div>
+
+
+    <p>
+        © 2026 Veylora AI. All rights reserved.
+    </p>
+
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Video Tools - Veylora AI</title>
+
+    <meta name="description"
+          content="Discover powerful AI video generators, editors, avatar tools, animation platforms and image-to-video tools on Veylora AI.">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0f19;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #202638;
+            background: #0b0f19;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7568ff;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cbd0dc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 0 80px;
+        }
+
+        .back {
+            display: inline-block;
+            color: #9da6b8;
+            text-decoration: none;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #ffffff;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #7568ff;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+            color: #aeb5c5;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .count {
+            display: inline-block;
+            margin-top: 20px;
+            background: #211f45;
+            color: #9d96ff;
+            padding: 8px 15px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        /* SEARCH BAR */
+
+        .search-wrapper {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto 45px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 54px;
+            padding: 0 55px 0 20px;
+            background: #121827;
+            border: 1px solid #252d40;
+            border-radius: 12px;
+            outline: none;
+            color: #ffffff;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .search-input::placeholder {
+            color: #7f8798;
+        }
+
+        .search-input:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8f98ad;
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        /* TOOLS */
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .tool-card {
+            background: #121827;
+            border: 1px solid #252d40;
+            border-radius: 17px;
+            padding: 25px;
+            transition: 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #6c63ff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: #1c2335;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .tool-card h2 {
+            color: #ffffff;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #211f45;
+            color: #9d96ff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .tool-card p {
+            color: #9da6b8;
+            line-height: 1.65;
+            font-size: 14px;
+            min-height: 70px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            background: #6c63ff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #584ee8;
+        }
+
+        /* NO RESULTS */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 45px 20px;
+            color: #8f98ad;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #202638;
+            padding: 35px 7%;
+            color: #7f8798;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            color: #9da6b8;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .container {
+                width: 90%;
+                padding-top: 40px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-wrapper {
+                margin-bottom: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a href="/" class="logo">
+        Veylora <span>AI</span>
+    </a>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/ai-image-tools/">
+            AI Image Tools
+        </a>
+
+        <a href="/ai-video-tools/">
+            AI Video Tools
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+
+    <a href="/" class="back">
+        ← Back to Home
+    </a>
+
+
+    <section class="hero">
+
+        <h1>
+            AI <span>Video Tools</span>
+        </h1>
+
+        <p>
+            Discover powerful AI video generators, editors,
+            avatar platforms, animation tools and image-to-video
+            solutions for your creative projects.
+        </p>
+
+        <span class="count">
+            {{ tool_count }} AI Video Tools
+        </span>
+
+    </section>
+
+
+    <!-- SEARCH BAR -->
+
+    <div class="search-wrapper">
+
+        <input
+            type="text"
+            id="toolSearch"
+            class="search-input"
+            placeholder="Search AI video tools..."
+            autocomplete="off"
+        >
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+    </div>
+
+
+    <!-- TOOLS GRID -->
+
+    <section class="tools-grid" id="toolsGrid">
+
+
+        {% for tool in tools %}
+
+
+        <div class="tool-card"
+             data-search="{{ tool.name|lower }} {{ tool.category|lower }} {{ tool.description|lower }}">
+
+
+            <div class="tool-icon">
+                {{ tool.icon }}
+            </div>
+
+
+            <h2>
+                {{ tool.name }}
+            </h2>
+
+
+            <span class="category">
+                {{ tool.category }}
+            </span>
+
+
+            <p>
+                {{ tool.description }}
+            </p>
+
+
+            <a href="{% url 'tool_detail' tool.slug %}"
+               class="button">
+
+                View Details →
+
+            </a>
+
+
+        </div>
+
+
+        {% empty %}
+
+
+        <div class="tool-card">
+
+            <div class="tool-icon">
+                ⚠️
+            </div>
+
+            <h2>
+                No Tools Found
+            </h2>
+
+            <p>
+                No AI video tools are currently available.
+            </p>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </section>
+
+
+    <div class="no-results" id="noResults">
+
+        No video tools found. Try a different search.
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/">
+            About
+        </a>
+
+        <a href="/privacy/">
+            Privacy
+        </a>
+
+        <a href="/terms/">
+            Terms
+        </a>
+
+        <a href="/disclaimer/">
+            Disclaimer
+        </a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+    </div>
+
+    <p>
+        © 2026 Veylora AI. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    const searchInput = document.getElementById("toolSearch");
+    const toolCards = document.querySelectorAll(".tool-card[data-search]");
+    const noResults = document.getElementById("noResults");
+
+    searchInput.addEventListener("input", function () {
+
+        const searchText = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        toolCards.forEach(function (card) {
+
+            const searchableText = card.getAttribute("data-search");
+
+            if (searchableText.includes(searchText)) {
+
+                card.style.display = "block";
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+        if (searchText !== "" && visibleCount === 0) {
+
+            noResults.style.display = "block";
+
+        } else {
+
+            noResults.style.display = "none";
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

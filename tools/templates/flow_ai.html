@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flow AI - Veylora AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0f19;
+            color: white;
+        }
+
+        header {
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #202638;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        nav a {
+            color: #cbd0dc;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .back {
+            display: inline-block;
+            color: #9da6b8;
+            text-decoration: none;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1c2335;
+            border: 1px solid #30384d;
+            border-radius: 20px;
+            font-size: 42px;
+        }
+
+        .tool-header h1 {
+            font-size: 46px;
+            margin-bottom: 8px;
+        }
+
+        .tool-header p {
+            color: #8f98aa;
+            font-size: 15px;
+        }
+
+        .description {
+            color: #aeb5c5;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .tags {
+            margin-bottom: 35px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #1d2538;
+            color: #aeb7ca;
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            margin-right: 7px;
+            margin-bottom: 7px;
+        }
+
+        .visit-button {
+            display: inline-block;
+            padding: 14px 25px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .visit-button:hover {
+            background: #584ee8;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 25px 80px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .feature {
+            background: #121827;
+            border: 1px solid #252d40;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #929bad;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #121827;
+            border: 1px solid #252d40;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #252d40;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #8f98aa;
+        }
+
+        .info-value {
+            color: white;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid #202638;
+            text-align: center;
+            padding: 30px;
+            color: #7f8798;
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                display: none;
+            }
+
+            .tool-header {
+                align-items: flex-start;
+            }
+
+            .tool-header h1 {
+                font-size: 36px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .info-row {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Veylora <span>AI</span>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/ai-image-tools/">AI Image Tools</a>
+        <a href="/ai-video-tools/">AI Video Tools</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <a href="/ai-video-tools/" class="back">
+        ← Back to AI Video Tools
+    </a>
+
+
+    <div class="tool-header">
+
+        <div class="tool-icon">
+            🌊
+        </div>
+
+        <div>
+
+            <h1>Flow AI</h1>
+
+            <p>
+                AI Image & Video Creation Tool
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <p class="description">
+
+        Flow is a creative AI tool designed to help users
+        create cinematic images and videos using artificial
+        intelligence. Turn ideas and prompts into creative
+        visual content with AI-powered generation.
+
+    </p>
+
+
+    <div class="tags">
+
+        <span class="tag">
+            AI Image
+        </span>
+
+        <span class="tag">
+            AI Video
+        </span>
+
+        <span class="tag">
+            Text to Video
+        </span>
+
+        <span class="tag">
+            Image to Video
+        </span>
+
+        <span class="tag">
+            Creative AI
+        </span>
+
+    </div>
+
+
+    <a
+        href="https://labs.google/fx/tools/flow"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="visit-button"
+    >
+        Visit Official Tool →
+    </a>
+
+</section>
+
+
+<main class="content">
+
+
+    <h2 class="section-title">
+        What Can Flow AI Do?
+    </h2>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🖼️
+            </div>
+
+            <h3>
+                AI Image Creation
+            </h3>
+
+            <p>
+                Create creative visual images from
+                text-based ideas and prompts.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎬
+            </div>
+
+            <h3>
+                AI Video Generation
+            </h3>
+
+            <p>
+                Turn creative concepts into
+                AI-generated video content.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ✨
+            </div>
+
+            <h3>
+                Creative Workflow
+            </h3>
+
+            <p>
+                Experiment with AI-powered visual
+                creation for different projects.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <h2 class="section-title">
+        Tool Information
+    </h2>
+
+
+    <div class="info-box">
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Category
+            </span>
+
+            <span class="info-value">
+                AI Image & Video
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Tool Type
+            </span>
+
+            <span class="info-value">
+                Generative AI
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Image Generation
+            </span>
+
+            <span class="info-value">
+                Available
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Video Generation
+            </span>
+
+            <span class="info-value">
+                Available
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Platform
+            </span>
+
+            <span class="info-value">
+                Web
+            </span>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 Veylora AI. All rights reserved.
+
+</footer>
+
+
+</body>
+</html>

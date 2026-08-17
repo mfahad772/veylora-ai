@@ -11,6 +11,10 @@ from tools.views import (
     terms,
     disclaimer,
     contact,
+    login_view,
+    signup_view,
+    logout_view,
+    profile_view,
 )
 
 
@@ -102,6 +106,35 @@ urlpatterns = [
         "contact/",
         contact,
         name="contact"
+    ),
+
+
+    # =========================
+    # USER ACCOUNT
+    # =========================
+
+    path(
+        "login/",
+        login_view,
+        name="login"
+    ),
+
+    path(
+        "signup/",
+        signup_view,
+        name="signup"
+    ),
+
+    path(
+        "logout/",
+        logout_view,
+        name="logout"
+    ),
+
+    path(
+        "profile/",
+        profile_view,
+        name="profile"
     ),
 
 ]

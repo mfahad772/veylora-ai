@@ -53,6 +53,7 @@
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -0.4px;
+            white-space: nowrap;
         }
 
         .logo span {
@@ -62,7 +63,7 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 22px;
         }
 
         nav a {
@@ -74,6 +75,60 @@
 
         nav a:hover {
             color: #ffffff;
+        }
+
+        /* AUTH BUTTONS */
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 5px;
+        }
+
+        .auth-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 15px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid #30384d;
+            background: #151b29;
+            color: #e5e8ef !important;
+            white-space: nowrap;
+        }
+
+        .auth-button:hover {
+            border-color: #6c63ff;
+            background: #1c2335;
+            transform: translateY(-1px);
+        }
+
+        .auth-button.primary {
+            background: #6c63ff;
+            border-color: #6c63ff;
+            color: #ffffff !important;
+        }
+
+        .auth-button.primary:hover {
+            background: #584ee8;
+            border-color: #584ee8;
+            box-shadow: 0 7px 18px rgba(108, 99, 255, 0.18);
+        }
+
+        .auth-button.logout {
+            background: rgba(239, 68, 68, 0.10);
+            border-color: rgba(239, 68, 68, 0.25);
+            color: #fca5a5 !important;
+        }
+
+        .auth-button.logout:hover {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: rgba(239, 68, 68, 0.40);
+            color: #ffffff !important;
         }
 
         /* HERO */
@@ -393,6 +448,23 @@
 
         /* TABLET */
 
+        @media (max-width: 1050px) {
+
+            nav {
+                gap: 13px;
+            }
+
+            nav > a {
+                font-size: 13px;
+            }
+
+            .auth-button {
+                padding: 8px 11px;
+                font-size: 12px;
+            }
+
+        }
+
         @media (max-width: 900px) {
 
             .hero h1 {
@@ -403,6 +475,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .main-nav-link {
+                display: none;
+            }
+
         }
 
         /* MOBILE */
@@ -410,11 +486,30 @@
         @media (max-width: 600px) {
 
             header {
-                padding: 18px 5%;
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
             }
 
             nav {
+                gap: 0;
+            }
+
+            .main-nav-link {
                 display: none;
+            }
+
+            .auth-links {
+                margin-left: 0;
+                gap: 7px;
+            }
+
+            .auth-button {
+                padding: 8px 10px;
+                font-size: 11px;
+                border-radius: 8px;
             }
 
             .hero {
@@ -465,6 +560,19 @@
 
         }
 
+        @media (max-width: 400px) {
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .auth-button {
+                padding: 7px 8px;
+                font-size: 10px;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -475,23 +583,63 @@
 
 <header>
 
-    <a href="/" class="logo">
+    <a href="{% url 'home' %}" class="logo">
         Veylora <span>AI</span>
     </a>
 
+
     <nav>
 
-        <a href="/">
+        <a href="{% url 'home' %}" class="main-nav-link">
             Home
         </a>
 
-        <a href="/ai-image-tools/">
+        <a href="{% url 'image_tools' %}" class="main-nav-link">
             AI Image Tools
         </a>
 
-        <a href="/ai-video-tools/">
+        <a href="{% url 'video_tools' %}" class="main-nav-link">
             AI Video Tools
         </a>
+
+
+        <div class="auth-links">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}"
+                   class="auth-button primary">
+
+                    My Account
+
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="auth-button logout">
+
+                    Logout
+
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="auth-button">
+
+                    Login
+
+                </a>
+
+                <a href="{% url 'signup' %}"
+                   class="auth-button primary">
+
+                    Create Account
+
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </nav>
 
@@ -513,14 +661,14 @@
 
     <div class="hero-buttons">
 
-        <a href="/ai-image-tools/"
+        <a href="{% url 'image_tools' %}"
            class="hero-button">
 
             Explore Image Tools
 
         </a>
 
-        <a href="/ai-video-tools/"
+        <a href="{% url 'video_tools' %}"
            class="hero-button secondary">
 
             Explore Video Tools
@@ -569,7 +717,7 @@
                     and creative image platforms.
                 </p>
 
-                <a href="/ai-image-tools/"
+                <a href="{% url 'image_tools' %}"
                    class="category-button">
 
                     Explore Image Tools →
@@ -595,7 +743,7 @@
                     image-to-video solutions.
                 </p>
 
-                <a href="/ai-video-tools/"
+                <a href="{% url 'video_tools' %}"
                    class="category-button">
 
                     Explore Video Tools →
@@ -723,27 +871,27 @@
 
     <div class="footer-links">
 
-        <a href="/">
+        <a href="{% url 'home' %}">
             Home
         </a>
 
-        <a href="/about/">
+        <a href="{% url 'about' %}">
             About
         </a>
 
-        <a href="/privacy/">
+        <a href="{% url 'privacy' %}">
             Privacy
         </a>
 
-        <a href="/terms/">
+        <a href="{% url 'terms' %}">
             Terms
         </a>
 
-        <a href="/disclaimer/">
+        <a href="{% url 'disclaimer' %}">
             Disclaimer
         </a>
 
-        <a href="/contact/">
+        <a href="{% url 'contact' %}">
             Contact
         </a>
 

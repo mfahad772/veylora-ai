@@ -1,30 +1,16 @@
 from django.contrib import admin
 from django.urls import path, include, reverse
 from django.http import HttpResponse
-from xml.sax.saxutils import escape
 
-from tools.views import (
-    TOOLS,
-    home,
-    image_tools,
-    video_tools,
-    tool_detail,
-    about,
-    privacy,
-    terms,
-    disclaimer,
-    contact,
-    login_view,
-    signup_view,
-    logout_view,
-    profile_view,
-    welcome_view,
+from tools import views
+from tools.views import TOOLS
+
+from tools.tool_access import (
+    protected_tool_access,
+    protected_official_access,
+    welcome_router,
 )
 
-
-# =========================================================
-# MAIN DOMAIN
-# =========================================================
 
 BASE_URL = "https://veyloraai.online"
 
@@ -34,37 +20,57 @@ BASE_URL = "https://veyloraai.online"
 # =========================================================
 
 def favicon_view(request):
+
     svg = """
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="64"
+         height="64"
+         viewBox="0 0 64 64">
+
         <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#00d4ff"/>
-                <stop offset="50%" stop-color="#6c5cff"/>
-                <stop offset="100%" stop-color="#d946ef"/>
+            <linearGradient
+                id="gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+                <stop
+                    offset="0%"
+                    stop-color="#00d4ff"
+                />
+
+                <stop
+                    offset="50%"
+                    stop-color="#7b5cff"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#d946ef"
+                />
             </linearGradient>
         </defs>
 
-        <rect width="100" height="100" rx="24" fill="#080b14"/>
-
-        <path
-            d="M22 25 L43 76 Q50 88 57 76 L79 25
-               L65 25 L51 63 Q50 66 49 63
-               L36 25 Z"
-            fill="url(#g)"
+        <rect
+            width="64"
+            height="64"
+            rx="14"
+            fill="#070b14"
         />
 
-        <circle cx="76" cy="21" r="5" fill="#00eaff"/>
+        <path
+            d="M14 16 L27 48 L37 48 L50 16 L40 16 L32 38 L24 16 Z"
+            fill="url(#gradient)"
+        />
+
     </svg>
     """
 
-    response = HttpResponse(
+    return HttpResponse(
         svg,
-        content_type="image/svg+xml"
+        content_type="image/svg+xml",
     )
-
-    response["Cache-Control"] = "public, max-age=86400"
-
-    return response
 
 
 # =========================================================
@@ -72,6 +78,7 @@ def favicon_view(request):
 # =========================================================
 
 def robots_txt(request):
+
     content = """User-agent: *
 Allow: /
 
@@ -85,17 +92,15 @@ Sitemap: https://veyloraai.online/sitemap.xml
 
     return HttpResponse(
         content,
-        content_type="text/plain"
+        content_type="text/plain",
     )
 
 
 # =========================================================
-# SITEMAP.XML
+# SITEMAP
 # =========================================================
 
 def sitemap_xml(request):
-
-    urls = []
 
     public_pages = [
         "home",
@@ -108,37 +113,52 @@ def sitemap_xml(request):
         "contact",
     ]
 
-    for name in public_pages:
+    urls = []
+
+
+    # Main public pages
+    for page_name in public_pages:
+
         urls.append(
-            BASE_URL + reverse(name)
+            BASE_URL + reverse(page_name)
         )
 
+
+    # Public SEO tool detail pages
     for slug in TOOLS.keys():
 
         urls.append(
-            BASE_URL + reverse(
+            BASE_URL
+            + reverse(
                 "tool_detail",
-                kwargs={"slug": slug}
+                args=[slug],
             )
         )
 
-    xml_urls = ""
+
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+"""
+
 
     for url in urls:
-        xml_urls += f"""
-    <url>
-        <loc>{escape(url)}</loc>
-    </url>"""
 
-    sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{xml_urls}
+        xml += f"""
+    <url>
+        <loc>{url}</loc>
+    </url>
+"""
+
+
+    xml += """
 </urlset>
 """
 
+
     return HttpResponse(
-        sitemap,
-        content_type="application/xml"
+        xml,
+        content_type="application/xml",
     )
 
 
@@ -148,6 +168,7 @@ def sitemap_xml(request):
 
 urlpatterns = [
 
+    # SEO
     path(
         "robots.txt",
         robots_txt,
@@ -166,97 +187,160 @@ urlpatterns = [
         name="favicon",
     ),
 
+
+    # ADMIN
     path(
         "admin/",
         admin.site.urls,
     ),
 
+
+    # HOME
     path(
         "",
-        home,
+        views.home,
         name="home",
     ),
 
+
+    # IMAGE TOOLS
     path(
         "ai-image-tools/",
-        image_tools,
+        views.image_tools,
         name="image_tools",
     ),
 
+
+    # VIDEO TOOLS
     path(
         "ai-video-tools/",
-        video_tools,
+        views.video_tools,
         name="video_tools",
     ),
 
+
+    # =====================================================
+    # PUBLIC TOOL DETAIL PAGE
+    # Keep public for Google SEO
+    # =====================================================
+
     path(
         "tool/<slug:slug>/",
-        tool_detail,
+        views.tool_detail,
         name="tool_detail",
     ),
 
+
+    # =====================================================
+    # LOGIN REQUIRED TOOL ACCESS
+    # =====================================================
+
+    path(
+        "access-tool/<slug:slug>/",
+        protected_tool_access,
+        name="protected_tool_access",
+    ),
+
+
+    # =====================================================
+    # LOGIN REQUIRED OFFICIAL WEBSITE
+    # =====================================================
+
+    path(
+        "go/<slug:slug>/",
+        protected_official_access,
+        name="protected_official_access",
+    ),
+
+
+    # ABOUT
     path(
         "about/",
-        about,
+        views.about,
         name="about",
     ),
 
+
+    # PRIVACY
     path(
         "privacy/",
-        privacy,
+        views.privacy,
         name="privacy",
     ),
 
+
+    # TERMS
     path(
         "terms/",
-        terms,
+        views.terms,
         name="terms",
     ),
 
+
+    # DISCLAIMER
     path(
         "disclaimer/",
-        disclaimer,
+        views.disclaimer,
         name="disclaimer",
     ),
 
+
+    # CONTACT
     path(
         "contact/",
-        contact,
+        views.contact,
         name="contact",
     ),
 
+
+    # LOGIN
     path(
         "login/",
-        login_view,
+        views.login_view,
         name="login",
     ),
 
+
+    # SIGNUP
     path(
         "signup/",
-        signup_view,
+        views.signup_view,
         name="signup",
     ),
 
+
+    # LOGOUT
     path(
         "logout/",
-        logout_view,
+        views.logout_view,
         name="logout",
     ),
 
+
+    # PROFILE
     path(
         "profile/",
-        profile_view,
+        views.profile_view,
         name="profile",
     ),
 
+
+    # =====================================================
+    # AFTER LOGIN
+    # This now remembers which tool the visitor clicked
+    # =====================================================
+
     path(
         "welcome/",
-        welcome_view,
+        welcome_router,
         name="welcome",
     ),
 
+
+    # GOOGLE LOGIN / ALLAUTH
     path(
         "accounts/",
         include("allauth.urls"),
     ),
+
 ]

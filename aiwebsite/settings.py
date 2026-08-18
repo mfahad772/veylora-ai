@@ -16,10 +16,10 @@ SECRET_KEY = os.environ.get(
     "django-insecure-veylora-local-development-only",
 )
 
-DEBUG = os.environ.get(
-    "DJANGO_DEBUG",
-    "False",
-).lower() == "true"
+DEBUG = (
+    os.environ.get("DJANGO_DEBUG", "False").lower()
+    == "true"
+)
 
 
 # =========================================================
@@ -40,7 +40,9 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get(
 )
 
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    ALLOWED_HOSTS.append(
+        RENDER_EXTERNAL_HOSTNAME
+    )
 
 
 CSRF_TRUSTED_ORIGINS = [
@@ -86,12 +88,21 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
+
     "django.middleware.common.CommonMiddleware",
+
     "django.middleware.csrf.CsrfViewMiddleware",
+
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
+
     "allauth.account.middleware.AccountMiddleware",
+
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # Veylora AI SEO
+    "tools.seo_middleware.SEOMiddleware",
 ]
 
 
@@ -129,7 +140,9 @@ WSGI_APPLICATION = "aiwebsite.wsgi.application"
 # DATABASE
 # =========================================================
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL"
+)
 
 if DATABASE_URL:
 
@@ -155,7 +168,7 @@ else:
 
 
 # =========================================================
-# AUTH
+# AUTHENTICATION
 # =========================================================
 
 AUTHENTICATION_BACKENDS = [
@@ -233,10 +246,11 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 
 
 # =========================================================
-# LANGUAGE
+# LANGUAGE / TIME
 # =========================================================
 
 LANGUAGE_CODE = "en-us"
+
 TIME_ZONE = "UTC"
 
 USE_I18N = True
@@ -249,7 +263,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = (
+    BASE_DIR / "staticfiles"
+)
 
 STORAGES = {
     "default": {
@@ -278,13 +294,19 @@ EMAIL_BACKEND = (
 # =========================================================
 
 SESSION_COOKIE_SECURE = not DEBUG
+
 CSRF_COOKIE_SECURE = not DEBUG
 
 X_FRAME_OPTIONS = "DENY"
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
 SECURE_REFERRER_POLICY = "same-origin"
 
+
+# =========================================================
+# DEFAULT ID
+# =========================================================
 
 DEFAULT_AUTO_FIELD = (
     "django.db.models.BigAutoField"

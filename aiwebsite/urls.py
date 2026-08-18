@@ -1,8 +1,10 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse
 from django.http import HttpResponse
+from xml.sax.saxutils import escape
 
 from tools.views import (
+    TOOLS,
     home,
     image_tools,
     video_tools,
@@ -21,7 +23,7 @@ from tools.views import (
 
 
 # =========================================================
-# VEYLORA AI FAVICON
+# FAVICON
 # =========================================================
 
 def favicon_view(request):
@@ -59,10 +61,104 @@ def favicon_view(request):
 
 
 # =========================================================
+# ROBOTS.TXT
+# =========================================================
+
+def robots_txt(request):
+    content = """User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /profile/
+Disallow: /welcome/
+
+Sitemap: https://veyloraai.online/sitemap.xml
+"""
+
+    return HttpResponse(
+        content,
+        content_type="text/plain"
+    )
+
+
+# =========================================================
+# SITEMAP.XML
+# =========================================================
+
+def sitemap_xml(request):
+
+    urls = []
+
+    # Main public pages
+    public_pages = [
+        "home",
+        "image_tools",
+        "video_tools",
+        "about",
+        "privacy",
+        "terms",
+        "disclaimer",
+        "contact",
+    ]
+
+    for name in public_pages:
+        url = request.build_absolute_uri(
+            reverse(name)
+        )
+
+        urls.append(url)
+
+    # Every AI tool page
+    for slug in TOOLS.keys():
+
+        url = request.build_absolute_uri(
+            reverse(
+                "tool_detail",
+                kwargs={"slug": slug}
+            )
+        )
+
+        urls.append(url)
+
+    xml_urls = ""
+
+    for url in urls:
+        xml_urls += f"""
+    <url>
+        <loc>{escape(url)}</loc>
+    </url>"""
+
+    sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{xml_urls}
+</urlset>
+"""
+
+    return HttpResponse(
+        sitemap,
+        content_type="application/xml"
+    )
+
+
+# =========================================================
 # URLS
 # =========================================================
 
 urlpatterns = [
+
+    # SEO
+    path(
+        "robots.txt",
+        robots_txt,
+        name="robots_txt",
+    ),
+
+    path(
+        "sitemap.xml",
+        sitemap_xml,
+        name="sitemap_xml",
+    ),
 
     # Favicon
     path(
@@ -71,7 +167,7 @@ urlpatterns = [
         name="favicon",
     ),
 
-    # Django Admin
+    # Admin
     path(
         "admin/",
         admin.site.urls,
@@ -84,14 +180,14 @@ urlpatterns = [
         name="home",
     ),
 
-    # AI Image Tools
+    # Image Tools
     path(
         "ai-image-tools/",
         image_tools,
         name="image_tools",
     ),
 
-    # AI Video Tools
+    # Video Tools
     path(
         "ai-video-tools/",
         video_tools,
@@ -175,7 +271,7 @@ urlpatterns = [
         name="welcome",
     ),
 
-    # Google Social Login / django-allauth
+    # Google Login
     path(
         "accounts/",
         include("allauth.urls"),

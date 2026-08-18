@@ -23,6 +23,13 @@ from tools.views import (
 
 
 # =========================================================
+# MAIN DOMAIN
+# =========================================================
+
+BASE_URL = "https://veyloraai.online"
+
+
+# =========================================================
 # FAVICON
 # =========================================================
 
@@ -90,7 +97,6 @@ def sitemap_xml(request):
 
     urls = []
 
-    # Main public pages
     public_pages = [
         "home",
         "image_tools",
@@ -103,23 +109,18 @@ def sitemap_xml(request):
     ]
 
     for name in public_pages:
-        url = request.build_absolute_uri(
-            reverse(name)
+        urls.append(
+            BASE_URL + reverse(name)
         )
 
-        urls.append(url)
-
-    # Every AI tool page
     for slug in TOOLS.keys():
 
-        url = request.build_absolute_uri(
-            reverse(
+        urls.append(
+            BASE_URL + reverse(
                 "tool_detail",
                 kwargs={"slug": slug}
             )
         )
-
-        urls.append(url)
 
     xml_urls = ""
 
@@ -147,7 +148,6 @@ def sitemap_xml(request):
 
 urlpatterns = [
 
-    # SEO
     path(
         "robots.txt",
         robots_txt,
@@ -160,118 +160,101 @@ urlpatterns = [
         name="sitemap_xml",
     ),
 
-    # Favicon
     path(
         "favicon.ico",
         favicon_view,
         name="favicon",
     ),
 
-    # Admin
     path(
         "admin/",
         admin.site.urls,
     ),
 
-    # Home
     path(
         "",
         home,
         name="home",
     ),
 
-    # Image Tools
     path(
         "ai-image-tools/",
         image_tools,
         name="image_tools",
     ),
 
-    # Video Tools
     path(
         "ai-video-tools/",
         video_tools,
         name="video_tools",
     ),
 
-    # Tool Detail
     path(
         "tool/<slug:slug>/",
         tool_detail,
         name="tool_detail",
     ),
 
-    # About
     path(
         "about/",
         about,
         name="about",
     ),
 
-    # Privacy
     path(
         "privacy/",
         privacy,
         name="privacy",
     ),
 
-    # Terms
     path(
         "terms/",
         terms,
         name="terms",
     ),
 
-    # Disclaimer
     path(
         "disclaimer/",
         disclaimer,
         name="disclaimer",
     ),
 
-    # Contact
     path(
         "contact/",
         contact,
         name="contact",
     ),
 
-    # Login
     path(
         "login/",
         login_view,
         name="login",
     ),
 
-    # Signup
     path(
         "signup/",
         signup_view,
         name="signup",
     ),
 
-    # Logout
     path(
         "logout/",
         logout_view,
         name="logout",
     ),
 
-    # Profile
     path(
         "profile/",
         profile_view,
         name="profile",
     ),
 
-    # Welcome
     path(
         "welcome/",
         welcome_view,
         name="welcome",
     ),
 
-    # Google Login
     path(
         "accounts/",
         include("allauth.urls"),

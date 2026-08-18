@@ -5,13 +5,23 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>AI Video Tools - Veylora AI</title>
+    <title>Best AI Video Tools & Generators | Veylora AI</title>
 
-    <meta name="description"
-          content="Discover AI video generators, animation tools, avatars and video creation platforms on Veylora AI.">
+    <meta
+        name="description"
+        content="Explore AI video generators, image-to-video tools, AI avatars, animation platforms and AI video editors on Veylora AI."
+    >
+
+    <link
+        rel="icon"
+        href="/favicon.ico"
+        type="image/svg+xml"
+    >
 
     <style>
 
@@ -26,619 +36,469 @@
         }
 
         body {
-            min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
-            background: #05070d;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        .background {
-            position: fixed;
-            inset: 0;
-            z-index: -20;
-            overflow: hidden;
 
             background:
                 radial-gradient(
-                    circle at 50% -10%,
-                    rgba(139,92,246,0.16),
-                    transparent 38%
+                    circle at 15% 10%,
+                    rgba(0,212,255,0.07),
+                    transparent 30%
                 ),
-                linear-gradient(
-                    180deg,
-                    #05070d,
-                    #070b14,
-                    #05070d
-                );
-        }
-
-        .mouse-glow {
-            position: absolute;
-
-            width: 620px;
-            height: 620px;
-
-            left: 50%;
-            top: 20%;
-
-            transform: translate(-50%, -50%);
-
-            border-radius: 50%;
-
-            background:
                 radial-gradient(
-                    circle,
-                    rgba(139,92,246,0.12),
-                    rgba(34,211,238,0.05) 40%,
-                    transparent 72%
-                );
-
-            filter: blur(20px);
-
-            transition:
-                left 0.18s ease-out,
-                top 0.18s ease-out;
-        }
-
-        .grid {
-            position: absolute;
-            inset: 0;
-
-            background-image:
-                linear-gradient(
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
+                    circle at 85% 20%,
+                    rgba(123,92,255,0.11),
+                    transparent 30%
                 ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
-                );
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(217,70,239,0.06),
+                    transparent 30%
+                ),
+                #070b14;
 
-            background-size: 60px 60px;
-
-            animation:
-                gridMove 22s linear infinite;
+            color: white;
+            min-height: 100vh;
         }
 
-        @keyframes gridMove {
-            from {
-                background-position: 0 0;
-            }
-
-            to {
-                background-position: 60px 60px;
-            }
+        a {
+            text-decoration: none;
         }
 
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.32;
-        }
 
-        .blob-one {
-            width: 500px;
-            height: 500px;
-
-            top: -220px;
-            left: -180px;
-
-            background: #7c3aed;
-
-            animation:
-                blobOne 16s ease-in-out infinite alternate;
-        }
-
-        .blob-two {
-            width: 520px;
-            height: 520px;
-
-            right: -250px;
-            top: 30%;
-
-            background: #2563eb;
-
-            animation:
-                blobTwo 19s ease-in-out infinite alternate;
-        }
-
-        .blob-three {
-            width: 430px;
-            height: 430px;
-
-            bottom: -220px;
-            left: 30%;
-
-            background: #0891b2;
-
-            animation:
-                blobThree 21s ease-in-out infinite alternate;
-        }
-
-        @keyframes blobOne {
-            from {
-                transform: translate(0,0) scale(1);
-            }
-
-            to {
-                transform: translate(230px,120px) scale(1.15);
-            }
-        }
-
-        @keyframes blobTwo {
-            from {
-                transform: translate(0,0) scale(1);
-            }
-
-            to {
-                transform: translate(-220px,100px) scale(1.15);
-            }
-        }
-
-        @keyframes blobThree {
-            from {
-                transform: translate(0,0) scale(1);
-            }
-
-            to {
-                transform: translate(-160px,-130px) scale(1.12);
-            }
-        }
-
-        .floating-object {
-            position: absolute;
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.08),
-                    rgba(255,255,255,0.01)
-                );
-
-            backdrop-filter: blur(8px);
-
-            box-shadow:
-                0 20px 60px rgba(0,0,0,0.28);
-        }
-
-        .object-one {
-            width: 90px;
-            height: 90px;
-
-            left: 6%;
-            top: 25%;
-
-            border-radius: 25px;
-
-            animation:
-                floatOne 7s ease-in-out infinite;
-        }
-
-        .object-two {
-            width: 65px;
-            height: 65px;
-
-            right: 7%;
-            top: 42%;
-
-            border-radius: 50%;
-
-            animation:
-                floatTwo 8s ease-in-out infinite;
-        }
-
-        @keyframes floatOne {
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(20deg);
-            }
-
-            50% {
-                transform:
-                    translateY(-25px)
-                    rotate(32deg);
-            }
-        }
-
-        @keyframes floatTwo {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(25px);
-            }
-        }
+        /* =========================
+           HEADER
+        ========================= */
 
         header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            width: 100%;
-
-            padding: 15px 6%;
+            padding: 18px 6%;
 
             display: flex;
-            align-items: center;
             justify-content: space-between;
-
-            background:
-                rgba(5,7,13,0.72);
+            align-items: center;
 
             border-bottom:
-                1px solid rgba(255,255,255,0.07);
+                1px solid rgba(255,255,255,0.08);
 
-            backdrop-filter: blur(20px);
+            background:
+                rgba(7,11,20,0.82);
+
+            backdrop-filter:
+                blur(15px);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
             color: white;
-            text-decoration: none;
 
             font-size: 24px;
             font-weight: 800;
         }
 
-        .logo-box {
-            width: 38px;
-            height: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 12px;
-
+        .logo span,
+        .gradient-text {
             background:
                 linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
+                    90deg,
+                    #00d4ff,
+                    #7760ff,
+                    #d946ef
                 );
 
-            background-size: 200% 200%;
-
-            box-shadow:
-                0 8px 28px rgba(37,99,235,0.35);
-
-            animation:
-                gradientMove 5s ease infinite;
-        }
-
-        .logo span {
-            color: #67e8f9;
-        }
-
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         nav {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 22px;
         }
 
-        .nav-link {
-            color: #adb6c8;
-            text-decoration: none;
+        nav a {
+            color: #aeb7c9;
             font-size: 14px;
         }
 
-        .nav-link:hover {
+        nav a:hover {
             color: white;
         }
 
-        .auth-area {
-            display: flex;
-            gap: 8px;
-        }
+        .account-button {
+            padding: 9px 14px;
 
-        .small-button {
-            padding: 9px 15px;
-
-            border-radius: 11px;
+            border-radius: 10px;
 
             border:
-                1px solid rgba(255,255,255,0.11);
+                1px solid rgba(123,92,255,0.4);
 
             background:
-                rgba(255,255,255,0.045);
-
-            color: #e4e8f0;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition: 0.28s;
+                rgba(123,92,255,0.1);
         }
 
-        .small-button:hover {
-            transform: translateY(-2px);
 
-            border-color:
-                rgba(139,92,246,0.45);
-        }
-
-        .small-button.primary {
-            border: none;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
-                );
-
-            background-size: 200% 200%;
-
-            animation:
-                gradientMove 5s ease infinite;
-        }
-
-        .small-button.logout {
-            color: #fda4af;
-        }
+        /* =========================
+           HERO
+        ========================= */
 
         .hero {
-            max-width: 1050px;
-
-            margin: auto;
+            text-align: center;
 
             padding:
-                95px 25px
-                55px;
-
-            text-align: center;
+                75px 20px 55px;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
 
-            margin-bottom: 22px;
+            margin-bottom: 18px;
 
-            padding: 8px 14px;
+            padding:
+                7px 13px;
 
-            border-radius: 30px;
+            border-radius: 999px;
 
-            background:
-                rgba(139,92,246,0.07);
+            color: #b9aeff;
 
             border:
-                1px solid rgba(139,92,246,0.25);
+                1px solid rgba(123,92,255,0.24);
 
-            color: #ddd6fe;
+            background:
+                rgba(123,92,255,0.06);
 
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
         }
 
-        .live-dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #a78bfa;
-
-            box-shadow:
-                0 0 13px #a78bfa;
-
-            animation:
-                pulse 1.6s ease infinite;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-        }
-
         .hero h1 {
+            font-size:
+                clamp(38px, 6vw, 58px);
+
             margin-bottom: 18px;
 
-            font-size: 56px;
-            line-height: 1.07;
-
-            letter-spacing: -2px;
-        }
-
-        .gradient-text {
-            background:
-                linear-gradient(
-                    90deg,
-                    #60a5fa,
-                    #22d3ee,
-                    #a78bfa,
-                    #f472b6,
-                    #60a5fa
-                );
-
-            background-size: 300% 300%;
-
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            color: transparent;
-
-            animation:
-                titleGradient 7s linear infinite;
-        }
-
-        @keyframes titleGradient {
-            from {
-                background-position: 0% 50%;
-            }
-
-            to {
-                background-position: 300% 50%;
-            }
+            letter-spacing:
+                -1.5px;
         }
 
         .hero p {
-            max-width: 700px;
+            max-width: 780px;
 
             margin: auto;
 
-            color: #9da8bc;
+            color: #a2adbf;
+
+            line-height: 1.8;
 
             font-size: 16px;
-            line-height: 1.8;
         }
 
-        .container {
-            width: 89%;
-            max-width: 1200px;
 
-            margin: auto;
+        /* =========================
+           SEARCH
+        ========================= */
 
-            padding-bottom: 100px;
-        }
-
-        .search-panel {
-            max-width: 800px;
+        .search-box {
+            width: 90%;
+            max-width: 680px;
 
             margin:
-                10px auto
-                55px;
+                30px auto 0;
 
-            padding: 20px;
+            display: flex;
 
-            border-radius: 20px;
+            padding: 6px;
+
+            border-radius: 13px;
 
             background:
-                rgba(12,18,32,0.72);
+                rgba(255,255,255,0.04);
 
             border:
-                1px solid rgba(255,255,255,0.08);
-
-            backdrop-filter: blur(17px);
-
-            box-shadow:
-                0 20px 50px rgba(0,0,0,0.20);
+                1px solid rgba(255,255,255,0.09);
         }
 
-        .search-wrapper {
-            position: relative;
-        }
+        .search-box input {
+            flex: 1;
+            min-width: 0;
 
-        .search-icon {
-            position: absolute;
+            padding:
+                13px 15px;
 
-            left: 17px;
-            top: 50%;
-
-            transform: translateY(-50%);
-        }
-
-        #toolSearch {
-            width: 100%;
-            height: 55px;
-
-            padding: 0 50px;
-
-            border-radius: 14px;
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
+            border: none;
             outline: none;
-
-            background:
-                rgba(3,7,18,0.72);
 
             color: white;
 
-            font-size: 15px;
+            background:
+                transparent;
+
+            font-size: 14px;
         }
 
-        #toolSearch:focus {
-            border-color:
-                rgba(139,92,246,0.55);
-
-            box-shadow:
-                0 0 0 4px
-                rgba(139,92,246,0.08);
+        .search-box input::placeholder {
+            color: #778196;
         }
 
-        #toolSearch::placeholder {
-            color: #687489;
+        .search-box button {
+            padding:
+                12px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6156ff,
+                    #805bff
+                );
         }
 
-        .search-info {
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 88%;
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding-bottom: 80px;
+        }
+
+        .directory-heading {
             display: flex;
-            justify-content: space-between;
 
-            margin-top: 13px;
+            justify-content:
+                space-between;
 
-            color: #748096;
+            align-items:
+                end;
+
+            margin-bottom:
+                26px;
+
+            gap: 20px;
+        }
+
+        .directory-heading h2 {
+            font-size: 27px;
+
+            margin-bottom: 7px;
+        }
+
+        .directory-heading p {
+            color: #929db1;
+
+            line-height: 1.6;
+        }
+
+        .tool-count {
+            padding:
+                8px 11px;
+
+            color: #b6adff;
+
+            border-radius: 8px;
+
+            background:
+                rgba(123,92,255,0.08);
+
+            border:
+                1px solid rgba(123,92,255,0.18);
 
             font-size: 12px;
         }
 
-        .count-number {
-            color: #c4b5fd;
-            font-weight: bold;
-        }
+
+        /* =========================
+           TOOL CARDS
+        ========================= */
 
         .tools-grid {
             display: grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(3, 1fr);
 
-            gap: 22px;
-
-            perspective: 1200px;
+            gap: 18px;
         }
 
         .tool-card {
-            position: relative;
-            overflow: hidden;
+            padding: 25px;
 
-            min-height: 390px;
+            border-radius: 18px;
 
-            padding: 26px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,24,40,0.92),
+                    rgba(10,15,28,0.92)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition:
+                0.3s;
+        }
+
+        .tool-card:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(123,92,255,0.28);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.23);
+        }
+
+        .tool-icon {
+            width: 58px;
+            height: 58px;
 
             display: flex;
-            flex-direction: column;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            border-radius: 15px;
+
+            font-size: 29px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            margin-bottom: 18px;
+        }
+
+        .tool-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: #98a3b7;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            min-height: 93px;
+        }
+
+        .category {
+            display: inline-block;
+
+            margin-top: 14px;
+
+            padding:
+                6px 9px;
+
+            border-radius: 7px;
+
+            color: #aaa0ff;
+
+            font-size: 11px;
+
+            border:
+                1px solid rgba(123,92,255,0.18);
+
+            background:
+                rgba(123,92,255,0.07);
+        }
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin:
+                13px 0 18px;
+        }
+
+        .tag {
+            padding:
+                5px 7px;
+
+            border-radius: 6px;
+
+            font-size: 10px;
+
+            color: #919bae;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.04);
+        }
+
+        .tool-button {
+            display: block;
+
+            padding: 11px;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #5f55ff,
+                    #7e5cff
+                );
+
+            transition: 0.25s;
+        }
+
+        .tool-button:hover {
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(98,85,255,0.2);
+        }
+
+
+        /* =========================
+           SEO CONTENT
+        ========================= */
+
+        .seo-content {
+            margin-top: 65px;
+
+            padding: 40px;
 
             border-radius: 22px;
 
@@ -648,371 +508,217 @@
             background:
                 linear-gradient(
                     145deg,
-                    rgba(15,22,39,0.78),
-                    rgba(7,12,23,0.73)
+                    rgba(16,23,40,0.9),
+                    rgba(9,14,26,0.9)
                 );
-
-            backdrop-filter: blur(16px);
-
-            transition:
-                transform 0.38s ease,
-                border-color 0.38s ease,
-                box-shadow 0.38s ease;
         }
 
-        .tool-card::before {
-            content: "";
+        .seo-content h2 {
+            font-size: 27px;
 
-            position: absolute;
-
-            width: 210px;
-            height: 210px;
-
-            right: -120px;
-            bottom: -120px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(139,92,246,0.17),
-                    transparent 70%
-                );
-
-            transition: 0.5s;
+            margin-bottom: 15px;
         }
 
-        .tool-card:hover {
-            transform:
-                translateY(-10px)
-                rotateX(2deg)
-                rotateY(-2deg);
+        .seo-content h3 {
+            font-size: 19px;
 
-            border-color:
-                rgba(139,92,246,0.38);
-
-            box-shadow:
-                0 28px 60px rgba(0,0,0,0.32);
+            margin:
+                26px 0 10px;
         }
 
-        .tool-card:hover::before {
-            transform: scale(1.6);
+        .seo-content p {
+            color: #9da8ba;
+
+            line-height: 1.85;
+
+            font-size: 15px;
         }
 
-        .tool-icon {
-            width: 64px;
-            height: 64px;
-
+        .quick-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
 
-            margin-bottom: 22px;
+            flex-wrap: wrap;
 
-            border-radius: 17px;
+            gap: 9px;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(139,92,246,0.18),
-                    rgba(34,211,238,0.07)
-                );
-
-            border:
-                1px solid rgba(167,139,250,0.16);
-
-            font-size: 30px;
-
-            transition: 0.35s;
+            margin-top: 24px;
         }
 
-        .tool-card:hover .tool-icon {
-            transform:
-                translateY(-5px)
-                rotate(-5deg)
-                scale(1.08);
-        }
-
-        .tool-category {
-            align-self: flex-start;
-
-            margin-bottom: 13px;
-
-            padding: 6px 10px;
+        .quick-links a {
+            padding:
+                9px 12px;
 
             border-radius: 8px;
 
-            background:
-                rgba(139,92,246,0.10);
+            color: #b8afff;
 
             border:
-                1px solid rgba(167,139,250,0.16);
-
-            color: #c4b5fd;
-
-            font-size: 11px;
-        }
-
-        .tool-card h2 {
-            margin-bottom: 11px;
-            font-size: 21px;
-        }
-
-        .tool-description {
-            margin-bottom: 18px;
-
-            color: #96a1b5;
-
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-
-            gap: 6px;
-
-            margin-bottom: 22px;
-        }
-
-        .tag {
-            padding: 5px 8px;
-
-            border-radius: 7px;
+                1px solid rgba(123,92,255,0.2);
 
             background:
-                rgba(255,255,255,0.045);
+                rgba(123,92,255,0.06);
 
-            border:
-                1px solid rgba(255,255,255,0.06);
+            font-size: 12px;
 
-            color: #8995aa;
-
-            font-size: 10px;
+            transition: 0.2s;
         }
 
-        .tool-button {
-            position: relative;
-            overflow: hidden;
-
-            width: 100%;
-
-            margin-top: auto;
-
-            padding: 12px;
-
-            border-radius: 11px;
-
-            text-align: center;
-            text-decoration: none;
-
+        .quick-links a:hover {
             color: white;
 
-            font-size: 13px;
-            font-weight: 700;
+            background:
+                rgba(123,92,255,0.13);
+        }
+
+
+        /* =========================
+           FAQ
+        ========================= */
+
+        .faq-section {
+            margin-top: 55px;
+        }
+
+        .faq-section h2 {
+            font-size: 27px;
+
+            margin-bottom: 20px;
+        }
+
+        .faq-grid {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .faq-item {
+            padding: 22px;
+
+            border-radius: 14px;
 
             border:
-                1px solid rgba(255,255,255,0.10);
-
-            background:
-                rgba(255,255,255,0.045);
-
-            transition: 0.3s;
-        }
-
-        .tool-button::before {
-            content: "";
-
-            position: absolute;
-
-            top: -80%;
-            left: -80%;
-
-            width: 45%;
-            height: 250%;
-
-            transform: rotate(24deg);
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,255,255,0.32),
-                    transparent
-                );
-
-            transition: left 0.65s ease;
-        }
-
-        .tool-button:hover::before {
-            left: 140%;
-        }
-
-        .tool-button:hover {
-            transform: translateY(-2px);
-
-            border-color: transparent;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
-                );
-
-            box-shadow:
-                0 12px 35px rgba(139,92,246,0.20);
-        }
-
-        #noResults {
-            display: none;
-
-            max-width: 650px;
-
-            margin: 40px auto;
-
-            padding: 45px 25px;
-
-            text-align: center;
-
-            border-radius: 20px;
-
-            background:
-                rgba(15,22,39,0.72);
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            color: #929db0;
-        }
-
-        #noResults h3 {
-            color: white;
-            margin: 12px 0 8px;
-        }
-
-        footer {
-            padding: 40px 7%;
-
-            text-align: center;
-
-            border-top:
                 1px solid rgba(255,255,255,0.07);
 
             background:
-                rgba(5,7,13,0.75);
+                rgba(255,255,255,0.025);
         }
 
-        .footer-logo {
-            margin-bottom: 16px;
+        .faq-item h3 {
+            font-size: 16px;
 
-            font-size: 22px;
-            font-weight: 800;
+            margin-bottom: 9px;
         }
 
-        .footer-logo span {
-            color: #67e8f9;
+        .faq-item p {
+            color: #98a3b7;
+
+            line-height: 1.7;
+
+            font-size: 14px;
         }
 
-        .footer-links {
-            margin-bottom: 17px;
+        .no-results {
+            padding:
+                50px 20px;
+
+            text-align: center;
+
+            color: #919bad;
+
+            grid-column:
+                1 / -1;
         }
 
-        .footer-links a {
-            display: inline-block;
 
-            margin: 5px 9px;
+        /* =========================
+           FOOTER
+        ========================= */
 
-            color: #8792a6;
+        footer {
+            border-top:
+                1px solid rgba(255,255,255,0.07);
 
-            text-decoration: none;
+            text-align: center;
+
+            padding:
+                32px 6%;
+
+            color: #737e92;
 
             font-size: 13px;
         }
 
+        .footer-links {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 16px;
+
+            margin-bottom: 14px;
+        }
+
+        .footer-links a {
+            color: #8f99ab;
+        }
+
         .footer-links a:hover {
-            color: #67e8f9;
+            color: white;
         }
 
-        footer p {
-            color: #5f697c;
-            font-size: 12px;
-        }
 
-        @media (max-width: 1000px) {
+        /* =========================
+           MOBILE
+        ========================= */
 
-            .nav-link {
-                display: none;
-            }
+        @media (max-width: 900px) {
 
             .tools-grid {
                 grid-template-columns:
-                    repeat(2,1fr);
+                    repeat(2, 1fr);
             }
 
         }
 
         @media (max-width: 650px) {
 
-            header {
-                padding: 13px 4%;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            .logo-box {
-                width: 34px;
-                height: 34px;
-            }
-
-            .small-button {
-                padding: 8px 9px;
-                font-size: 10px;
-            }
-
-            .hero {
-                padding:
-                    75px 18px
-                    45px;
-            }
-
-            .hero h1 {
-                font-size: 39px;
-                letter-spacing: -1px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .container {
-                width: 91%;
+            nav a:not(.account-button) {
+                display: none;
             }
 
             .tools-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
-            .tool-card {
-                min-height: auto;
+            .directory-heading {
+                display: block;
             }
 
-            .search-info {
-                flex-direction: column;
-                gap: 5px;
+            .tool-count {
+                display: inline-block;
+
+                margin-top: 12px;
             }
 
-        }
+            .search-box {
+                flex-direction:
+                    column;
+            }
 
-        @media (max-width: 390px) {
+            .search-box button {
+                width: 100%;
+            }
 
-            .logo-name {
-                display: none;
+            .seo-content {
+                padding:
+                    27px 22px;
+            }
+
+            .hero {
+                padding-top: 55px;
             }
 
         }
@@ -1021,110 +727,78 @@
 
 </head>
 
+
 <body>
 
 
-<div class="background">
-
-    <div
-        class="mouse-glow"
-        id="mouseGlow"></div>
-
-    <div class="grid"></div>
-
-    <div class="blob blob-one"></div>
-    <div class="blob blob-two"></div>
-    <div class="blob blob-three"></div>
-
-    <div class="floating-object object-one"></div>
-    <div class="floating-object object-two"></div>
-
-</div>
-
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
-    <a href="{% url 'home' %}"
-       class="logo">
-
-        <div class="logo-box">
-            V
-        </div>
-
-        <div class="logo-name">
-            Veylora <span>AI</span>
-        </div>
-
+    <a
+        href="/"
+        class="logo"
+    >
+        Veylora <span>AI</span>
     </a>
 
 
     <nav>
 
-        <a href="{% url 'home' %}"
-           class="nav-link">
+        <a href="/">
             Home
         </a>
 
-        <a href="{% url 'image_tools' %}"
-           class="nav-link">
+        <a href="/ai-image-tools/">
             AI Image Tools
         </a>
 
-        <a href="{% url 'video_tools' %}"
-           class="nav-link">
+        <a href="/ai-video-tools/">
             AI Video Tools
         </a>
 
 
-        <div class="auth-area">
+        {% if user.is_authenticated %}
 
-            {% if user.is_authenticated %}
+            <a
+                href="/profile/"
+                class="account-button"
+            >
+                My Account
+            </a>
 
-                <a href="{% url 'profile' %}"
-                   class="small-button primary">
-                    My Account
-                </a>
+        {% else %}
 
-                <a href="{% url 'logout' %}"
-                   class="small-button logout">
-                    Logout
-                </a>
+            <a
+                href="/login/"
+                class="account-button"
+            >
+                Login
+            </a>
 
-            {% else %}
-
-                <a href="{% url 'login' %}"
-                   class="small-button">
-                    Login
-                </a>
-
-                <a href="{% url 'signup' %}"
-                   class="small-button primary">
-                    Create Account
-                </a>
-
-            {% endif %}
-
-        </div>
+        {% endif %}
 
     </nav>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
     <div class="hero-badge">
-
-        <span class="live-dot"></span>
-
-        Next-generation video creation
-
+        AI Video Tools Directory
     </div>
 
 
     <h1>
 
-        Discover Powerful
+        Best
 
         <span class="gradient-text">
             AI Video Tools
@@ -1134,72 +808,74 @@
 
 
     <p>
-
-        Explore AI video generators, animation tools,
-        avatars, image-to-video platforms and intelligent
-        video editing solutions from one place.
-
+        Discover AI video generators, text-to-video platforms,
+        image-to-video tools, AI avatar generators,
+        animation tools and AI-assisted video editors
+        for creative video production.
     </p>
+
+
+    <form
+        method="get"
+        class="search-box"
+    >
+
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            placeholder="Search AI video tools..."
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
 
 </section>
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="container">
 
 
-    <div class="search-panel">
+    <div class="directory-heading">
 
-        <div class="search-wrapper">
+        <div>
 
-            <span class="search-icon">
-                🔎
-            </span>
+            <h2>
+                AI Video Tools Directory
+            </h2>
 
-            <input
-                type="text"
-                id="toolSearch"
-                placeholder="Search AI video tools..."
-                autocomplete="off"
-            >
+            <p>
+                Compare AI video generation,
+                animation, avatar and editing platforms.
+            </p>
 
         </div>
 
 
-        <div class="search-info">
-
-            <span>
-                Search by tool name, category or feature.
-            </span>
-
-            <span>
-
-                <span
-                    id="toolCount"
-                    class="count-number">
-
-                    {{ tools|length }}
-
-                </span>
-
-                tools available
-
-            </span>
-
+        <div class="tool-count">
+            {{ tools|length }} Tools
         </div>
 
     </div>
 
 
-    <div class="tools-grid"
-         id="toolsGrid">
+    <!-- =========================
+         TOOL LIST
+    ========================= -->
+
+    <div class="tools-grid">
 
 
         {% for slug, tool in tools.items %}
 
-
-            <article
-                class="tool-card"
-                data-search="{{ tool.name }} {{ tool.category }} {{ tool.description }} {{ tool.tags|join:' ' }}">
+            <article class="tool-card">
 
 
                 <div class="tool-icon">
@@ -1207,19 +883,19 @@
                 </div>
 
 
-                <span class="tool-category">
-                    {{ tool.category }}
-                </span>
-
-
-                <h2>
+                <h3>
                     {{ tool.name }}
-                </h2>
+                </h3>
 
 
-                <p class="tool-description">
+                <p>
                     {{ tool.description }}
                 </p>
+
+
+                <span class="category">
+                    {{ tool.category }}
+                </span>
 
 
                 <div class="tags">
@@ -1236,11 +912,10 @@
 
 
                 <a
-                    href="{% url 'tool_detail' slug %}"
-                    class="tool-button">
-
-                    View Tool Details →
-
+                    href="/tool/{{ slug }}/"
+                    class="tool-button"
+                >
+                    Explore {{ tool.name }} →
                 </a>
 
 
@@ -1249,11 +924,9 @@
 
         {% empty %}
 
-
-            <div>
-                No AI video tools are currently available.
+            <div class="no-results">
+                No AI video tools found.
             </div>
-
 
         {% endfor %}
 
@@ -1261,174 +934,271 @@
     </div>
 
 
-    <div id="noResults">
+    <!-- =========================
+         SEO CONTENT
+    ========================= -->
 
-        <div style="font-size:35px;">
-            🔎
-        </div>
+    <section class="seo-content">
 
-        <h3>
-            No tools found
-        </h3>
+
+        <h2>
+            What Are the Best AI Video Tools?
+        </h2>
+
 
         <p>
-            Try another tool name or keyword.
+            AI video tools use artificial intelligence
+            to generate, edit, animate or transform
+            video content. Some platforms can create
+            scenes from text prompts, while others
+            turn images into moving videos,
+            generate digital presenters,
+            create AI narration or provide
+            AI-assisted video editing features.
         </p>
 
-    </div>
+
+        <h3>
+            AI Video Generators
+        </h3>
+
+
+        <p>
+            AI video generators can help creators
+            turn written ideas or prompts into
+            visual scenes. Platforms such as
+            Flow AI, Runway and Pika provide
+            generative workflows for creating
+            experimental videos, cinematic scenes
+            and short-form visual content.
+        </p>
+
+
+        <h3>
+            Image-to-Video and AI Animation Tools
+        </h3>
+
+
+        <p>
+            Image-to-video AI tools can add motion
+            to still photographs, artwork or
+            AI-generated images. These tools can
+            be useful for social media videos,
+            creative animations, concept videos
+            and visual storytelling without
+            traditional frame-by-frame animation.
+        </p>
+
+
+        <h3>
+            AI Avatar and Presenter Video Tools
+        </h3>
+
+
+        <p>
+            AI avatar platforms can generate
+            presenter-style videos without requiring
+            traditional filming for every project.
+            Tools such as HeyGen and other
+            AI presenter platforms can be useful
+            for explainers, training videos,
+            marketing content and business communication.
+        </p>
+
+
+        <h3>
+            AI Video Editing Tools
+        </h3>
+
+
+        <p>
+            AI-assisted video editing tools can
+            simplify tasks such as captions,
+            visual effects, creative transformations
+            and short-form editing. The best tool
+            depends on whether you need video
+            generation, animation, avatar content
+            or general editing features.
+        </p>
+
+
+        <!-- INTERNAL LINKS -->
+
+        <div class="quick-links">
+
+
+            <a href="/tool/flow-ai/">
+                Flow AI
+            </a>
+
+
+            <a href="/tool/runway/">
+                Runway
+            </a>
+
+
+            <a href="/tool/pika/">
+                Pika
+            </a>
+
+
+            <a href="/tool/heygen/">
+                HeyGen
+            </a>
+
+
+            <a href="/tool/image-to-video-ai/">
+                Image to Video AI
+            </a>
+
+
+            <a href="/tool/ai-video-generator/">
+                AI Video Generator
+            </a>
+
+
+            <a href="/tool/ai-video-editor/">
+                AI Video Editor
+            </a>
+
+
+            <a href="/tool/ai-avatar-video/">
+                AI Avatar Video
+            </a>
+
+
+            <a href="/tool/ai-voice-video/">
+                AI Voice Video
+            </a>
+
+
+            <a href="/tool/ai-animation-generator/">
+                AI Animation Generator
+            </a>
+
+
+            <a href="/ai-image-tools/">
+                Explore AI Image Tools
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         FAQ
+    ========================= -->
+
+    <section class="faq-section">
+
+
+        <h2>
+            AI Video Tools FAQ
+        </h2>
+
+
+        <div class="faq-grid">
+
+
+            <article class="faq-item">
+
+                <h3>
+                    What is an AI video generator?
+                </h3>
+
+                <p>
+                    An AI video generator uses artificial
+                    intelligence to help create video content
+                    from prompts, images or other creative input.
+                </p>
+
+            </article>
+
+
+            <article class="faq-item">
+
+                <h3>
+                    Can AI turn an image into a video?
+                </h3>
+
+                <p>
+                    Yes. Image-to-video AI tools can animate
+                    still images and add motion to photographs,
+                    artwork or AI-generated visuals.
+                </p>
+
+            </article>
+
+
+            <article class="faq-item">
+
+                <h3>
+                    What are AI avatar video tools?
+                </h3>
+
+                <p>
+                    AI avatar tools can create digital
+                    presenter-style videos for explainers,
+                    training, marketing and other
+                    communication workflows.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </section>
 
 
 </main>
 
 
-<footer>
+<!-- =========================
+     FOOTER
+========================= -->
 
-    <div class="footer-logo">
-        Veylora <span>AI</span>
-    </div>
+<footer>
 
 
     <div class="footer-links">
 
-        <a href="{% url 'home' %}">
+        <a href="/">
             Home
         </a>
 
-        <a href="{% url 'about' %}">
+        <a href="/about/">
             About
         </a>
 
-        <a href="{% url 'privacy' %}">
+        <a href="/privacy/">
             Privacy
         </a>
 
-        <a href="{% url 'terms' %}">
+        <a href="/terms/">
             Terms
         </a>
 
-        <a href="{% url 'disclaimer' %}">
+        <a href="/disclaimer/">
             Disclaimer
         </a>
 
-        <a href="{% url 'contact' %}">
+        <a href="/contact/">
             Contact
         </a>
 
     </div>
 
 
-    <p>
-        © 2026 Veylora AI. All rights reserved.
-    </p>
+    © 2026 Veylora AI.
+    All rights reserved.
+
 
 </footer>
 
 
-<script>
-
-    const searchInput =
-        document.getElementById("toolSearch");
-
-    const cards =
-        document.querySelectorAll(".tool-card");
-
-    const toolCount =
-        document.getElementById("toolCount");
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-                const query =
-                    this.value
-                        .toLowerCase()
-                        .trim();
-
-                let visibleCount = 0;
-
-
-                cards.forEach(
-                    function (card) {
-
-                        const searchText =
-                            (
-                                card.dataset.search || ""
-                            ).toLowerCase();
-
-
-                        if (
-                            searchText.includes(query)
-                        ) {
-
-                            card.style.display =
-                                "flex";
-
-                            visibleCount++;
-
-                        } else {
-
-                            card.style.display =
-                                "none";
-
-                        }
-
-                    }
-                );
-
-
-                if (toolCount) {
-
-                    toolCount.textContent =
-                        visibleCount;
-
-                }
-
-
-                if (noResults) {
-
-                    noResults.style.display =
-                        visibleCount === 0
-                            ? "block"
-                            : "none";
-
-                }
-
-            }
-        );
-
-    }
-
-
-    const glow =
-        document.getElementById("mouseGlow");
-
-
-    if (glow) {
-
-        document.addEventListener(
-            "mousemove",
-            function (event) {
-
-                glow.style.left =
-                    event.clientX + "px";
-
-                glow.style.top =
-                    event.clientY + "px";
-
-            }
-        );
-
-    }
-
-</script>
-
-
 </body>
-
 </html>

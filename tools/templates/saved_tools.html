@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Saved AI Tools | Veylora AI</title>
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <link
+        rel="icon"
+        href="/favicon.ico"
+        type="image/svg+xml"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 15% 5%,
+                    rgba(0,212,255,0.08),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(123,92,255,0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(217,70,239,0.06),
+                    transparent 30%
+                ),
+                #070b14;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        header {
+            padding: 18px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                rgba(7,11,20,0.84);
+
+            backdrop-filter:
+                blur(15px);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+
+            color: white;
+        }
+
+
+        .logo span,
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        nav {
+            display: flex;
+            align-items: center;
+
+            gap: 21px;
+        }
+
+
+        nav a {
+            color: #aab4c7;
+            font-size: 14px;
+        }
+
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        .account-button {
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(123,92,255,0.35);
+
+            background:
+                rgba(123,92,255,0.09);
+        }
+
+
+        .container {
+            width: 88%;
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding:
+                65px 0 90px;
+        }
+
+
+        .page-header {
+            margin-bottom: 38px;
+        }
+
+
+        .page-badge {
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            margin-bottom: 16px;
+
+            border-radius: 999px;
+
+            color: #b8aeff;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            border:
+                1px solid rgba(123,92,255,0.25);
+
+            background:
+                rgba(123,92,255,0.07);
+        }
+
+
+        .page-header h1 {
+            font-size:
+                clamp(38px, 6vw, 58px);
+
+            margin-bottom: 14px;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .page-header p {
+            color: #9faabd;
+
+            font-size: 15px;
+
+            line-height: 1.75;
+
+            max-width: 720px;
+        }
+
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+
+        .stat-box {
+            padding: 12px 16px;
+
+            border-radius: 11px;
+
+            color: #bac3d4;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            font-size: 13px;
+        }
+
+
+        .stat-box strong {
+            color: white;
+        }
+
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .tool-card {
+            padding: 25px;
+
+            border-radius: 19px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,24,40,0.94),
+                    rgba(10,15,28,0.94)
+                );
+
+            transition: 0.3s;
+        }
+
+
+        .tool-card:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(123,92,255,0.28);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .tool-top {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .tool-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            font-size: 29px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+        }
+
+
+        .heart {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(217,70,239,0.08);
+
+            border:
+                1px solid rgba(217,70,239,0.16);
+
+            font-size: 17px;
+        }
+
+
+        .tool-card h2 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .tool-card p {
+            color: #98a3b7;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            min-height: 72px;
+        }
+
+
+        .category {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            color: #aaa0ff;
+
+            background:
+                rgba(123,92,255,0.07);
+
+            border:
+                1px solid rgba(123,92,255,0.18);
+
+            font-size: 11px;
+        }
+
+
+        .saved-date {
+            margin-top: 12px;
+
+            color: #707b90;
+
+            font-size: 11px;
+        }
+
+
+        .actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 9px;
+
+            margin-top: 19px;
+        }
+
+
+        .open-button {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 12px;
+
+            border-radius: 9px;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #5f55ff,
+                    #805cff
+                );
+        }
+
+
+        .remove-form {
+            margin: 0;
+        }
+
+
+        .remove-button {
+            height: 100%;
+
+            padding: 10px 13px;
+
+            cursor: pointer;
+
+            border-radius: 9px;
+
+            color: #ff9cad;
+
+            border:
+                1px solid rgba(255,86,116,0.2);
+
+            background:
+                rgba(255,86,116,0.07);
+
+            font-weight: 700;
+        }
+
+
+        .empty-state {
+            padding: 70px 25px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.025);
+        }
+
+
+        .empty-icon {
+            font-size: 52px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .empty-state h2 {
+            font-size: 25px;
+
+            margin-bottom: 11px;
+        }
+
+
+        .empty-state p {
+            color: #99a4b7;
+
+            line-height: 1.7;
+
+            margin-bottom: 25px;
+        }
+
+
+        .explore-button {
+            display: inline-block;
+
+            padding: 13px 19px;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #5f55ff,
+                    #805cff
+                );
+        }
+
+
+        footer {
+            padding: 33px 6%;
+
+            text-align: center;
+
+            color: #737e92;
+
+            font-size: 13px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+        }
+
+
+        @media (max-width: 900px) {
+
+            .tools-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            nav a:not(.account-button) {
+                display: none;
+            }
+
+            .container {
+                width: 91%;
+
+                padding-top: 45px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .remove-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a
+        href="/"
+        class="logo"
+    >
+        Veylora <span>AI</span>
+    </a>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/ai-image-tools/">
+            Image Tools
+        </a>
+
+        <a href="/ai-video-tools/">
+            Video Tools
+        </a>
+
+        <a
+            href="/profile/"
+            class="account-button"
+        >
+            My Account
+        </a>
+
+        <a href="/logout/">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+
+    <section class="page-header">
+
+        <span class="page-badge">
+            My Collection
+        </span>
+
+        <h1>
+            My
+            <span class="gradient-text">
+                Saved Tools
+            </span>
+        </h1>
+
+        <p>
+            Keep your favorite AI tools in one place
+            and return to them whenever you need them.
+        </p>
+
+
+        <div class="stats">
+
+            <div class="stat-box">
+                Saved Tools:
+                <strong>
+                    {{ saved_count }}
+                </strong>
+            </div>
+
+            <div class="stat-box">
+                Account:
+                <strong>
+                    {{ user.username }}
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {% if saved_tools %}
+
+
+        <section class="tools-grid">
+
+
+            {% for item in saved_tools %}
+
+
+                <article class="tool-card">
+
+
+                    <div class="tool-top">
+
+                        <div class="tool-icon">
+                            {{ item.tool.icon }}
+                        </div>
+
+                        <div class="heart">
+                            ❤️
+                        </div>
+
+                    </div>
+
+
+                    <h2>
+                        {{ item.tool.name }}
+                    </h2>
+
+
+                    <p>
+                        {{ item.tool.description }}
+                    </p>
+
+
+                    <span class="category">
+                        {{ item.tool.category }}
+                    </span>
+
+
+                    <div class="saved-date">
+
+                        Saved:
+                        {{ item.saved_at|date:"M d, Y" }}
+
+                    </div>
+
+
+                    <div class="actions">
+
+
+                        <a
+                            href="{% url 'protected_tool_access' item.slug %}"
+                            class="open-button"
+                        >
+                            Open Tool →
+                        </a>
+
+
+                        <form
+                            method="post"
+                            action="{% url 'toggle_saved_tool' item.slug %}"
+                            class="remove-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <input
+                                type="hidden"
+                                name="next"
+                                value="{% url 'saved_tools' %}"
+                            >
+
+                            <button
+                                type="submit"
+                                class="remove-button"
+                            >
+                                Remove
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+
+                </article>
+
+
+            {% endfor %}
+
+
+        </section>
+
+
+    {% else %}
+
+
+        <section class="empty-state">
+
+            <div class="empty-icon">
+                ❤️
+            </div>
+
+            <h2>
+                No saved tools yet
+            </h2>
+
+            <p>
+                Save AI tools you like and
+                they will appear here.
+            </p>
+
+            <a
+                href="/ai-image-tools/"
+                class="explore-button"
+            >
+                Explore AI Tools →
+            </a>
+
+        </section>
+
+
+    {% endif %}
+
+
+</main>
+
+
+<footer>
+    © 2026 Veylora AI. All rights reserved.
+</footer>
+
+
+</body>
+</html>

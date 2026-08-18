@@ -11,6 +11,11 @@ from tools.tool_access import (
     welcome_router,
 )
 
+from tools.saved_tools import (
+    toggle_saved_tool,
+    saved_tools_view,
+)
+
 
 BASE_URL = "https://veyloraai.online"
 
@@ -86,6 +91,8 @@ Disallow: /admin/
 Disallow: /accounts/
 Disallow: /profile/
 Disallow: /welcome/
+Disallow: /saved-tools/
+Disallow: /save-tool/
 
 Sitemap: https://veyloraai.online/sitemap.xml
 """
@@ -115,16 +122,12 @@ def sitemap_xml(request):
 
     urls = []
 
-
-    # Main public pages
     for page_name in public_pages:
 
         urls.append(
             BASE_URL + reverse(page_name)
         )
 
-
-    # Public SEO tool detail pages
     for slug in TOOLS.keys():
 
         urls.append(
@@ -135,12 +138,10 @@ def sitemap_xml(request):
             )
         )
 
-
     xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 """
-
 
     for url in urls:
 
@@ -150,11 +151,9 @@ def sitemap_xml(request):
     </url>
 """
 
-
     xml += """
 </urlset>
 """
-
 
     return HttpResponse(
         xml,
@@ -221,7 +220,6 @@ urlpatterns = [
 
     # =====================================================
     # PUBLIC TOOL DETAIL PAGE
-    # Keep public for Google SEO
     # =====================================================
 
     path(
@@ -250,6 +248,23 @@ urlpatterns = [
         "go/<slug:slug>/",
         protected_official_access,
         name="protected_official_access",
+    ),
+
+
+    # =====================================================
+    # SAVED TOOLS
+    # =====================================================
+
+    path(
+        "saved-tools/",
+        saved_tools_view,
+        name="saved_tools",
+    ),
+
+    path(
+        "save-tool/<slug:slug>/",
+        toggle_saved_tool,
+        name="toggle_saved_tool",
     ),
 
 
@@ -325,11 +340,7 @@ urlpatterns = [
     ),
 
 
-    # =====================================================
     # AFTER LOGIN
-    # This now remembers which tool the visitor clicked
-    # =====================================================
-
     path(
         "welcome/",
         welcome_router,
@@ -337,7 +348,7 @@ urlpatterns = [
     ),
 
 
-    # GOOGLE LOGIN / ALLAUTH
+    # GOOGLE LOGIN
     path(
         "accounts/",
         include("allauth.urls"),

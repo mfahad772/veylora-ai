@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -25,162 +26,62 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family:
-                Inter,
-                Arial,
-                Helvetica,
-                sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
 
             background:
                 radial-gradient(
                     circle at 15% 10%,
-                    rgba(0, 212, 255, 0.08),
+                    rgba(0,212,255,0.08),
                     transparent 28%
                 ),
                 radial-gradient(
                     circle at 85% 15%,
-                    rgba(123, 92, 255, 0.12),
+                    rgba(123,92,255,0.12),
                     transparent 30%
                 ),
                 radial-gradient(
                     circle at 50% 90%,
-                    rgba(217, 70, 239, 0.08),
+                    rgba(217,70,239,0.08),
                     transparent 30%
                 ),
                 #070b14;
 
-            color: #ffffff;
+            color: white;
 
             min-height: 100vh;
-
-            overflow-x: hidden;
         }
 
-
-        /* =====================================================
-           BACKGROUND
-        ===================================================== */
-
-        .background-grid {
-            position: fixed;
-            inset: 0;
-
-            pointer-events: none;
-
-            opacity: 0.2;
-
-            background-image:
-                linear-gradient(
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
-                );
-
-            background-size: 45px 45px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 90%
-                );
-
-            z-index: -2;
+        a {
+            text-decoration: none;
         }
 
-
-        .orb {
-            position: fixed;
-
-            width: 350px;
-            height: 350px;
-
-            border-radius: 50%;
-
-            filter: blur(100px);
-
-            opacity: 0.12;
-
-            pointer-events: none;
-
-            z-index: -1;
-        }
-
-
-        .orb-one {
-            top: 5%;
-            left: -100px;
-
-            background: #00d4ff;
-        }
-
-
-        .orb-two {
-            top: 35%;
-            right: -120px;
-
-            background: #7b5cff;
-        }
-
-
-        .orb-three {
-            bottom: -150px;
-            left: 35%;
-
-            background: #d946ef;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
 
         header {
-            width: 100%;
-
             padding: 18px 6%;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            position: relative;
-
             border-bottom:
                 1px solid rgba(255,255,255,0.08);
 
             background:
-                rgba(7, 11, 20, 0.74);
+                rgba(7,11,20,0.82);
 
-            backdrop-filter:
-                blur(16px);
-
-            z-index: 50;
+            backdrop-filter: blur(15px);
         }
-
 
         .logo {
             color: white;
 
-            font-size: 23px;
+            font-size: 24px;
             font-weight: 800;
-
-            text-decoration: none;
-
-            letter-spacing: -0.5px;
         }
 
-
-        .logo span {
+        .logo span,
+        .gradient-text {
             background:
                 linear-gradient(
                     90deg,
@@ -189,114 +90,66 @@
                     #d946ef
                 );
 
-            -webkit-background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
 
         nav {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 22px;
         }
-
 
         nav a {
             color: #aeb8cc;
-
-            text-decoration: none;
-
             font-size: 14px;
-
-            transition:
-                color 0.25s ease;
         }
-
 
         nav a:hover {
             color: white;
         }
 
-
         .account-link {
-            padding:
-                9px 14px;
+            padding: 9px 14px;
 
             border:
                 1px solid rgba(123,92,255,0.35);
 
-            border-radius:
-                10px;
+            border-radius: 10px;
 
             background:
                 rgba(123,92,255,0.1);
         }
 
 
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
         .container {
             width: 88%;
             max-width: 1180px;
 
-            margin:
-                55px auto 80px;
+            margin: 50px auto 80px;
         }
 
-
-        /* =====================================================
-           BREADCRUMBS
-        ===================================================== */
 
         .breadcrumbs {
             display: flex;
-            align-items: center;
             flex-wrap: wrap;
-
             gap: 8px;
 
-            margin-bottom: 25px;
+            margin-bottom: 24px;
 
             font-size: 13px;
-
-            color: #77829a;
+            color: #737e91;
         }
-
 
         .breadcrumbs a {
-            color: #9ea8bd;
-
-            text-decoration: none;
+            color: #9aa5b9;
         }
 
-
-        .breadcrumbs a:hover {
-            color: #ffffff;
-        }
-
-
-        .breadcrumbs span {
-            color: #5d667a;
-        }
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
 
         .tool-hero {
-            position: relative;
+            padding: 45px;
 
-            padding:
-                50px;
-
-            border-radius:
-                28px;
+            border-radius: 27px;
 
             border:
                 1px solid rgba(255,255,255,0.1);
@@ -304,87 +157,40 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(18, 25, 43, 0.94),
-                    rgba(10, 15, 28, 0.94)
+                    rgba(18,25,43,0.94),
+                    rgba(10,15,28,0.94)
                 );
 
             box-shadow:
                 0 30px 80px rgba(0,0,0,0.35);
-
-            overflow: hidden;
-        }
-
-
-        .tool-hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 350px;
-            height: 350px;
-
-            top: -220px;
-            right: -80px;
-
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #00d4ff,
-                    #7b5cff,
-                    #d946ef
-                );
-
-            filter:
-                blur(25px);
-
-            opacity: 0.15;
         }
 
 
         .hero-top {
-            position: relative;
-
             display: flex;
             align-items: flex-start;
-
-            gap: 28px;
+            gap: 27px;
         }
 
 
         .tool-icon {
-            width: 105px;
-            min-width: 105px;
-
-            height: 105px;
+            width: 100px;
+            min-width: 100px;
+            height: 100px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-size: 51px;
+            font-size: 49px;
 
-            border-radius: 26px;
+            border-radius: 25px;
 
             border:
                 1px solid rgba(255,255,255,0.12);
 
             background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.09),
-                    rgba(255,255,255,0.025)
-                );
-
-            box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.09),
-                0 18px 45px rgba(0,0,0,0.28);
-
-            transform:
-                perspective(700px)
-                rotateX(5deg)
-                rotateY(-7deg);
+                rgba(255,255,255,0.055);
         }
 
 
@@ -396,23 +202,16 @@
         .category {
             display: inline-block;
 
-            margin-bottom:
-                12px;
+            margin-bottom: 12px;
 
-            padding:
-                7px 12px;
+            padding: 7px 11px;
 
-            border-radius:
-                999px;
+            border-radius: 999px;
 
-            font-size:
-                12px;
+            font-size: 12px;
+            font-weight: 700;
 
-            font-weight:
-                700;
-
-            color:
-                #b9adff;
+            color: #b8adff;
 
             border:
                 1px solid rgba(123,92,255,0.3);
@@ -424,75 +223,43 @@
 
         .hero-content h1 {
             font-size:
-                clamp(34px, 5vw, 55px);
+                clamp(35px, 5vw, 54px);
 
-            line-height:
-                1.05;
+            margin-bottom: 15px;
 
-            letter-spacing:
-                -1.8px;
-
-            margin-bottom:
-                16px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffffff,
-                    #dbe2f0 60%,
-                    #9586ff
-                );
-
-            -webkit-background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
+            letter-spacing: -1.5px;
         }
 
 
-        .hero-content > p {
-            max-width:
-                760px;
+        .hero-content p {
+            max-width: 760px;
 
-            color:
-                #a5afc2;
+            color: #a5afc2;
 
-            line-height:
-                1.8;
+            line-height: 1.8;
 
-            font-size:
-                16px;
+            font-size: 16px;
         }
 
 
         .tags {
-            display:
-                flex;
+            display: flex;
+            flex-wrap: wrap;
 
-            flex-wrap:
-                wrap;
+            gap: 8px;
 
-            gap:
-                8px;
-
-            margin-top:
-                22px;
+            margin-top: 21px;
         }
 
 
         .tag {
-            padding:
-                7px 10px;
+            padding: 7px 10px;
 
-            border-radius:
-                8px;
+            border-radius: 8px;
 
-            font-size:
-                12px;
+            font-size: 12px;
 
-            color:
-                #aab4c8;
+            color: #aab4c8;
 
             background:
                 rgba(255,255,255,0.045);
@@ -503,56 +270,27 @@
 
 
         .hero-actions {
-            position:
-                relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
 
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                12px;
-
-            margin-top:
-                30px;
+            margin-top: 30px;
         }
 
 
         .primary-btn {
-            display:
-                inline-flex;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
 
-            align-items:
-                center;
+            padding: 14px 22px;
 
-            justify-content:
-                center;
+            color: white;
 
-            gap:
-                8px;
+            font-weight: 700;
+            font-size: 14px;
 
-            padding:
-                14px 22px;
-
-            color:
-                #ffffff;
-
-            text-decoration:
-                none;
-
-            font-weight:
-                700;
-
-            font-size:
-                14px;
-
-            border-radius:
-                11px;
+            border-radius: 11px;
 
             background:
                 linear-gradient(
@@ -562,109 +300,75 @@
                 );
 
             box-shadow:
-                0 15px 35px
-                rgba(103,87,255,0.24);
+                0 15px 35px rgba(103,87,255,0.24);
 
-            transition:
-                0.25s ease;
+            transition: 0.25s;
         }
 
 
         .primary-btn:hover {
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
 
             box-shadow:
-                0 20px 40px
-                rgba(103,87,255,0.35);
+                0 20px 40px rgba(103,87,255,0.35);
         }
 
 
         .secondary-btn {
-            display:
-                inline-flex;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
 
-            align-items:
-                center;
+            padding: 13px 20px;
 
-            justify-content:
-                center;
+            color: #b5bfd1;
 
-            padding:
-                13px 20px;
+            font-size: 14px;
 
-            color:
-                #b5bfd1;
-
-            text-decoration:
-                none;
-
-            font-size:
-                14px;
-
-            border-radius:
-                11px;
+            border-radius: 11px;
 
             border:
                 1px solid rgba(255,255,255,0.1);
 
             background:
                 rgba(255,255,255,0.035);
-
-            transition:
-                0.25s ease;
         }
 
 
-        .secondary-btn:hover {
-            color:
-                white;
+        .login-note {
+            margin-top: 15px;
 
-            border-color:
-                rgba(123,92,255,0.45);
+            color: #838da1;
 
-            background:
-                rgba(123,92,255,0.08);
+            font-size: 12px;
+
+            line-height: 1.6;
         }
 
-
-        /* =====================================================
-           CONTENT GRID
-        ===================================================== */
 
         .content-grid {
-            display:
-                grid;
+            display: grid;
 
             grid-template-columns:
                 1.35fr 0.65fr;
 
-            gap:
-                22px;
+            gap: 22px;
 
-            margin-top:
-                28px;
+            margin-top: 28px;
         }
 
 
         .column {
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                22px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
         }
 
 
         .info-card {
-            padding:
-                30px;
+            padding: 30px;
 
-            border-radius:
-                20px;
+            border-radius: 20px;
 
             border:
                 1px solid rgba(255,255,255,0.085);
@@ -678,31 +382,12 @@
 
             box-shadow:
                 0 20px 55px rgba(0,0,0,0.2);
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-
-        .info-card:hover {
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(123,92,255,0.25);
         }
 
 
         .info-card h2 {
-            font-size:
-                22px;
-
-            margin-bottom:
-                15px;
-
-            letter-spacing:
-                -0.4px;
+            font-size: 22px;
+            margin-bottom: 15px;
         }
 
 
@@ -715,60 +400,40 @@
                     #d946ef
                 );
 
-            -webkit-background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
 
         .info-card p {
-            color:
-                #9faabc;
+            color: #9faabc;
 
-            line-height:
-                1.85;
+            line-height: 1.85;
 
-            font-size:
-                15px;
+            font-size: 15px;
         }
 
 
-        /* =====================================================
-           LISTS
-        ===================================================== */
-
         .feature-list {
-            list-style:
-                none;
+            list-style: none;
 
-            display:
-                grid;
+            display: grid;
 
-            gap:
-                12px;
-
-            margin-top:
-                5px;
+            gap: 11px;
         }
 
 
         .feature-list li {
-            position:
-                relative;
+            position: relative;
 
             padding:
-                13px 14px 13px 43px;
+                13px 14px 13px 42px;
 
-            color:
-                #b4bfd1;
+            color: #b4bfd1;
 
-            line-height:
-                1.55;
+            line-height: 1.55;
 
-            border-radius:
-                11px;
+            border-radius: 11px;
 
             border:
                 1px solid rgba(255,255,255,0.055);
@@ -779,44 +444,26 @@
 
 
         .feature-list li::before {
-            content:
-                "✓";
+            content: "✓";
 
-            position:
-                absolute;
+            position: absolute;
 
-            left:
-                14px;
+            left: 14px;
+            top: 12px;
 
-            top:
-                12px;
+            width: 20px;
+            height: 20px;
 
-            width:
-                20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            height:
-                20px;
+            border-radius: 50%;
 
-            display:
-                flex;
+            font-size: 11px;
+            font-weight: bold;
 
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                50%;
-
-            color:
-                white;
-
-            font-size:
-                11px;
-
-            font-weight:
-                bold;
+            color: white;
 
             background:
                 linear-gradient(
@@ -828,8 +475,7 @@
 
 
         .use-list li::before {
-            content:
-                "→";
+            content: "→";
 
             background:
                 linear-gradient(
@@ -840,65 +486,12 @@
         }
 
 
-        /* =====================================================
-           BEST FOR
-        ===================================================== */
-
-        .best-for {
-            position:
-                relative;
-
-            overflow:
-                hidden;
-        }
-
-
-        .best-for::after {
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                120px;
-
-            height:
-                120px;
-
-            right:
-                -50px;
-
-            bottom:
-                -60px;
-
-            border-radius:
-                50%;
-
-            background:
-                #7b5cff;
-
-            filter:
-                blur(50px);
-
-            opacity:
-                0.14;
-        }
-
-
-        /* =====================================================
-           DIRECTORY NOTICE
-        ===================================================== */
-
         .notice-card {
-            padding:
-                23px 25px;
+            padding: 23px 25px;
 
-            margin-top:
-                22px;
+            margin-top: 22px;
 
-            border-radius:
-                16px;
+            border-radius: 16px;
 
             border:
                 1px solid rgba(0,212,255,0.13);
@@ -906,39 +499,27 @@
             background:
                 rgba(0,212,255,0.035);
 
-            color:
-                #8f9aac;
+            color: #8f9aac;
 
-            font-size:
-                13px;
+            font-size: 13px;
 
-            line-height:
-                1.75;
+            line-height: 1.75;
         }
 
 
         .notice-card strong {
-            color:
-                #d9e2f2;
+            color: #d9e2f2;
         }
 
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
         footer {
-            padding:
-                35px 6%;
+            padding: 35px 6%;
 
-            text-align:
-                center;
+            text-align: center;
 
-            color:
-                #707b91;
+            color: #707b91;
 
-            font-size:
-                13px;
+            font-size: 13px;
 
             border-top:
                 1px solid rgba(255,255,255,0.075);
@@ -946,140 +527,74 @@
 
 
         .footer-links {
-            display:
-                flex;
+            display: flex;
 
-            justify-content:
-                center;
+            justify-content: center;
 
-            flex-wrap:
-                wrap;
+            flex-wrap: wrap;
 
-            gap:
-                18px;
+            gap: 18px;
 
-            margin-bottom:
-                15px;
+            margin-bottom: 15px;
         }
 
 
         .footer-links a {
-            color:
-                #8f99ae;
-
-            text-decoration:
-                none;
+            color: #8f99ae;
         }
 
 
-        .footer-links a:hover {
-            color:
-                white;
-        }
-
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        @media (
-            max-width: 900px
-        ) {
+        @media (max-width: 900px) {
 
             .content-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .tool-hero {
-                padding:
-                    35px;
+                grid-template-columns: 1fr;
             }
 
         }
 
 
-        @media (
-            max-width: 700px
-        ) {
+        @media (max-width: 700px) {
 
-            header {
-                padding:
-                    16px 5%;
-            }
-
-            nav a:not(
-                .account-link
-            ) {
-                display:
-                    none;
+            nav a:not(.account-link) {
+                display: none;
             }
 
             .container {
-                width:
-                    91%;
-
-                margin-top:
-                    30px;
+                width: 91%;
+                margin-top: 30px;
             }
 
             .tool-hero {
-                padding:
-                    27px 22px;
+                padding: 27px 22px;
             }
 
             .hero-top {
-                flex-direction:
-                    column;
-
-                gap:
-                    20px;
+                flex-direction: column;
             }
 
             .tool-icon {
-                width:
-                    84px;
+                width: 84px;
+                min-width: 84px;
+                height: 84px;
 
-                min-width:
-                    84px;
-
-                height:
-                    84px;
-
-                font-size:
-                    41px;
-
-                border-radius:
-                    21px;
+                font-size: 41px;
             }
 
             .hero-content h1 {
-                font-size:
-                    38px;
-            }
-
-            .hero-content > p {
-                font-size:
-                    15px;
+                font-size: 38px;
             }
 
             .hero-actions {
-                flex-direction:
-                    column;
-
-                align-items:
-                    stretch;
+                flex-direction: column;
             }
 
             .primary-btn,
             .secondary-btn {
-                width:
-                    100%;
+                width: 100%;
             }
 
             .info-card {
-                padding:
-                    24px 21px;
+                padding: 24px 21px;
             }
 
         }
@@ -1091,439 +606,385 @@
 
 <body>
 
-    <div class="background-grid"></div>
 
-    <div class="orb orb-one"></div>
-    <div class="orb orb-two"></div>
-    <div class="orb orb-three"></div>
+<header>
 
+    <a href="/" class="logo">
+        Veylora <span>AI</span>
+    </a>
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+    <nav>
 
-    <header>
-
-        <a
-            href="/"
-            class="logo"
-        >
-            Veylora <span>AI</span>
+        <a href="/">
+            Home
         </a>
 
+        <a href="/ai-image-tools/">
+            Image Tools
+        </a>
 
-        <nav>
+        <a href="/ai-video-tools/">
+            Video Tools
+        </a>
 
-            <a href="/">
-                Home
+        {% if user.is_authenticated %}
+
+            <a
+                href="/profile/"
+                class="account-link"
+            >
+                My Account
             </a>
+
+        {% else %}
+
+            <a
+                href="/login/"
+                class="account-link"
+            >
+                Login
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+
+    <div class="breadcrumbs">
+
+        <a href="/">
+            Home
+        </a>
+
+        <span>›</span>
+
+        {% if tool.type == "image" %}
 
             <a href="/ai-image-tools/">
-                Image Tools
+                AI Image Tools
             </a>
+
+        {% else %}
 
             <a href="/ai-video-tools/">
-                Video Tools
+                AI Video Tools
             </a>
 
+        {% endif %}
 
-            {% if user.is_authenticated %}
+        <span>›</span>
 
-                <a
-                    href="/profile/"
-                    class="account-link"
-                >
-                    My Account
-                </a>
+        <span>
+            {{ tool.name }}
+        </span>
 
-            {% else %}
-
-                <a
-                    href="/login/"
-                    class="account-link"
-                >
-                    Login
-                </a>
-
-            {% endif %}
-
-        </nav>
-
-    </header>
+    </div>
 
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main class="container">
+    <section class="tool-hero">
 
 
-        <!-- BREADCRUMBS -->
-
-        <div class="breadcrumbs">
-
-            <a href="/">
-                Home
-            </a>
-
-            <span>›</span>
+        <div class="hero-top">
 
 
-            {% if tool.type == "image" %}
-
-                <a href="/ai-image-tools/">
-                    AI Image Tools
-                </a>
-
-            {% else %}
-
-                <a href="/ai-video-tools/">
-                    AI Video Tools
-                </a>
-
-            {% endif %}
+            <div class="tool-icon">
+                {{ tool.icon }}
+            </div>
 
 
-            <span>›</span>
+            <div class="hero-content">
 
-            <span>
-                {{ tool.name }}
-            </span>
+                <span class="category">
+                    {{ tool.category }}
+                </span>
 
-        </div>
+                <h1>
+                    {{ tool.name }}
+                </h1>
 
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
-
-        <section class="tool-hero">
-
-            <div class="hero-top">
-
-                <div class="tool-icon">
-                    {{ tool.icon }}
-                </div>
+                <p>
+                    {{ tool.description }}
+                </p>
 
 
-                <div class="hero-content">
+                <div class="tags">
 
-                    <span class="category">
-                        {{ tool.category }}
-                    </span>
+                    {% for tag in tool.tags %}
 
+                        <span class="tag">
+                            {{ tag }}
+                        </span>
 
-                    <h1>
-                        {{ tool.name }}
-                    </h1>
-
-
-                    <p>
-                        {{ tool.description }}
-                    </p>
-
-
-                    <div class="tags">
-
-                        {% for tag in tool.tags %}
-
-                            <span class="tag">
-                                {{ tag }}
-                            </span>
-
-                        {% endfor %}
-
-                    </div>
+                    {% endfor %}
 
                 </div>
 
             </div>
 
 
-            <div class="hero-actions">
+        </div>
+
+
+        <div class="hero-actions">
+
+
+            <a
+                href="{% url 'protected_official_access' tool.slug %}"
+                class="primary-btn"
+            >
+                Visit Official Website ↗
+            </a>
+
+
+            {% if tool.type == "image" %}
 
                 <a
-                    href="{{ tool.official_url }}"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    class="primary-btn"
+                    href="/ai-image-tools/"
+                    class="secondary-btn"
                 >
-                    Visit Official Website ↗
+                    ← Browse AI Image Tools
                 </a>
 
+            {% else %}
 
-                {% if tool.type == "image" %}
+                <a
+                    href="/ai-video-tools/"
+                    class="secondary-btn"
+                >
+                    ← Browse AI Video Tools
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
+
+        {% if not user.is_authenticated %}
+
+            <p class="login-note">
+                🔒 Login or create a free account to continue
+                to the official {{ tool.name }} website.
+            </p>
+
+        {% endif %}
+
+
+    </section>
+
+
+    <section class="content-grid">
+
+
+        <div class="column">
+
+
+            <article class="info-card">
+
+                <h2>
+                    About
+                    <span>{{ tool.name }}</span>
+                </h2>
+
+                <p>
+                    {{ tool.overview }}
+                </p>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <h2>
+                    Key <span>Features</span>
+                </h2>
+
+                <ul class="feature-list">
+
+                    {% for feature in tool.features %}
+
+                        <li>
+                            {{ feature }}
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <h2>
+                    Popular <span>Use Cases</span>
+                </h2>
+
+                <ul class="feature-list use-list">
+
+                    {% for use_case in tool.use_cases %}
+
+                        <li>
+                            {{ use_case }}
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </article>
+
+
+        </div>
+
+
+        <div class="column">
+
+
+            <aside class="info-card">
+
+                <h2>
+                    Best <span>For</span>
+                </h2>
+
+                <p>
+                    {{ tool.best_for }}
+                </p>
+
+            </aside>
+
+
+            <aside class="info-card">
+
+                <h2>
+                    Tool <span>Information</span>
+                </h2>
+
+                <ul class="feature-list">
+
+                    <li>
+                        {{ tool.category }}
+                    </li>
+
+                    <li>
+
+                        {% if tool.type == "image" %}
+
+                            AI Image Tool
+
+                        {% else %}
+
+                            AI Video Tool
+
+                        {% endif %}
+
+                    </li>
+
+                    <li>
+                        Login required before visiting
+                        the official platform
+                    </li>
+
+                </ul>
+
+            </aside>
+
+
+            <aside class="info-card">
+
+                <h2>
+                    Explore <span>More</span>
+                </h2>
+
+                <p>
+                    Discover more AI tools for image generation,
+                    video creation, editing and creative workflows.
+                </p>
+
+                <div class="hero-actions">
 
                     <a
                         href="/ai-image-tools/"
                         class="secondary-btn"
                     >
-                        ← Browse AI Image Tools
+                        Image Tools
                     </a>
-
-                {% else %}
 
                     <a
                         href="/ai-video-tools/"
                         class="secondary-btn"
                     >
-                        ← Browse AI Video Tools
+                        Video Tools
                     </a>
 
-                {% endif %}
+                </div>
 
-            </div>
+            </aside>
 
-        </section>
-
-
-        <!-- =================================================
-             SEO CONTENT
-        ================================================== -->
-
-        <section class="content-grid">
-
-
-            <!-- LEFT COLUMN -->
-
-            <div class="column">
-
-
-                <!-- OVERVIEW -->
-
-                <article class="info-card">
-
-                    <h2>
-                        About
-                        <span>{{ tool.name }}</span>
-                    </h2>
-
-                    <p>
-                        {{ tool.overview }}
-                    </p>
-
-                </article>
-
-
-                <!-- FEATURES -->
-
-                <article class="info-card">
-
-                    <h2>
-                        Key <span>Features</span>
-                    </h2>
-
-
-                    <ul class="feature-list">
-
-                        {% for feature in tool.features %}
-
-                            <li>
-                                {{ feature }}
-                            </li>
-
-                        {% endfor %}
-
-                    </ul>
-
-                </article>
-
-
-                <!-- USE CASES -->
-
-                <article class="info-card">
-
-                    <h2>
-                        Popular <span>Use Cases</span>
-                    </h2>
-
-
-                    <ul class="feature-list use-list">
-
-                        {% for use_case in tool.use_cases %}
-
-                            <li>
-                                {{ use_case }}
-                            </li>
-
-                        {% endfor %}
-
-                    </ul>
-
-                </article>
-
-            </div>
-
-
-            <!-- RIGHT COLUMN -->
-
-            <div class="column">
-
-
-                <!-- BEST FOR -->
-
-                <aside class="info-card best-for">
-
-                    <h2>
-                        Best <span>For</span>
-                    </h2>
-
-                    <p>
-                        {{ tool.best_for }}
-                    </p>
-
-                </aside>
-
-
-                <!-- TOOL INFORMATION -->
-
-                <aside class="info-card">
-
-                    <h2>
-                        Tool <span>Information</span>
-                    </h2>
-
-
-                    <ul class="feature-list">
-
-                        <li>
-                            Category:
-                            {{ tool.category }}
-                        </li>
-
-                        <li>
-
-                            {% if tool.type == "image" %}
-
-                                AI Image Tool
-
-                            {% else %}
-
-                                AI Video Tool
-
-                            {% endif %}
-
-                        </li>
-
-                        <li>
-                            Official platform linked directly
-                        </li>
-
-                    </ul>
-
-                </aside>
-
-
-                <!-- EXPLORE MORE -->
-
-                <aside class="info-card">
-
-                    <h2>
-                        Explore <span>More AI Tools</span>
-                    </h2>
-
-
-                    <p>
-                        Compare more artificial intelligence
-                        tools for image generation, video
-                        creation, editing and creative
-                        workflows on Veylora AI.
-                    </p>
-
-
-                    <div
-                        class="hero-actions"
-                        style="margin-top:20px;"
-                    >
-
-                        <a
-                            href="/ai-image-tools/"
-                            class="secondary-btn"
-                        >
-                            Image Tools
-                        </a>
-
-                        <a
-                            href="/ai-video-tools/"
-                            class="secondary-btn"
-                        >
-                            Video Tools
-                        </a>
-
-                    </div>
-
-                </aside>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             DIRECTORY NOTICE
-        ================================================== -->
-
-        <div class="notice-card">
-
-            <strong>
-                Independent directory notice:
-            </strong>
-
-            Veylora AI is an independent AI tools directory.
-            We provide information to help users discover
-            useful AI platforms. Veylora AI is not the owner
-            or operator of the third-party tool shown on this
-            page. Features, availability and pricing may
-            change on the official provider's website.
-
-        </div>
-
-    </main>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer>
-
-        <div class="footer-links">
-
-            <a href="/">
-                Home
-            </a>
-
-            <a href="/about/">
-                About
-            </a>
-
-            <a href="/privacy/">
-                Privacy
-            </a>
-
-            <a href="/terms/">
-                Terms
-            </a>
-
-            <a href="/disclaimer/">
-                Disclaimer
-            </a>
-
-            <a href="/contact/">
-                Contact
-            </a>
 
         </div>
 
 
-        <p>
-            © 2026 Veylora AI.
-            All rights reserved.
-        </p>
+    </section>
 
-    </footer>
+
+    <div class="notice-card">
+
+        <strong>
+            Independent directory notice:
+        </strong>
+
+        Veylora AI is an independent AI tools directory.
+        The third-party platform shown on this page
+        is not owned or operated by Veylora AI.
+        Features, availability and pricing may change
+        on the official provider's website.
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/">
+            About
+        </a>
+
+        <a href="/privacy/">
+            Privacy
+        </a>
+
+        <a href="/terms/">
+            Terms
+        </a>
+
+        <a href="/disclaimer/">
+            Disclaimer
+        </a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+    </div>
+
+    © 2026 Veylora AI. All rights reserved.
+
+</footer>
+
 
 </body>
-
 </html>

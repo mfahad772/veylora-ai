@@ -10,9 +10,10 @@
     <title>Login - Veylora AI</title>
 
     <meta name="description"
-          content="Login to your Veylora AI account and access your profile and AI tools.">
+          content="Login to your Veylora AI account and access powerful AI tools.">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -21,26 +22,38 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
+
             background:
-                radial-gradient(circle at top, rgba(108, 99, 255, 0.14), transparent 35%),
+                radial-gradient(
+                    circle at top,
+                    rgba(108, 99, 255, 0.14),
+                    transparent 35%
+                ),
                 #0b0f19;
+
             color: #ffffff;
             min-height: 100vh;
         }
 
+        /* HEADER */
+
         header {
             width: 100%;
             padding: 20px 7%;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             border-bottom: 1px solid #202638;
+
             background: rgba(11, 15, 25, 0.94);
         }
 
         .logo {
             color: #ffffff;
             text-decoration: none;
+
             font-size: 25px;
             font-weight: bold;
         }
@@ -58,7 +71,9 @@
         nav a {
             color: #cbd0dc;
             text-decoration: none;
+
             font-size: 14px;
+
             transition: 0.25s;
         }
 
@@ -66,25 +81,40 @@
             color: #ffffff;
         }
 
+        /* PAGE */
+
         .page {
             width: 92%;
             min-height: calc(100vh - 145px);
+
             margin: auto;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             padding: 55px 0;
         }
+
+        /* CARD */
 
         .login-card {
             width: 100%;
             max-width: 460px;
+
             background: rgba(18, 24, 39, 0.96);
+
             border: 1px solid #293247;
             border-radius: 22px;
+
             padding: 38px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.36);
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.36);
         }
+
+        /* WELCOME */
 
         .welcome {
             text-align: center;
@@ -94,13 +124,19 @@
         .welcome-icon {
             width: 62px;
             height: 62px;
+
             margin: 0 auto 18px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             border-radius: 16px;
+
             background: #1d2145;
+
             border: 1px solid #37316e;
+
             font-size: 29px;
         }
 
@@ -111,20 +147,33 @@
 
         .welcome p {
             color: #9da6b8;
+
             line-height: 1.6;
+
             font-size: 14px;
         }
 
+        /* ERROR */
+
         .error-box {
             background: rgba(239, 68, 68, 0.1);
+
             border: 1px solid rgba(239, 68, 68, 0.35);
+
             color: #fca5a5;
+
             border-radius: 10px;
+
             padding: 12px 14px;
+
             font-size: 13px;
+
             margin-bottom: 18px;
+
             line-height: 1.5;
         }
+
+        /* FORM */
 
         .form-group {
             margin-bottom: 18px;
@@ -132,8 +181,11 @@
 
         .form-group label {
             display: block;
+
             margin-bottom: 8px;
+
             color: #dce1ec;
+
             font-size: 14px;
             font-weight: 600;
         }
@@ -141,128 +193,178 @@
         .form-group input {
             width: 100%;
             height: 50px;
+
             padding: 0 15px;
+
             border: 1px solid #30384d;
             border-radius: 10px;
+
             background: #0e1421;
+
             color: #ffffff;
+
             outline: none;
+
             font-size: 15px;
+
             transition: 0.25s;
         }
 
         .form-group input:focus {
             border-color: #6c63ff;
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(108, 99, 255, 0.12);
         }
+
+        /* LOGIN BUTTON */
 
         .login-button {
             width: 100%;
+
             border: none;
+
             cursor: pointer;
+
             padding: 14px;
+
             border-radius: 10px;
+
             background: #6c63ff;
+
             color: #ffffff;
+
             font-size: 15px;
             font-weight: bold;
+
             transition: 0.25s;
         }
 
         .login-button:hover {
             background: #584ee8;
+
             transform: translateY(-1px);
-            box-shadow: 0 8px 22px rgba(108, 99, 255, 0.2);
+
+            box-shadow:
+                0 8px 22px
+                rgba(108, 99, 255, 0.2);
         }
+
+        /* DIVIDER */
 
         .divider {
             display: flex;
             align-items: center;
+
             gap: 12px;
+
             margin: 25px 0;
+
             color: #70798c;
+
             font-size: 12px;
         }
 
         .divider::before,
         .divider::after {
             content: "";
+
             flex: 1;
+
             height: 1px;
+
             background: #293247;
         }
 
-        .social-buttons {
-            display: grid;
-            gap: 11px;
-        }
+        /* GOOGLE */
 
-        .social-form {
+        .google-form {
             width: 100%;
-        }
-
-        .social-button {
-            width: 100%;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #151c2c;
-            border: 1px solid #30384d;
-            border-radius: 10px;
-            color: #e8ebf2;
-            font-size: 14px;
-            font-weight: 600;
         }
 
         .google-button {
+            width: 100%;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            background: #151c2c;
+
+            border: 1px solid #30384d;
+            border-radius: 10px;
+
+            color: #e8ebf2;
+
+            font-size: 14px;
+            font-weight: 600;
+
             cursor: pointer;
-            opacity: 1;
+
             transition: 0.25s;
         }
 
         .google-button:hover {
             background: #1d2537;
-            border-color: #6c63ff;
-            transform: translateY(-1px);
-        }
 
-        .disabled-button {
-            cursor: not-allowed;
-            opacity: 0.55;
+            border-color: #6c63ff;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(108, 99, 255, 0.14);
         }
 
         .google-icon {
-            width: 25px;
-            height: 25px;
-            background: #ffffff;
-            color: #4285f4;
-            border-radius: 50%;
+            width: 27px;
+            height: 27px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            color: #4285f4;
+
             font-size: 15px;
             font-weight: bold;
         }
 
         .social-note {
-            margin-top: 10px;
+            margin-top: 11px;
+
             text-align: center;
+
             color: #697386;
+
             font-size: 11px;
         }
 
+        /* SIGNUP */
+
         .signup-text {
             margin-top: 26px;
+
             text-align: center;
+
             color: #9da6b8;
+
             font-size: 14px;
         }
 
         .signup-text a {
             color: #9d96ff;
+
             text-decoration: none;
+
             font-weight: bold;
         }
 
@@ -270,12 +372,19 @@
             color: #ffffff;
         }
 
+        /* BACK */
+
         .back-home {
             display: block;
+
             text-align: center;
+
             margin-top: 18px;
+
             color: #7f8798;
+
             text-decoration: none;
+
             font-size: 13px;
         }
 
@@ -283,15 +392,24 @@
             color: #ffffff;
         }
 
+        /* FOOTER */
+
         footer {
             border-top: 1px solid #202638;
+
             padding: 25px 7%;
+
             color: #70798c;
+
             text-align: center;
+
             font-size: 13px;
         }
 
+        /* MOBILE */
+
         @media (max-width: 600px) {
+
             header {
                 padding: 18px 5%;
             }
@@ -313,22 +431,40 @@
             .welcome h1 {
                 font-size: 26px;
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
 
 <header>
 
-    <a href="{% url 'home' %}" class="logo">
+    <a href="{% url 'home' %}"
+       class="logo">
+
         Veylora <span>AI</span>
+
     </a>
 
+
     <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'image_tools' %}">AI Image Tools</a>
-        <a href="{% url 'video_tools' %}">AI Video Tools</a>
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'image_tools' %}">
+            AI Image Tools
+        </a>
+
+        <a href="{% url 'video_tools' %}">
+            AI Video Tools
+        </a>
+
     </nav>
 
 </header>
@@ -336,7 +472,9 @@
 
 <main class="page">
 
+
     <div class="login-card">
+
 
         <div class="welcome">
 
@@ -344,7 +482,9 @@
                 🔐
             </div>
 
-            <h1>Welcome Back</h1>
+            <h1>
+                Welcome Back
+            </h1>
 
             <p>
                 Login to your Veylora AI account to continue.
@@ -355,9 +495,12 @@
 
         {% if form.errors %}
 
-        <div class="error-box">
-            Username or password is incorrect. Please try again.
-        </div>
+            <div class="error-box">
+
+                Username or password is incorrect.
+                Please try again.
+
+            </div>
 
         {% endif %}
 
@@ -367,6 +510,7 @@
         <form method="POST">
 
             {% csrf_token %}
+
 
             <div class="form-group">
 
@@ -404,75 +548,54 @@
             </div>
 
 
-            <button type="submit" class="login-button">
+            <button
+                type="submit"
+                class="login-button">
+
                 Login to Veylora AI
+
             </button>
 
         </form>
 
 
+        <!-- DIVIDER -->
+
         <div class="divider">
-            OR CONTINUE WITH
+            OR
         </div>
 
 
-        <div class="social-buttons">
+        <!-- GOOGLE LOGIN -->
 
+        <form
+            method="POST"
+            action="{% provider_login_url 'google' %}"
+            class="google-form">
 
-            <!-- REAL GOOGLE LOGIN -->
-
-            <form
-                method="POST"
-                action="{% provider_login_url 'google' %}"
-                class="social-form">
-
-                {% csrf_token %}
-
-                <button
-                    type="submit"
-                    class="social-button google-button">
-
-                    <span class="google-icon">
-                        G
-                    </span>
-
-                    Continue with Google
-
-                </button>
-
-            </form>
-
-
-            <!-- APPLE - LATER -->
+            {% csrf_token %}
 
             <button
-                type="button"
-                class="social-button disabled-button"
-                disabled>
+                type="submit"
+                class="google-button">
 
-                 &nbsp; Continue with Apple
+                <span class="google-icon">
+                    G
+                </span>
+
+                Continue with Google
 
             </button>
 
-
-            <!-- MICROSOFT - LATER -->
-
-            <button
-                type="button"
-                class="social-button disabled-button"
-                disabled>
-
-                ◫ &nbsp; Continue with Microsoft
-
-            </button>
-
-        </div>
+        </form>
 
 
         <div class="social-note">
-            Google login is enabled. Apple and Microsoft will be connected later.
+            Secure sign-in with your Google account.
         </div>
 
+
+        <!-- SIGNUP -->
 
         <div class="signup-text">
 
@@ -485,18 +608,29 @@
         </div>
 
 
-        <a href="{% url 'home' %}" class="back-home">
+        <!-- HOME -->
+
+        <a href="{% url 'home' %}"
+           class="back-home">
+
             ← Back to Home
+
         </a>
 
+
     </div>
+
 
 </main>
 
 
 <footer>
-    © 2026 Veylora AI. All rights reserved.
+
+    © 2026 Veylora AI.
+    All rights reserved.
+
 </footer>
+
 
 </body>
 

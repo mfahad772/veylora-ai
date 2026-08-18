@@ -2,16 +2,20 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>{{ tool.name }} - Veylora AI</title>
+    <title>{{ tool.name }} | Veylora AI</title>
 
-    <meta name="description"
-          content="{{ tool.description }}">
+    <link
+        rel="icon"
+        href="/favicon.ico"
+        type="image/svg+xml"
+    >
 
     <style>
 
@@ -25,339 +29,114 @@
             scroll-behavior: smooth;
         }
 
-        :root {
-            --bg: #05070d;
-            --blue: #2563eb;
-            --cyan: #22d3ee;
-            --violet: #8b5cf6;
-            --pink: #ec4899;
-            --white: #ffffff;
-            --muted: #98a3b7;
-            --border: rgba(255, 255, 255, 0.08);
-        }
-
         body {
-            min-height: 100vh;
-
             font-family:
+                Inter,
                 Arial,
                 Helvetica,
                 sans-serif;
 
-            background: var(--bg);
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(0, 212, 255, 0.08),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(123, 92, 255, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(217, 70, 239, 0.08),
+                    transparent 30%
+                ),
+                #070b14;
 
-            color: var(--white);
+            color: #ffffff;
+
+            min-height: 100vh;
 
             overflow-x: hidden;
-
-            line-height: 1.5;
         }
 
 
         /* =====================================================
-           LIVE BACKGROUND
+           BACKGROUND
         ===================================================== */
 
-        .background {
+        .background-grid {
             position: fixed;
             inset: 0;
 
-            z-index: -20;
+            pointer-events: none;
 
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 50% -10%,
-                    rgba(37, 99, 235, 0.15),
-                    transparent 38%
-                ),
-                linear-gradient(
-                    180deg,
-                    #05070d,
-                    #070b14 55%,
-                    #05070d
-                );
-        }
-
-        .mouse-glow {
-            position: absolute;
-
-            width: 620px;
-            height: 620px;
-
-            left: 50%;
-            top: 20%;
-
-            transform:
-                translate(-50%, -50%);
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(34, 211, 238, 0.11),
-                    rgba(37, 99, 235, 0.05) 40%,
-                    transparent 72%
-                );
-
-            filter: blur(20px);
-
-            transition:
-                left 0.18s ease-out,
-                top 0.18s ease-out;
-        }
-
-        .grid {
-            position: absolute;
-            inset: 0;
+            opacity: 0.2;
 
             background-image:
                 linear-gradient(
-                    rgba(255, 255, 255, 0.025) 1px,
+                    rgba(255,255,255,0.025) 1px,
                     transparent 1px
                 ),
                 linear-gradient(
                     90deg,
-                    rgba(255, 255, 255, 0.025) 1px,
+                    rgba(255,255,255,0.025) 1px,
                     transparent 1px
                 );
 
-            background-size:
-                60px 60px;
+            background-size: 45px 45px;
 
-            animation:
-                gridMove 22s linear infinite;
-        }
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
 
-        @keyframes gridMove {
-
-            from {
-                background-position: 0 0;
-            }
-
-            to {
-                background-position: 60px 60px;
-            }
-
+            z-index: -2;
         }
 
 
-        /* =====================================================
-           LIVE BLOBS
-        ===================================================== */
+        .orb {
+            position: fixed;
 
-        .blob {
-            position: absolute;
+            width: 350px;
+            height: 350px;
 
             border-radius: 50%;
 
             filter: blur(100px);
 
-            opacity: 0.32;
-        }
+            opacity: 0.12;
 
-        .blob-one {
-            width: 520px;
-            height: 520px;
+            pointer-events: none;
 
-            top: -230px;
-            left: -180px;
-
-            background: #2563eb;
-
-            animation:
-                blobOne 16s ease-in-out infinite alternate;
-        }
-
-        .blob-two {
-            width: 500px;
-            height: 500px;
-
-            right: -230px;
-            top: 32%;
-
-            background: #7c3aed;
-
-            animation:
-                blobTwo 19s ease-in-out infinite alternate;
-        }
-
-        .blob-three {
-            width: 450px;
-            height: 450px;
-
-            bottom: -230px;
-            left: 33%;
-
-            background: #0891b2;
-
-            animation:
-                blobThree 21s ease-in-out infinite alternate;
-        }
-
-        @keyframes blobOne {
-
-            from {
-                transform:
-                    translate(0, 0)
-                    scale(1);
-            }
-
-            to {
-                transform:
-                    translate(240px, 130px)
-                    scale(1.16);
-            }
-
-        }
-
-        @keyframes blobTwo {
-
-            from {
-                transform:
-                    translate(0, 0)
-                    scale(1);
-            }
-
-            to {
-                transform:
-                    translate(-230px, 110px)
-                    scale(1.15);
-            }
-
-        }
-
-        @keyframes blobThree {
-
-            from {
-                transform:
-                    translate(0, 0)
-                    scale(1);
-            }
-
-            to {
-                transform:
-                    translate(-160px, -140px)
-                    scale(1.13);
-            }
-
+            z-index: -1;
         }
 
 
-        /* =====================================================
-           FLOATING 3D OBJECTS
-        ===================================================== */
+        .orb-one {
+            top: 5%;
+            left: -100px;
 
-        .floating-object {
-            position: absolute;
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.10);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.08),
-                    rgba(255, 255, 255, 0.01)
-                );
-
-            backdrop-filter: blur(8px);
-
-            box-shadow:
-                0 20px 60px
-                rgba(0, 0, 0, 0.28);
+            background: #00d4ff;
         }
 
-        .object-one {
-            width: 100px;
-            height: 100px;
 
-            left: 7%;
-            top: 24%;
+        .orb-two {
+            top: 35%;
+            right: -120px;
 
-            border-radius: 27px;
-
-            animation:
-                floatOne 7s ease-in-out infinite;
+            background: #7b5cff;
         }
 
-        .object-two {
-            width: 70px;
-            height: 70px;
 
-            right: 8%;
-            top: 42%;
+        .orb-three {
+            bottom: -150px;
+            left: 35%;
 
-            border-radius: 50%;
-
-            animation:
-                floatTwo 8s ease-in-out infinite;
-        }
-
-        .object-three {
-            width: 60px;
-            height: 60px;
-
-            left: 14%;
-            bottom: 17%;
-
-            border-radius: 18px;
-
-            animation:
-                floatThree 9s ease-in-out infinite;
-        }
-
-        @keyframes floatOne {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(20deg);
-            }
-
-            50% {
-                transform:
-                    translateY(-25px)
-                    rotate(32deg);
-            }
-
-        }
-
-        @keyframes floatTwo {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateY(25px)
-                    translateX(-10px);
-            }
-
-        }
-
-        @keyframes floatThree {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(-18deg);
-            }
-
-            50% {
-                transform:
-                    translateY(-20px)
-                    rotate(-7deg);
-            }
-
+            background: #d946ef;
         }
 
 
@@ -366,447 +145,94 @@
         ===================================================== */
 
         header {
-            position: sticky;
-            top: 0;
-
-            z-index: 1000;
-
             width: 100%;
 
-            padding:
-                15px 6%;
+            padding: 18px 6%;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            background:
-                rgba(5, 7, 13, 0.72);
+            position: relative;
 
             border-bottom:
-                1px solid
-                rgba(255, 255, 255, 0.07);
+                1px solid rgba(255,255,255,0.08);
 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background:
+                rgba(7, 11, 20, 0.74);
+
+            backdrop-filter:
+                blur(16px);
+
+            z-index: 50;
         }
 
 
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
         .logo {
-            display: flex;
-            align-items: center;
+            color: white;
 
-            gap: 10px;
-
-            color: #ffffff;
+            font-size: 23px;
+            font-weight: 800;
 
             text-decoration: none;
-
-            font-size: 24px;
-            font-weight: 800;
 
             letter-spacing: -0.5px;
         }
 
-        .logo-box {
-            width: 38px;
-            height: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 12px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
-                );
-
-            background-size:
-                200% 200%;
-
-            box-shadow:
-                0 8px 28px
-                rgba(37, 99, 235, 0.35);
-
-            animation:
-                gradientMove 5s ease infinite;
-        }
 
         .logo span {
-            color: #67e8f9;
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
         }
 
-        @keyframes gradientMove {
-
-            0% {
-                background-position:
-                    0% 50%;
-            }
-
-            50% {
-                background-position:
-                    100% 50%;
-            }
-
-            100% {
-                background-position:
-                    0% 50%;
-            }
-
-        }
-
-
-        /* =====================================================
-           NAV
-        ===================================================== */
 
         nav {
             display: flex;
             align-items: center;
-
-            gap: 24px;
+            gap: 25px;
         }
 
-        .nav-link {
-            position: relative;
 
-            padding: 8px 0;
-
-            color: #adb6c8;
+        nav a {
+            color: #aeb8cc;
 
             text-decoration: none;
 
             font-size: 14px;
-        }
-
-        .nav-link::after {
-            content: "";
-
-            position: absolute;
-
-            left: 50%;
-            bottom: 0;
-
-            width: 0;
-            height: 2px;
-
-            transform:
-                translateX(-50%);
-
-            border-radius: 5px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #22d3ee,
-                    #8b5cf6
-                );
 
             transition:
-                width 0.3s ease;
+                color 0.25s ease;
         }
 
-        .nav-link:hover {
+
+        nav a:hover {
             color: white;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
 
-
-        /* =====================================================
-           AUTH
-        ===================================================== */
-
-        .auth-area {
-            display: flex;
-            align-items: center;
-
-            gap: 8px;
-        }
-
-        .small-button {
-            position: relative;
-
-            overflow: hidden;
-
+        .account-link {
             padding:
-                9px 15px;
-
-            border-radius: 11px;
+                9px 14px;
 
             border:
-                1px solid
-                rgba(255, 255, 255, 0.11);
+                1px solid rgba(123,92,255,0.35);
+
+            border-radius:
+                10px;
 
             background:
-                rgba(255, 255, 255, 0.045);
-
-            color: #e4e8f0;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition:
-                all 0.28s ease;
-        }
-
-        .small-button::before {
-            content: "";
-
-            position: absolute;
-
-            top: -60%;
-            left: -80%;
-
-            width: 45%;
-            height: 220%;
-
-            transform:
-                rotate(25deg);
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.25),
-                    transparent
-                );
-
-            transition:
-                left 0.6s ease;
-        }
-
-        .small-button:hover::before {
-            left: 140%;
-        }
-
-        .small-button:hover {
-            transform:
-                translateY(-2px);
-
-            border-color:
-                rgba(34, 211, 238, 0.40);
-        }
-
-        .small-button.primary {
-            border: none;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
-                );
-
-            background-size:
-                200% 200%;
-
-            animation:
-                gradientMove 5s ease infinite;
-        }
-
-        .small-button.logout {
-            color: #fda4af;
-        }
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-            max-width: 1100px;
-
-            margin: auto;
-
-            padding:
-                90px 25px
-                50px;
-
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-
-            gap: 8px;
-
-            margin-bottom: 23px;
-
-            padding:
-                8px 14px;
-
-            border-radius: 30px;
-
-            background:
-                rgba(34, 211, 238, 0.06);
-
-            border:
-                1px solid
-                rgba(34, 211, 238, 0.22);
-
-            color: #bae6fd;
-
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .live-dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #22d3ee;
-
-            box-shadow:
-                0 0 14px #22d3ee;
-
-            animation:
-                pulseDot 1.6s ease infinite;
-        }
-
-        @keyframes pulseDot {
-
-            0%,
-            100% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: scale(1.25);
-                opacity: 1;
-            }
-
-        }
-
-        .hero-icon {
-            width: 92px;
-            height: 92px;
-
-            margin:
-                0 auto
-                25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 25px;
-
-            font-size: 45px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(37, 99, 235, 0.18),
-                    rgba(139, 92, 246, 0.12)
-                );
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.10);
-
-            box-shadow:
-                0 20px 60px
-                rgba(37, 99, 235, 0.13);
-
-            backdrop-filter: blur(16px);
-
-            animation:
-                iconFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(0);
-            }
-
-            50% {
-                transform:
-                    translateY(-8px)
-                    rotate(-3deg);
-            }
-
-        }
-
-        .hero h1 {
-            margin-bottom: 17px;
-
-            font-size: 57px;
-
-            line-height: 1.07;
-
-            letter-spacing: -2px;
-        }
-
-        .gradient-title {
-            background:
-                linear-gradient(
-                    90deg,
-                    #60a5fa,
-                    #22d3ee,
-                    #a78bfa,
-                    #f472b6,
-                    #60a5fa
-                );
-
-            background-size:
-                300% 300%;
-
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            color: transparent;
-
-            animation:
-                titleGradient 7s linear infinite;
-        }
-
-        @keyframes titleGradient {
-
-            from {
-                background-position:
-                    0% 50%;
-            }
-
-            to {
-                background-position:
-                    300% 50%;
-            }
-
-        }
-
-        .hero-description {
-            max-width: 760px;
-
-            margin: auto;
-
-            color: #9da8bc;
-
-            font-size: 16px;
-
-            line-height: 1.85;
+                rgba(123,92,255,0.1);
         }
 
 
@@ -815,479 +241,685 @@
         ===================================================== */
 
         .container {
-            width: 89%;
+            width: 88%;
+            max-width: 1180px;
 
-            max-width: 1100px;
-
-            margin: auto;
-
-            padding-bottom: 100px;
+            margin:
+                55px auto 80px;
         }
 
 
         /* =====================================================
-           DETAIL CARD
+           BREADCRUMBS
         ===================================================== */
 
-        .detail-card {
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 25px;
+
+            font-size: 13px;
+
+            color: #77829a;
+        }
+
+
+        .breadcrumbs a {
+            color: #9ea8bd;
+
+            text-decoration: none;
+        }
+
+
+        .breadcrumbs a:hover {
+            color: #ffffff;
+        }
+
+
+        .breadcrumbs span {
+            color: #5d667a;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .tool-hero {
             position: relative;
 
-            overflow: hidden;
+            padding:
+                50px;
 
-            padding: 35px;
-
-            border-radius: 26px;
+            border-radius:
+                28px;
 
             border:
-                1px solid
-                rgba(255, 255, 255, 0.085);
+                1px solid rgba(255,255,255,0.1);
 
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(15, 22, 39, 0.83),
-                    rgba(7, 12, 23, 0.75)
+                    135deg,
+                    rgba(18, 25, 43, 0.94),
+                    rgba(10, 15, 28, 0.94)
                 );
 
-            backdrop-filter: blur(18px);
-
             box-shadow:
-                0 30px 70px
-                rgba(0, 0, 0, 0.27);
+                0 30px 80px rgba(0,0,0,0.35);
 
-            transform-style: preserve-3d;
-
-            transition:
-                transform 0.4s ease,
-                border-color 0.4s ease;
+            overflow: hidden;
         }
 
-        .detail-card::before {
+
+        .tool-hero::before {
             content: "";
 
             position: absolute;
 
-            width: 320px;
-            height: 320px;
+            width: 350px;
+            height: 350px;
 
-            right: -180px;
-            top: -170px;
+            top: -220px;
+            right: -80px;
 
             border-radius: 50%;
 
             background:
-                radial-gradient(
-                    circle,
-                    rgba(34, 211, 238, 0.16),
-                    transparent 70%
+                linear-gradient(
+                    135deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
                 );
 
-            pointer-events: none;
-        }
+            filter:
+                blur(25px);
 
-        .detail-card:hover {
-            transform:
-                translateY(-5px);
-
-            border-color:
-                rgba(34, 211, 238, 0.25);
+            opacity: 0.15;
         }
 
 
-        /* =====================================================
-           TOP INFORMATION
-        ===================================================== */
-
-        .detail-top {
+        .hero-top {
             position: relative;
 
-            display: grid;
+            display: flex;
+            align-items: flex-start;
 
-            grid-template-columns:
-                1fr auto;
-
-            gap: 30px;
-
-            align-items: center;
-
-            padding-bottom: 30px;
-
-            border-bottom:
-                1px solid
-                rgba(255, 255, 255, 0.07);
-        }
-
-        .category {
-            display: inline-flex;
-
-            margin-bottom: 14px;
-
-            padding:
-                6px 11px;
-
-            border-radius: 8px;
-
-            background:
-                rgba(37, 99, 235, 0.10);
-
-            border:
-                1px solid
-                rgba(96, 165, 250, 0.16);
-
-            color: #93c5fd;
-
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .detail-top h2 {
-            margin-bottom: 11px;
-
-            font-size: 31px;
-
-            letter-spacing: -0.7px;
-        }
-
-        .detail-top p {
-            max-width: 700px;
-
-            color: #98a3b6;
-
-            font-size: 15px;
-
-            line-height: 1.8;
+            gap: 28px;
         }
 
 
-        /* =====================================================
-           OFFICIAL BUTTON
-        ===================================================== */
+        .tool-icon {
+            width: 105px;
+            min-width: 105px;
 
-        .official-button {
-            position: relative;
+            height: 105px;
 
-            overflow: hidden;
-
-            min-width: 190px;
-
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
 
-            gap: 8px;
+            font-size: 51px;
 
-            padding:
-                14px 21px;
+            border-radius: 26px;
 
-            border-radius: 13px;
-
-            color: white;
-
-            text-decoration: none;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            border: none;
+            border:
+                1px solid rgba(255,255,255,0.12);
 
             background:
                 linear-gradient(
-                    120deg,
-                    #2563eb,
-                    #06b6d4,
-                    #7c3aed
+                    145deg,
+                    rgba(255,255,255,0.09),
+                    rgba(255,255,255,0.025)
                 );
 
-            background-size:
-                220% 220%;
-
             box-shadow:
-                0 14px 38px
-                rgba(37, 99, 235, 0.23);
+                inset 0 1px 0 rgba(255,255,255,0.09),
+                0 18px 45px rgba(0,0,0,0.28);
 
-            animation:
-                gradientMove 5s ease infinite;
-
-            transition:
-                all 0.3s ease;
+            transform:
+                perspective(700px)
+                rotateX(5deg)
+                rotateY(-7deg);
         }
 
-        .official-button::before {
-            content: "";
 
-            position: absolute;
+        .hero-content {
+            flex: 1;
+        }
 
-            top: -80%;
-            left: -80%;
 
-            width: 45%;
-            height: 260%;
+        .category {
+            display: inline-block;
+
+            margin-bottom:
+                12px;
+
+            padding:
+                7px 12px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            color:
+                #b9adff;
+
+            border:
+                1px solid rgba(123,92,255,0.3);
+
+            background:
+                rgba(123,92,255,0.1);
+        }
+
+
+        .hero-content h1 {
+            font-size:
+                clamp(34px, 5vw, 55px);
+
+            line-height:
+                1.05;
+
+            letter-spacing:
+                -1.8px;
+
+            margin-bottom:
+                16px;
 
             background:
                 linear-gradient(
                     90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.34),
-                    transparent
+                    #ffffff,
+                    #dbe2f0 60%,
+                    #9586ff
                 );
 
-            transform: rotate(25deg);
+            -webkit-background-clip:
+                text;
 
-            animation:
-                buttonShine 4s ease-in-out infinite;
-        }
-
-        @keyframes buttonShine {
-
-            0%,
-            55% {
-                left: -80%;
-            }
-
-            90%,
-            100% {
-                left: 150%;
-            }
-
-        }
-
-        .official-button:hover {
-            transform:
-                translateY(-4px)
-                scale(1.02);
-
-            box-shadow:
-                0 20px 50px
-                rgba(34, 211, 238, 0.28);
+            -webkit-text-fill-color:
+                transparent;
         }
 
 
-        /* =====================================================
-           FEATURES
-        ===================================================== */
+        .hero-content > p {
+            max-width:
+                760px;
 
-        .content-section {
-            position: relative;
+            color:
+                #a5afc2;
 
-            padding-top: 30px;
+            line-height:
+                1.8;
+
+            font-size:
+                16px;
         }
 
-        .content-title {
-            margin-bottom: 18px;
-
-            color: #ffffff;
-
-            font-size: 18px;
-        }
 
         .tags {
-            display: flex;
-            flex-wrap: wrap;
+            display:
+                flex;
 
-            gap: 10px;
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            margin-top:
+                22px;
         }
+
 
         .tag {
-            position: relative;
-
-            overflow: hidden;
-
             padding:
-                9px 13px;
+                7px 10px;
 
-            border-radius: 10px;
+            border-radius:
+                8px;
 
-            color: #bac5d8;
+            font-size:
+                12px;
 
-            font-size: 12px;
+            color:
+                #aab4c8;
 
             background:
-                rgba(255, 255, 255, 0.045);
+                rgba(255,255,255,0.045);
 
             border:
-                1px solid
-                rgba(255, 255, 255, 0.07);
-
-            transition:
-                all 0.3s ease;
+                1px solid rgba(255,255,255,0.07);
         }
 
-        .tag:hover {
-            color: white;
 
-            transform:
-                translateY(-3px);
+        .hero-actions {
+            position:
+                relative;
 
-            border-color:
-                rgba(34, 211, 238, 0.28);
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                12px;
+
+            margin-top:
+                30px;
+        }
+
+
+        .primary-btn {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                14px 22px;
+
+            color:
+                #ffffff;
+
+            text-decoration:
+                none;
+
+            font-weight:
+                700;
+
+            font-size:
+                14px;
+
+            border-radius:
+                11px;
 
             background:
-                rgba(34, 211, 238, 0.07);
+                linear-gradient(
+                    90deg,
+                    #6156ff,
+                    #8259ff
+                );
 
             box-shadow:
-                0 10px 25px
-                rgba(0, 0, 0, 0.18);
-        }
-
-
-        /* =====================================================
-           INFORMATION GRID
-        ===================================================== */
-
-        .info-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 16px;
-
-            margin-top: 30px;
-        }
-
-        .info-item {
-            position: relative;
-
-            overflow: hidden;
-
-            padding: 21px;
-
-            border-radius: 16px;
-
-            background:
-                rgba(255, 255, 255, 0.035);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.07);
+                0 15px 35px
+                rgba(103,87,255,0.24);
 
             transition:
-                all 0.3s ease;
+                0.25s ease;
         }
 
-        .info-item:hover {
+
+        .primary-btn:hover {
             transform:
-                translateY(-4px);
+                translateY(-2px);
 
-            border-color:
-                rgba(139, 92, 246, 0.28);
-
-            background:
-                rgba(139, 92, 246, 0.05);
-        }
-
-        .info-label {
-            display: block;
-
-            margin-bottom: 7px;
-
-            color: #6f7c92;
-
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.8px;
-        }
-
-        .info-value {
-            color: #dbe4f2;
-
-            font-size: 14px;
-
-            font-weight: 700;
+            box-shadow:
+                0 20px 40px
+                rgba(103,87,255,0.35);
         }
 
 
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
+        .secondary-btn {
+            display:
+                inline-flex;
 
-        .back-area {
-            margin-top: 25px;
+            align-items:
+                center;
 
-            display: flex;
-            justify-content: center;
-        }
-
-        .back-button {
-            position: relative;
-
-            overflow: hidden;
-
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            gap: 8px;
+            justify-content:
+                center;
 
             padding:
-                12px 20px;
+                13px 20px;
 
-            border-radius: 12px;
+            color:
+                #b5bfd1;
+
+            text-decoration:
+                none;
+
+            font-size:
+                14px;
+
+            border-radius:
+                11px;
 
             border:
-                1px solid
-                rgba(255, 255, 255, 0.10);
+                1px solid rgba(255,255,255,0.1);
 
             background:
-                rgba(255, 255, 255, 0.045);
-
-            color: #dce3ef;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 700;
+                rgba(255,255,255,0.035);
 
             transition:
-                all 0.3s ease;
+                0.25s ease;
         }
 
-        .back-button:hover {
+
+        .secondary-btn:hover {
+            color:
+                white;
+
+            border-color:
+                rgba(123,92,255,0.45);
+
+            background:
+                rgba(123,92,255,0.08);
+        }
+
+
+        /* =====================================================
+           CONTENT GRID
+        ===================================================== */
+
+        .content-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                1.35fr 0.65fr;
+
+            gap:
+                22px;
+
+            margin-top:
+                28px;
+        }
+
+
+        .column {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                22px;
+        }
+
+
+        .info-card {
+            padding:
+                30px;
+
+            border-radius:
+                20px;
+
+            border:
+                1px solid rgba(255,255,255,0.085);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,24,40,0.88),
+                    rgba(11,16,29,0.9)
+                );
+
+            box-shadow:
+                0 20px 55px rgba(0,0,0,0.2);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .info-card:hover {
             transform:
                 translateY(-3px);
 
-            color: white;
-
             border-color:
-                rgba(34, 211, 238, 0.35);
+                rgba(123,92,255,0.25);
+        }
 
+
+        .info-card h2 {
+            font-size:
+                22px;
+
+            margin-bottom:
+                15px;
+
+            letter-spacing:
+                -0.4px;
+        }
+
+
+        .info-card h2 span {
             background:
-                rgba(34, 211, 238, 0.06);
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .info-card p {
+            color:
+                #9faabc;
+
+            line-height:
+                1.85;
+
+            font-size:
+                15px;
         }
 
 
         /* =====================================================
-           DISCLAIMER
+           LISTS
         ===================================================== */
 
-        .notice {
-            margin-top: 25px;
+        .feature-list {
+            list-style:
+                none;
 
-            padding:
-                18px 20px;
+            display:
+                grid;
 
-            border-radius: 15px;
+            gap:
+                12px;
 
-            background:
-                rgba(255, 255, 255, 0.025);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.06);
-
-            color: #727e92;
-
-            text-align: center;
-
-            font-size: 12px;
-
-            line-height: 1.7;
+            margin-top:
+                5px;
         }
 
-        .notice strong {
-            color: #aab5c7;
+
+        .feature-list li {
+            position:
+                relative;
+
+            padding:
+                13px 14px 13px 43px;
+
+            color:
+                #b4bfd1;
+
+            line-height:
+                1.55;
+
+            border-radius:
+                11px;
+
+            border:
+                1px solid rgba(255,255,255,0.055);
+
+            background:
+                rgba(255,255,255,0.025);
+        }
+
+
+        .feature-list li::before {
+            content:
+                "✓";
+
+            position:
+                absolute;
+
+            left:
+                14px;
+
+            top:
+                12px;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                50%;
+
+            color:
+                white;
+
+            font-size:
+                11px;
+
+            font-weight:
+                bold;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b8e6,
+                    #745cff
+                );
+        }
+
+
+        .use-list li::before {
+            content:
+                "→";
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #745cff,
+                    #d946ef
+                );
+        }
+
+
+        /* =====================================================
+           BEST FOR
+        ===================================================== */
+
+        .best-for {
+            position:
+                relative;
+
+            overflow:
+                hidden;
+        }
+
+
+        .best-for::after {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                120px;
+
+            height:
+                120px;
+
+            right:
+                -50px;
+
+            bottom:
+                -60px;
+
+            border-radius:
+                50%;
+
+            background:
+                #7b5cff;
+
+            filter:
+                blur(50px);
+
+            opacity:
+                0.14;
+        }
+
+
+        /* =====================================================
+           DIRECTORY NOTICE
+        ===================================================== */
+
+        .notice-card {
+            padding:
+                23px 25px;
+
+            margin-top:
+                22px;
+
+            border-radius:
+                16px;
+
+            border:
+                1px solid rgba(0,212,255,0.13);
+
+            background:
+                rgba(0,212,255,0.035);
+
+            color:
+                #8f9aac;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .notice-card strong {
+            color:
+                #d9e2f2;
         }
 
 
@@ -1297,194 +929,157 @@
 
         footer {
             padding:
-                40px 7%;
+                35px 6%;
 
-            text-align: center;
+            text-align:
+                center;
+
+            color:
+                #707b91;
+
+            font-size:
+                13px;
 
             border-top:
-                1px solid
-                rgba(255, 255, 255, 0.07);
-
-            background:
-                rgba(5, 7, 13, 0.75);
-
-            backdrop-filter: blur(15px);
+                1px solid rgba(255,255,255,0.075);
         }
 
-        .footer-logo {
-            margin-bottom: 16px;
-
-            font-size: 22px;
-            font-weight: 800;
-        }
-
-        .footer-logo span {
-            color: #67e8f9;
-        }
 
         .footer-links {
-            margin-bottom: 17px;
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                18px;
+
+            margin-bottom:
+                15px;
         }
+
 
         .footer-links a {
-            display: inline-block;
+            color:
+                #8f99ae;
 
-            margin:
-                5px 9px;
-
-            color: #8792a6;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-            transition:
-                all 0.25s ease;
+            text-decoration:
+                none;
         }
+
 
         .footer-links a:hover {
-            color: #67e8f9;
-
-            transform:
-                translateY(-2px);
-        }
-
-        footer p {
-            color: #5f697c;
-
-            font-size: 12px;
+            color:
+                white;
         }
 
 
         /* =====================================================
-           TABLET
+           RESPONSIVE
         ===================================================== */
 
-        @media (max-width: 900px) {
+        @media (
+            max-width: 900px
+        ) {
 
-            .nav-link {
-                display: none;
+            .content-grid {
+                grid-template-columns:
+                    1fr;
             }
 
-            .detail-top {
-                grid-template-columns: 1fr;
-            }
-
-            .official-button {
-                width: 100%;
+            .tool-hero {
+                padding:
+                    35px;
             }
 
         }
 
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 650px) {
+        @media (
+            max-width: 700px
+        ) {
 
             header {
                 padding:
-                    13px 4%;
+                    16px 5%;
             }
 
-            .logo {
-                font-size: 19px;
-            }
-
-            .logo-box {
-                width: 34px;
-                height: 34px;
-            }
-
-            .small-button {
-                padding:
-                    8px 9px;
-
-                font-size: 10px;
-            }
-
-            .hero {
-                padding:
-                    70px 18px
-                    42px;
-            }
-
-            .hero-icon {
-                width: 76px;
-                height: 76px;
-
-                border-radius: 20px;
-
-                font-size: 37px;
-            }
-
-            .hero h1 {
-                font-size: 39px;
-
-                letter-spacing: -1.2px;
-            }
-
-            .hero-description {
-                font-size: 14px;
+            nav a:not(
+                .account-link
+            ) {
+                display:
+                    none;
             }
 
             .container {
-                width: 91%;
+                width:
+                    91%;
 
-                padding-bottom: 75px;
+                margin-top:
+                    30px;
             }
 
-            .detail-card {
+            .tool-hero {
                 padding:
-                    25px 20px;
-
-                border-radius: 21px;
+                    27px 22px;
             }
 
-            .detail-top h2 {
-                font-size: 26px;
+            .hero-top {
+                flex-direction:
+                    column;
+
+                gap:
+                    20px;
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
+            .tool-icon {
+                width:
+                    84px;
+
+                min-width:
+                    84px;
+
+                height:
+                    84px;
+
+                font-size:
+                    41px;
+
+                border-radius:
+                    21px;
             }
 
-            .floating-object {
-                opacity: 0.45;
+            .hero-content h1 {
+                font-size:
+                    38px;
             }
 
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 390px) {
-
-            .logo-name {
-                display: none;
+            .hero-content > p {
+                font-size:
+                    15px;
             }
 
-            .hero h1 {
-                font-size: 34px;
+            .hero-actions {
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
             }
 
-        }
+            .primary-btn,
+            .secondary-btn {
+                width:
+                    100%;
+            }
 
-
-        /* =====================================================
-           REDUCED MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
+            .info-card {
+                padding:
+                    24px 21px;
             }
 
         }
@@ -1496,506 +1091,438 @@
 
 <body>
 
+    <div class="background-grid"></div>
 
-<!-- =====================================================
-     LIVE BACKGROUND
-===================================================== -->
-
-<div class="background">
-
-    <div
-        class="mouse-glow"
-        id="mouseGlow">
-    </div>
-
-    <div class="grid"></div>
-
-    <div class="blob blob-one"></div>
-
-    <div class="blob blob-two"></div>
-
-    <div class="blob blob-three"></div>
-
-    <div class="floating-object object-one"></div>
-
-    <div class="floating-object object-two"></div>
-
-    <div class="floating-object object-three"></div>
-
-</div>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-<header>
+    <header>
 
-    <a href="{% url 'home' %}"
-       class="logo">
-
-        <div class="logo-box">
-            V
-        </div>
-
-        <div class="logo-name">
-
-            Veylora
-
-            <span>
-                AI
-            </span>
-
-        </div>
-
-    </a>
-
-
-    <nav>
-
-        <a href="{% url 'home' %}"
-           class="nav-link">
-            Home
-        </a>
-
-        <a href="{% url 'image_tools' %}"
-           class="nav-link">
-            AI Image Tools
-        </a>
-
-        <a href="{% url 'video_tools' %}"
-           class="nav-link">
-            AI Video Tools
+        <a
+            href="/"
+            class="logo"
+        >
+            Veylora <span>AI</span>
         </a>
 
 
-        <div class="auth-area">
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/ai-image-tools/">
+                Image Tools
+            </a>
+
+            <a href="/ai-video-tools/">
+                Video Tools
+            </a>
+
 
             {% if user.is_authenticated %}
 
                 <a
-                    href="{% url 'profile' %}"
-                    class="small-button primary">
-
+                    href="/profile/"
+                    class="account-link"
+                >
                     My Account
-
-                </a>
-
-                <a
-                    href="{% url 'logout' %}"
-                    class="small-button logout">
-
-                    Logout
-
                 </a>
 
             {% else %}
 
                 <a
-                    href="{% url 'login' %}"
-                    class="small-button">
-
+                    href="/login/"
+                    class="account-link"
+                >
                     Login
-
-                </a>
-
-                <a
-                    href="{% url 'signup' %}"
-                    class="small-button primary">
-
-                    Create Account
-
                 </a>
 
             {% endif %}
 
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- BREADCRUMBS -->
+
+        <div class="breadcrumbs">
+
+            <a href="/">
+                Home
+            </a>
+
+            <span>›</span>
+
+
+            {% if tool.type == "image" %}
+
+                <a href="/ai-image-tools/">
+                    AI Image Tools
+                </a>
+
+            {% else %}
+
+                <a href="/ai-video-tools/">
+                    AI Video Tools
+                </a>
+
+            {% endif %}
+
+
+            <span>›</span>
+
+            <span>
+                {{ tool.name }}
+            </span>
+
         </div>
 
-    </nav>
 
-</header>
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
+        <section class="tool-hero">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+            <div class="hero-top">
 
-<section class="hero">
-
-
-    <div class="hero-badge">
-
-        <span class="live-dot"></span>
-
-        {{ tool.category }}
-
-    </div>
+                <div class="tool-icon">
+                    {{ tool.icon }}
+                </div>
 
 
-    <div class="hero-icon">
+                <div class="hero-content">
 
-        {{ tool.icon }}
-
-    </div>
-
-
-    <h1 class="gradient-title">
-
-        {{ tool.name }}
-
-    </h1>
+                    <span class="category">
+                        {{ tool.category }}
+                    </span>
 
 
-    <p class="hero-description">
-
-        {{ tool.description }}
-
-    </p>
+                    <h1>
+                        {{ tool.name }}
+                    </h1>
 
 
-</section>
+                    <p>
+                        {{ tool.description }}
+                    </p>
 
 
-<!-- =====================================================
-     TOOL DETAILS
-===================================================== -->
+                    <div class="tags">
 
-<main class="container">
+                        {% for tag in tool.tags %}
 
+                            <span class="tag">
+                                {{ tag }}
+                            </span>
 
-    <section class="detail-card">
+                        {% endfor %}
 
+                    </div>
 
-        <div class="detail-top">
-
-
-            <div>
-
-
-                <span class="category">
-
-                    {{ tool.category }}
-
-                </span>
-
-
-                <h2>
-
-                    About {{ tool.name }}
-
-                </h2>
-
-
-                <p>
-
-                    {{ tool.description }}
-
-                </p>
-
+                </div>
 
             </div>
 
 
-            <div>
-
+            <div class="hero-actions">
 
                 <a
                     href="{{ tool.official_url }}"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="official-button">
-
+                    rel="noopener noreferrer nofollow"
+                    class="primary-btn"
+                >
                     Visit Official Website ↗
-
                 </a>
 
 
-            </div>
+                {% if tool.type == "image" %}
 
+                    <a
+                        href="/ai-image-tools/"
+                        class="secondary-btn"
+                    >
+                        ← Browse AI Image Tools
+                    </a>
 
-        </div>
+                {% else %}
 
+                    <a
+                        href="/ai-video-tools/"
+                        class="secondary-btn"
+                    >
+                        ← Browse AI Video Tools
+                    </a>
 
-        <!-- FEATURES -->
-
-        <div class="content-section">
-
-
-            <h3 class="content-title">
-
-                Features & Uses
-
-            </h3>
-
-
-            <div class="tags">
-
-
-                {% for tag in tool.tags %}
-
-                    <span class="tag">
-
-                        {{ tag }}
-
-                    </span>
-
-                {% empty %}
-
-                    <span class="tag">
-
-                        AI Tool
-
-                    </span>
-
-                {% endfor %}
-
+                {% endif %}
 
             </div>
 
-
-        </div>
-
-
-        <!-- INFORMATION -->
-
-        <div class="info-grid">
+        </section>
 
 
-            <div class="info-item">
+        <!-- =================================================
+             SEO CONTENT
+        ================================================== -->
 
-                <span class="info-label">
-
-                    Tool Name
-
-                </span>
-
-                <span class="info-value">
-
-                    {{ tool.name }}
-
-                </span>
-
-            </div>
+        <section class="content-grid">
 
 
-            <div class="info-item">
+            <!-- LEFT COLUMN -->
 
-                <span class="info-label">
-
-                    Category
-
-                </span>
-
-                <span class="info-value">
-
-                    {{ tool.category }}
-
-                </span>
-
-            </div>
+            <div class="column">
 
 
-            <div class="info-item">
+                <!-- OVERVIEW -->
 
-                <span class="info-label">
+                <article class="info-card">
 
-                    Tool Type
+                    <h2>
+                        About
+                        <span>{{ tool.name }}</span>
+                    </h2>
 
-                </span>
+                    <p>
+                        {{ tool.overview }}
+                    </p>
 
-                <span class="info-value">
+                </article>
 
-                    {% if tool.type == "image" %}
 
-                        AI Image Tool
+                <!-- FEATURES -->
 
-                    {% elif tool.type == "video" %}
+                <article class="info-card">
 
-                        AI Video Tool
+                    <h2>
+                        Key <span>Features</span>
+                    </h2>
 
-                    {% else %}
 
-                        AI Tool
+                    <ul class="feature-list">
 
-                    {% endif %}
+                        {% for feature in tool.features %}
 
-                </span>
+                            <li>
+                                {{ feature }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </article>
+
+
+                <!-- USE CASES -->
+
+                <article class="info-card">
+
+                    <h2>
+                        Popular <span>Use Cases</span>
+                    </h2>
+
+
+                    <ul class="feature-list use-list">
+
+                        {% for use_case in tool.use_cases %}
+
+                            <li>
+                                {{ use_case }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </article>
 
             </div>
 
 
-            <div class="info-item">
+            <!-- RIGHT COLUMN -->
 
-                <span class="info-label">
+            <div class="column">
 
-                    Website
 
-                </span>
+                <!-- BEST FOR -->
 
-                <span class="info-value">
+                <aside class="info-card best-for">
 
-                    Official Platform
+                    <h2>
+                        Best <span>For</span>
+                    </h2>
 
-                </span>
+                    <p>
+                        {{ tool.best_for }}
+                    </p>
+
+                </aside>
+
+
+                <!-- TOOL INFORMATION -->
+
+                <aside class="info-card">
+
+                    <h2>
+                        Tool <span>Information</span>
+                    </h2>
+
+
+                    <ul class="feature-list">
+
+                        <li>
+                            Category:
+                            {{ tool.category }}
+                        </li>
+
+                        <li>
+
+                            {% if tool.type == "image" %}
+
+                                AI Image Tool
+
+                            {% else %}
+
+                                AI Video Tool
+
+                            {% endif %}
+
+                        </li>
+
+                        <li>
+                            Official platform linked directly
+                        </li>
+
+                    </ul>
+
+                </aside>
+
+
+                <!-- EXPLORE MORE -->
+
+                <aside class="info-card">
+
+                    <h2>
+                        Explore <span>More AI Tools</span>
+                    </h2>
+
+
+                    <p>
+                        Compare more artificial intelligence
+                        tools for image generation, video
+                        creation, editing and creative
+                        workflows on Veylora AI.
+                    </p>
+
+
+                    <div
+                        class="hero-actions"
+                        style="margin-top:20px;"
+                    >
+
+                        <a
+                            href="/ai-image-tools/"
+                            class="secondary-btn"
+                        >
+                            Image Tools
+                        </a>
+
+                        <a
+                            href="/ai-video-tools/"
+                            class="secondary-btn"
+                        >
+                            Video Tools
+                        </a>
+
+                    </div>
+
+                </aside>
 
             </div>
 
+        </section>
 
-        </div>
 
+        <!-- =================================================
+             DIRECTORY NOTICE
+        ================================================== -->
 
-        <!-- NOTICE -->
-
-        <div class="notice">
+        <div class="notice-card">
 
             <strong>
                 Independent directory notice:
             </strong>
 
-            Veylora AI helps users discover AI tools.
-            The external platform is operated by its
-            respective owner and may have its own pricing,
-            terms and privacy policies.
+            Veylora AI is an independent AI tools directory.
+            We provide information to help users discover
+            useful AI platforms. Veylora AI is not the owner
+            or operator of the third-party tool shown on this
+            page. Features, availability and pricing may
+            change on the official provider's website.
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/about/">
+                About
+            </a>
+
+            <a href="/privacy/">
+                Privacy
+            </a>
+
+            <a href="/terms/">
+                Terms
+            </a>
+
+            <a href="/disclaimer/">
+                Disclaimer
+            </a>
+
+            <a href="/contact/">
+                Contact
+            </a>
 
         </div>
 
 
-    </section>
+        <p>
+            © 2026 Veylora AI.
+            All rights reserved.
+        </p>
 
-
-    <!-- BACK -->
-
-    <div class="back-area">
-
-
-        {% if tool.type == "image" %}
-
-            <a
-                href="{% url 'image_tools' %}"
-                class="back-button">
-
-                ← Back to AI Image Tools
-
-            </a>
-
-        {% elif tool.type == "video" %}
-
-            <a
-                href="{% url 'video_tools' %}"
-                class="back-button">
-
-                ← Back to AI Video Tools
-
-            </a>
-
-        {% else %}
-
-            <a
-                href="{% url 'home' %}"
-                class="back-button">
-
-                ← Back to Home
-
-            </a>
-
-        {% endif %}
-
-
-    </div>
-
-
-</main>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-
-    <div class="footer-logo">
-
-        Veylora
-
-        <span>
-            AI
-        </span>
-
-    </div>
-
-
-    <div class="footer-links">
-
-        <a href="{% url 'home' %}">
-            Home
-        </a>
-
-        <a href="{% url 'about' %}">
-            About
-        </a>
-
-        <a href="{% url 'privacy' %}">
-            Privacy
-        </a>
-
-        <a href="{% url 'terms' %}">
-            Terms
-        </a>
-
-        <a href="{% url 'disclaimer' %}">
-            Disclaimer
-        </a>
-
-        <a href="{% url 'contact' %}">
-            Contact
-        </a>
-
-    </div>
-
-
-    <p>
-
-        © 2026 Veylora AI.
-        All rights reserved.
-
-    </p>
-
-
-</footer>
-
-
-<!-- =====================================================
-     MOUSE LIVE EFFECT
-===================================================== -->
-
-<script>
-
-    const glow =
-        document.getElementById(
-            "mouseGlow"
-        );
-
-
-    if (glow) {
-
-        document.addEventListener(
-            "mousemove",
-            function (event) {
-
-                glow.style.left =
-                    event.clientX + "px";
-
-                glow.style.top =
-                    event.clientY + "px";
-
-            }
-        );
-
-    }
-
-</script>
-
+    </footer>
 
 </body>
 

@@ -18,7 +18,17 @@ SECRET_KEY = os.environ.get(
     "django-insecure-veylora-local-development-only"
 )
 
-DEBUG = True
+
+# Production par default False.
+# Local development ke liye environment variable se True kar sakte ho.
+
+DEBUG = (
+    os.environ.get(
+        "DJANGO_DEBUG",
+        "False"
+    ).lower()
+    == "true"
+)
 
 
 ALLOWED_HOSTS = [
@@ -30,12 +40,11 @@ ALLOWED_HOSTS = [
 
 
 # =========================================================
-# APPLICATIONS
+# INSTALLED APPS
 # =========================================================
 
 INSTALLED_APPS = [
 
-    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,16 +52,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # django-allauth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-
-    # Google OAuth
     "allauth.socialaccount.providers.google",
 
-    # Veylora AI
     "tools",
+
 ]
 
 
@@ -74,10 +80,10 @@ MIDDLEWARE = [
 
     "django.contrib.messages.middleware.MessageMiddleware",
 
-    # Required by django-allauth
     "allauth.account.middleware.AccountMiddleware",
 
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
 ]
 
 
@@ -93,8 +99,11 @@ ROOT_URLCONF = "aiwebsite.urls"
 # =========================================================
 
 TEMPLATES = [
+
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
+
+        "BACKEND":
+            "django.template.backends.django.DjangoTemplates",
 
         "DIRS": [],
 
@@ -109,9 +118,13 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
 
                 "django.contrib.messages.context_processors.messages",
+
             ],
+
         },
+
     },
+
 ]
 
 
@@ -130,9 +143,11 @@ DATABASES = {
 
     "default": {
 
-        "ENGINE": "django.db.backends.sqlite3",
+        "ENGINE":
+            "django.db.backends.sqlite3",
 
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME":
+            BASE_DIR / "db.sqlite3",
 
     }
 
@@ -145,11 +160,10 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = [
 
-    # Normal Django username/password
     "django.contrib.auth.backends.ModelBackend",
 
-    # django-allauth / Google
     "allauth.account.auth_backends.AuthenticationBackend",
+
 ]
 
 
@@ -160,40 +174,43 @@ AUTHENTICATION_BACKENDS = [
 AUTH_PASSWORD_VALIDATORS = [
 
     {
+
         "NAME":
             "django.contrib.auth.password_validation.MinimumLengthValidator",
 
         "OPTIONS": {
+
             "min_length": 6,
+
         },
+
     },
 
     {
+
         "NAME":
             "django.contrib.auth.password_validation.CommonPasswordValidator",
+
     },
 
     {
+
         "NAME":
             "django.contrib.auth.password_validation.NumericPasswordValidator",
+
     },
 
 ]
 
 
 # =========================================================
-# LOGIN / LOGOUT / WELCOME REDIRECTS
+# LOGIN / LOGOUT
 # =========================================================
 
-# Our custom Veylora AI login page
 LOGIN_URL = "/login/"
 
-
-# Normal Django + Google login success
 LOGIN_REDIRECT_URL = "/welcome/"
 
-
-# Logout goes back to homepage
 LOGOUT_REDIRECT_URL = "/"
 
 
@@ -205,51 +222,50 @@ SOCIALACCOUNT_PROVIDERS = {
 
     "google": {
 
-        # Google Cloud credentials
         "APP": {
 
-            "client_id": os.environ.get(
-                "GOOGLE_CLIENT_ID",
-                ""
-            ),
+            "client_id":
+                os.environ.get(
+                    "GOOGLE_CLIENT_ID",
+                    ""
+                ),
 
-            "secret": os.environ.get(
-                "GOOGLE_CLIENT_SECRET",
-                ""
-            ),
+            "secret":
+                os.environ.get(
+                    "GOOGLE_CLIENT_SECRET",
+                    ""
+                ),
 
             "key": "",
+
         },
 
-
-        # Google permissions
         "SCOPE": [
+
             "profile",
             "email",
+
         ],
 
-
         "AUTH_PARAMS": {
-            "access_type": "online",
+
+            "access_type":
+                "online",
+
         },
 
+        "OAUTH_PKCE_ENABLED":
+            True,
 
-        # Extra OAuth security
-        "OAUTH_PKCE_ENABLED": True,
     },
+
 }
 
 
-# Allow allauth to obtain email from Google
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-
-# We do not need to permanently save Google's access token
 SOCIALACCOUNT_STORE_TOKENS = False
 
-
-# Automatically create Veylora account
-# when Google authentication succeeds
 SOCIALACCOUNT_AUTO_SIGNUP = True
 
 
@@ -283,7 +299,29 @@ EMAIL_BACKEND = (
 
 
 # =========================================================
+# PRODUCTION COOKIE SECURITY
+# =========================================================
+
+SESSION_COOKIE_SECURE = not DEBUG
+
+CSRF_COOKIE_SECURE = not DEBUG
+
+
+# =========================================================
+# SECURITY HEADERS
+# =========================================================
+
+X_FRAME_OPTIONS = "DENY"
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECURE_REFERRER_POLICY = "same-origin"
+
+
+# =========================================================
 # DEFAULT PRIMARY KEY
 # =========================================================
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = (
+    "django.db.models.BigAutoField"
+)

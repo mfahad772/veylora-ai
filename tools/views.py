@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -7,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # =========================================================
-# AI TOOLS DATABASE
+# AI TOOLS DATA
 # =========================================================
 
 TOOLS = {
@@ -18,133 +17,176 @@ TOOLS = {
 
     "flow-ai": {
         "name": "Flow AI",
-        "icon": "🌊",
+        "icon": "🎬",
         "category": "AI Video Generator",
-        "description": "Create cinematic AI-generated videos, scenes and visual content using Google's creative AI platform.",
+        "description": (
+            "Create cinematic AI videos using Google's advanced "
+            "Flow AI video creation platform."
+        ),
         "tags": [
+            "AI Video",
             "Text to Video",
-            "Image to Video",
-            "Creative"
+            "Google AI",
+            "Cinematic Video",
         ],
         "official_url": "https://labs.google/fx/tools/flow",
-        "type": "Video Tool",
+        "type": "video",
     },
 
     "ai-video-generator": {
         "name": "AI Video Generator",
-        "icon": "🎬",
-        "category": "Video Generator",
-        "description": "Create AI-generated videos from text prompts and transform creative ideas into engaging visual content.",
+        "icon": "🎥",
+        "category": "AI Video Generator",
+        "description": (
+            "Generate creative AI videos from text prompts and "
+            "ideas using artificial intelligence."
+        ),
         "tags": [
+            "Video Generator",
             "Text to Video",
-            "AI Video"
+            "AI Creation",
         ],
-        "official_url": "https://runwayml.com/",
-        "type": "Video Tool",
+        "official_url": "https://www.canva.com/ai-video-generator/",
+        "type": "video",
     },
 
     "image-to-video-ai": {
         "name": "Image to Video AI",
         "icon": "🖼️",
         "category": "Image to Video",
-        "description": "Transform static images into engaging animated videos with AI-powered image-to-video technology.",
+        "description": (
+            "Turn static images into animated AI videos with "
+            "motion and creative visual effects."
+        ),
         "tags": [
             "Image to Video",
-            "Animation"
+            "Animation",
+            "AI Video",
         ],
         "official_url": "https://pika.art/",
-        "type": "Video Tool",
+        "type": "video",
     },
 
     "ai-video-editor": {
         "name": "AI Video Editor",
-        "icon": "✨",
-        "category": "Video Editing",
-        "description": "Edit and enhance videos with AI-powered editing tools, effects and creative features.",
+        "icon": "✂️",
+        "category": "AI Video Editing",
+        "description": (
+            "Edit and enhance videos faster using AI-powered "
+            "video editing features."
+        ),
         "tags": [
             "Video Editing",
-            "AI"
+            "AI Editor",
+            "Creative Tools",
         ],
-        "official_url": "https://runwayml.com/",
-        "type": "Video Tool",
+        "official_url": "https://www.capcut.com/",
+        "type": "video",
     },
 
     "ai-avatar-video": {
         "name": "AI Avatar Video",
         "icon": "👤",
         "category": "AI Avatar",
-        "description": "Create talking avatar videos from text using AI-generated presenters.",
+        "description": (
+            "Create professional talking avatar videos using "
+            "AI-generated presenters and voices."
+        ),
         "tags": [
             "AI Avatar",
-            "Talking Video"
+            "Talking Avatar",
+            "Presentation",
         ],
         "official_url": "https://www.heygen.com/",
-        "type": "Video Tool",
+        "type": "video",
     },
 
     "ai-voice-video": {
         "name": "AI Voice Video",
         "icon": "🎙️",
-        "category": "AI Voice",
-        "description": "Create videos with AI voices, narration and realistic speech using AI-powered voice technology.",
+        "category": "AI Voice & Video",
+        "description": (
+            "Create videos with artificial intelligence voices, "
+            "narration and automated content."
+        ),
         "tags": [
             "AI Voice",
-            "Narration"
+            "Voiceover",
+            "Video",
         ],
-        "official_url": "https://www.heygen.com/",
-        "type": "Video Tool",
+        "official_url": "https://www.synthesia.io/",
+        "type": "video",
     },
 
     "ai-animation-generator": {
         "name": "AI Animation Generator",
-        "icon": "🚀",
-        "category": "Animation",
-        "description": "Create animated scenes and creative video content with artificial intelligence.",
+        "icon": "✨",
+        "category": "AI Animation",
+        "description": (
+            "Generate animated videos and creative visual scenes "
+            "with artificial intelligence."
+        ),
         "tags": [
             "Animation",
-            "Creative"
+            "AI Video",
+            "Creative",
         ],
-        "official_url": "https://pika.art/",
-        "type": "Video Tool",
+        "official_url": "https://runwayml.com/",
+        "type": "video",
     },
 
     "runway": {
         "name": "Runway",
-        "icon": "🎞️",
-        "category": "AI Video",
-        "description": "Create and edit AI-generated videos with advanced generative video tools.",
+        "icon": "🚀",
+        "category": "AI Video Generator",
+        "description": (
+            "Runway provides powerful AI tools for generating, "
+            "editing and transforming videos."
+        ),
         "tags": [
+            "Runway",
             "Text to Video",
-            "Video Editing"
+            "Video Editing",
+            "Generative AI",
         ],
         "official_url": "https://runwayml.com/",
-        "type": "Video Tool",
+        "type": "video",
     },
 
     "pika": {
         "name": "Pika",
         "icon": "⚡",
         "category": "AI Video Generator",
-        "description": "Generate creative AI videos and animations from text and images.",
+        "description": (
+            "Pika helps creators generate and animate videos "
+            "from text prompts and images."
+        ),
         "tags": [
+            "Pika",
             "AI Video",
-            "Animation"
+            "Image to Video",
+            "Animation",
         ],
         "official_url": "https://pika.art/",
-        "type": "Video Tool",
+        "type": "video",
     },
 
     "heygen": {
         "name": "HeyGen",
         "icon": "🧑‍💻",
-        "category": "AI Avatar",
-        "description": "Create professional AI avatar videos, presentations and talking videos.",
+        "category": "AI Avatar Video",
+        "description": (
+            "Create professional AI avatar and talking presenter "
+            "videos with HeyGen."
+        ),
         "tags": [
+            "HeyGen",
             "AI Avatar",
-            "Voice"
+            "Talking Video",
+            "AI Voice",
         ],
         "official_url": "https://www.heygen.com/",
-        "type": "Video Tool",
+        "type": "video",
     },
 
 
@@ -155,125 +197,163 @@ TOOLS = {
     "chatgpt-image-generator": {
         "name": "ChatGPT Image Generator",
         "icon": "🤖",
-        "category": "Image Generator",
-        "description": "Create detailed and creative images from simple text prompts using AI image generation.",
+        "category": "AI Image Generator",
+        "description": (
+            "Generate creative images from text prompts using "
+            "ChatGPT's AI image generation capabilities."
+        ),
         "tags": [
+            "ChatGPT",
+            "Image Generator",
             "Text to Image",
-            "Creative"
+            "OpenAI",
         ],
         "official_url": "https://chatgpt.com/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "midjourney": {
         "name": "Midjourney",
         "icon": "🎨",
-        "category": "AI Art",
-        "description": "Generate high-quality artistic images and stunning visuals using advanced AI.",
+        "category": "AI Image Generator",
+        "description": (
+            "Create detailed and artistic AI-generated images "
+            "from natural language prompts."
+        ),
         "tags": [
+            "Midjourney",
             "AI Art",
-            "Creative"
+            "Text to Image",
         ],
         "official_url": "https://www.midjourney.com/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "adobe-firefly": {
         "name": "Adobe Firefly",
         "icon": "🔥",
-        "category": "AI Generator",
-        "description": "Create and edit images with generative AI tools designed for creative professionals.",
+        "category": "AI Image Generator",
+        "description": (
+            "Adobe Firefly offers generative AI tools for images, "
+            "design and creative editing."
+        ),
         "tags": [
-            "Generation",
-            "Editing"
+            "Adobe",
+            "Firefly",
+            "AI Images",
+            "Design",
         ],
         "official_url": "https://firefly.adobe.com/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "canva-ai": {
         "name": "Canva AI",
-        "icon": "🖌️",
-        "category": "Design",
-        "description": "Generate images and creative designs with AI-powered Canva features.",
+        "icon": "🪄",
+        "category": "AI Design Tool",
+        "description": (
+            "Use Canva's AI features to create images, designs, "
+            "graphics and other visual content."
+        ),
         "tags": [
-            "Design",
-            "AI Image"
+            "Canva",
+            "AI Design",
+            "Graphics",
+            "Image",
         ],
-        "official_url": "https://www.canva.com/",
-        "type": "Image Tool",
+        "official_url": "https://www.canva.com/ai-image-generator/",
+        "type": "image",
     },
 
     "leonardo-ai": {
         "name": "Leonardo AI",
-        "icon": "🦁",
-        "category": "AI Art",
-        "description": "Generate detailed images, characters and creative artwork with AI.",
+        "icon": "🧠",
+        "category": "AI Image Generator",
+        "description": (
+            "Generate high-quality AI artwork, characters and "
+            "creative images with Leonardo AI."
+        ),
         "tags": [
-            "Image Generation",
-            "Art"
+            "Leonardo AI",
+            "AI Art",
+            "Image Generator",
         ],
         "official_url": "https://leonardo.ai/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "remove-bg": {
         "name": "Remove.bg",
         "icon": "✂️",
-        "category": "Background",
-        "description": "Remove image backgrounds automatically and create transparent background images.",
+        "category": "Background Remover",
+        "description": (
+            "Automatically remove image backgrounds quickly "
+            "using artificial intelligence."
+        ),
         "tags": [
-            "Background Remover",
-            "Editing"
+            "Background Removal",
+            "Image Editing",
+            "AI",
         ],
         "official_url": "https://www.remove.bg/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "photoroom": {
-        "name": "Photoroom",
+        "name": "PhotoRoom",
         "icon": "📸",
-        "category": "Photo Editing",
-        "description": "Edit product photos, remove backgrounds and create professional visuals with AI.",
+        "category": "AI Photo Editor",
+        "description": (
+            "Edit product photos, remove backgrounds and create "
+            "professional visuals using AI."
+        ),
         "tags": [
-            "Editing",
-            "Background"
+            "Photo Editor",
+            "Background Removal",
+            "AI Image",
         ],
         "official_url": "https://www.photoroom.com/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "pixlr": {
         "name": "Pixlr",
-        "icon": "🪄",
-        "category": "Photo Editor",
-        "description": "Edit photos online with AI-powered tools, filters and creative image features.",
+        "icon": "🖌️",
+        "category": "AI Image Editor",
+        "description": (
+            "Edit and enhance photos online with Pixlr's "
+            "AI-powered image editing tools."
+        ),
         "tags": [
+            "Pixlr",
             "Photo Editing",
-            "AI Tools"
+            "AI Editor",
         ],
         "official_url": "https://pixlr.com/",
-        "type": "Image Tool",
+        "type": "image",
     },
 
     "upscale-media": {
         "name": "Upscale.media",
-        "icon": "🚀",
-        "category": "Image Enhancer",
-        "description": "Increase image resolution and improve image quality using AI-powered upscaling.",
+        "icon": "🔍",
+        "category": "AI Image Enhancer",
+        "description": (
+            "Enhance image resolution and improve image quality "
+            "using AI-powered upscaling."
+        ),
         "tags": [
-            "Upscaling",
-            "Enhancement"
+            "Image Upscaler",
+            "Enhancer",
+            "AI Image",
         ],
         "official_url": "https://www.upscale.media/",
-        "type": "Image Tool",
+        "type": "image",
     },
-
 }
 
 
 # =========================================================
-# ADD SLUG TO EVERY TOOL
+# ADD SLUG TO EACH TOOL
 # =========================================================
 
 for slug, tool in TOOLS.items():
@@ -292,72 +372,93 @@ def home(request):
         "flow-ai",
     ]
 
-    featured_tools = {}
-
-    for slug in featured_slugs:
-
-        tool = TOOLS.get(slug)
-
-        if tool:
-            featured_tools[slug] = tool
+    featured_tools = {
+        slug: TOOLS[slug]
+        for slug in featured_slugs
+        if slug in TOOLS
+    }
 
     return render(
         request,
         "home.html",
         {
             "featured_tools": featured_tools,
-        }
+        },
     )
 
 
 # =========================================================
-# AI IMAGE TOOLS PAGE
+# IMAGE TOOLS
 # =========================================================
 
 def image_tools(request):
 
-    image_tools_list = []
+    query = request.GET.get("q", "").strip().lower()
+
+    filtered_tools = {}
 
     for slug, tool in TOOLS.items():
 
-        if tool["type"] == "Image Tool":
-            image_tools_list.append(tool)
+        if tool["type"] != "image":
+            continue
+
+        searchable_text = " ".join([
+            tool["name"],
+            tool["category"],
+            tool["description"],
+            " ".join(tool["tags"]),
+        ]).lower()
+
+        if not query or query in searchable_text:
+            filtered_tools[slug] = tool
 
     return render(
         request,
         "image_tools.html",
         {
-            "tools": image_tools_list,
-            "tool_count": len(image_tools_list),
-        }
+            "tools": filtered_tools,
+            "query": request.GET.get("q", ""),
+        },
     )
 
 
 # =========================================================
-# AI VIDEO TOOLS PAGE
+# VIDEO TOOLS
 # =========================================================
 
 def video_tools(request):
 
-    video_tools_list = []
+    query = request.GET.get("q", "").strip().lower()
+
+    filtered_tools = {}
 
     for slug, tool in TOOLS.items():
 
-        if tool["type"] == "Video Tool":
-            video_tools_list.append(tool)
+        if tool["type"] != "video":
+            continue
+
+        searchable_text = " ".join([
+            tool["name"],
+            tool["category"],
+            tool["description"],
+            " ".join(tool["tags"]),
+        ]).lower()
+
+        if not query or query in searchable_text:
+            filtered_tools[slug] = tool
 
     return render(
         request,
         "video_tools.html",
         {
-            "tools": video_tools_list,
-            "tool_count": len(video_tools_list),
-        }
+            "tools": filtered_tools,
+            "query": request.GET.get("q", ""),
+        },
     )
 
 
 # =========================================================
-# TOOL DETAIL PAGE
+# TOOL DETAIL
 # =========================================================
 
 def tool_detail(request, slug):
@@ -365,96 +466,43 @@ def tool_detail(request, slug):
     tool = TOOLS.get(slug)
 
     if not tool:
-
-        return render(
-            request,
-            "tool_detail.html",
-            {
-                "tool": {
-                    "name": "Tool Not Found",
-                    "slug": "",
-                    "icon": "❌",
-                    "category": "Unknown",
-                    "description": "The requested AI tool could not be found.",
-                    "tags": [],
-                    "official_url": "/",
-                    "type": "AI Tool",
-                }
-            },
-            status=404
-        )
+        return redirect("home")
 
     return render(
         request,
         "tool_detail.html",
         {
-            "tool": tool
-        }
+            "tool": tool,
+        },
     )
 
 
 # =========================================================
-# ABOUT PAGE
+# LEGAL / INFORMATION
 # =========================================================
 
 def about(request):
+    return render(request, "about.html")
 
-    return render(
-        request,
-        "about.html"
-    )
-
-
-# =========================================================
-# PRIVACY PAGE
-# =========================================================
 
 def privacy(request):
+    return render(request, "privacy.html")
 
-    return render(
-        request,
-        "privacy.html"
-    )
-
-
-# =========================================================
-# TERMS PAGE
-# =========================================================
 
 def terms(request):
+    return render(request, "terms.html")
 
-    return render(
-        request,
-        "terms.html"
-    )
-
-
-# =========================================================
-# DISCLAIMER PAGE
-# =========================================================
 
 def disclaimer(request):
+    return render(request, "disclaimer.html")
 
-    return render(
-        request,
-        "disclaimer.html"
-    )
-
-
-# =========================================================
-# CONTACT PAGE
-# =========================================================
 
 def contact(request):
-
-    return render(
-        request,
-        "contact.html"
-    )
+    return render(request, "contact.html")
 
 
 # =========================================================
-# CREATE ACCOUNT / SIGN UP
+# SIGNUP
 # =========================================================
 
 def signup_view(request):
@@ -470,9 +518,22 @@ def signup_view(request):
 
             user = form.save()
 
-            auth_login(request, user)
+            # IMPORTANT:
+            # We have two authentication backends:
+            #
+            # 1. Django ModelBackend
+            # 2. django-allauth AuthenticationBackend
+            #
+            # This user was created using normal Django signup,
+            # so explicitly use Django's ModelBackend.
 
-            return redirect("home")
+            auth_login(
+                request,
+                user,
+                backend="django.contrib.auth.backends.ModelBackend",
+            )
+
+            return redirect("welcome")
 
     else:
 
@@ -482,13 +543,13 @@ def signup_view(request):
         request,
         "signup.html",
         {
-            "form": form
-        }
+            "form": form,
+        },
     )
 
 
 # =========================================================
-# LOGIN
+# NORMAL LOGIN
 # =========================================================
 
 def login_view(request):
@@ -500,16 +561,19 @@ def login_view(request):
 
         form = AuthenticationForm(
             request,
-            data=request.POST
+            data=request.POST,
         )
 
         if form.is_valid():
 
             user = form.get_user()
 
+            # AuthenticationForm already authenticated
+            # the user through Django's authentication system.
+
             auth_login(request, user)
 
-            return redirect("home")
+            return redirect("welcome")
 
     else:
 
@@ -519,8 +583,8 @@ def login_view(request):
         request,
         "login.html",
         {
-            "form": form
-        }
+            "form": form,
+        },
     )
 
 
@@ -536,7 +600,7 @@ def logout_view(request):
 
 
 # =========================================================
-# USER PROFILE
+# PROFILE
 # =========================================================
 
 @login_required(login_url="login")
@@ -544,5 +608,18 @@ def profile_view(request):
 
     return render(
         request,
-        "profile.html"
+        "profile.html",
+    )
+
+
+# =========================================================
+# WELCOME
+# =========================================================
+
+@login_required(login_url="login")
+def welcome_view(request):
+
+    return render(
+        request,
+        "welcome.html",
     )

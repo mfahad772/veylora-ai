@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AI Image Tools - Veylora AI</title>
 
     <meta name="description"
-          content="Discover the best AI image generation, editing, enhancement and creative tools on Veylora AI.">
+          content="Discover AI image generators, editors, enhancers and creative image tools on Veylora AI.">
 
     <style>
 
@@ -19,274 +20,1033 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b0f19;
-            color: white;
-            min-height: 100vh;
+        html {
+            scroll-behavior: smooth;
         }
 
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #05070d;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           LIVE BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(37, 99, 235, 0.15),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    180deg,
+                    #05070d,
+                    #070b14,
+                    #05070d
+                );
+        }
+
+        .mouse-glow {
+            position: absolute;
+
+            width: 620px;
+            height: 620px;
+
+            left: 50%;
+            top: 20%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(34, 211, 238, 0.11),
+                    rgba(37, 99, 235, 0.05) 40%,
+                    transparent 72%
+                );
+
+            filter: blur(20px);
+
+            transition:
+                left 0.18s ease-out,
+                top 0.18s ease-out;
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            animation:
+                gridMove 22s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 60px 60px;
+            }
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.32;
+        }
+
+        .blob-one {
+            width: 500px;
+            height: 500px;
+
+            top: -220px;
+            left: -180px;
+
+            background: #2563eb;
+
+            animation:
+                blobOne 16s ease-in-out infinite alternate;
+        }
+
+        .blob-two {
+            width: 520px;
+            height: 520px;
+
+            right: -250px;
+            top: 30%;
+
+            background: #7c3aed;
+
+            animation:
+                blobTwo 19s ease-in-out infinite alternate;
+        }
+
+        .blob-three {
+            width: 430px;
+            height: 430px;
+
+            bottom: -220px;
+            left: 30%;
+
+            background: #0891b2;
+
+            animation:
+                blobThree 21s ease-in-out infinite alternate;
+        }
+
+        @keyframes blobOne {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(230px,120px) scale(1.15);
+            }
+        }
+
+        @keyframes blobTwo {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(-220px,100px) scale(1.15);
+            }
+        }
+
+        @keyframes blobThree {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(-160px,-130px) scale(1.12);
+            }
+        }
+
+        .floating-object {
+            position: absolute;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.01)
+                );
+
+            backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.28);
+        }
+
+        .object-one {
+            width: 90px;
+            height: 90px;
+
+            left: 6%;
+            top: 25%;
+
+            border-radius: 25px;
+
+            animation:
+                floatOne 7s ease-in-out infinite;
+        }
+
+        .object-two {
+            width: 65px;
+            height: 65px;
+
+            right: 7%;
+            top: 42%;
+
+            border-radius: 50%;
+
+            animation:
+                floatTwo 8s ease-in-out infinite;
+        }
+
+        @keyframes floatOne {
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(20deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-25px)
+                    rotate(32deg);
+            }
+        }
+
+        @keyframes floatTwo {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(25px);
+            }
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
-            padding: 20px 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            width: 100%;
+
+            padding: 15px 6%;
+
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #202638;
+            justify-content: space-between;
+
+            background:
+                rgba(5,7,13,0.72);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+
+            backdrop-filter: blur(20px);
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
             font-size: 24px;
-            font-weight: bold;
+            font-weight: 800;
+        }
+
+        .logo-box {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200% 200%;
+
+            box-shadow:
+                0 8px 28px rgba(37,99,235,0.35);
+
+            animation:
+                gradientMove 5s ease infinite;
         }
 
         .logo span {
-            color: #6c63ff;
+            color: #67e8f9;
         }
 
-        nav a {
-            color: #cbd0dc;
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 0;
+
+            color: #adb6c8;
+
             text-decoration: none;
-            margin-left: 25px;
-            font-size: 15px;
-        }
 
-        nav a:hover {
-            color: white;
-        }
-
-        .container {
-            width: 86%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 65px 0 80px;
-        }
-
-        .back {
-            display: inline-block;
-            color: #9da6b8;
-            text-decoration: none;
-            margin-bottom: 30px;
             font-size: 14px;
         }
 
-        .back:hover {
+        .nav-link:hover {
             color: white;
         }
 
+        .auth-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .small-button {
+            position: relative;
+            overflow: hidden;
+
+            padding: 9px 15px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,0.11);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            color: #e4e8f0;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.28s;
+        }
+
+        .small-button:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(34,211,238,0.4);
+        }
+
+        .small-button.primary {
+            border: none;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200% 200%;
+
+            animation:
+                gradientMove 5s ease infinite;
+        }
+
+        .small-button.logout {
+            color: #fda4af;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
         .hero {
+            max-width: 1050px;
+
+            margin: auto;
+
+            padding:
+                95px 25px
+                55px;
+
             text-align: center;
-            margin-bottom: 35px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(34,211,238,0.06);
+
+            border:
+                1px solid rgba(34,211,238,0.22);
+
+            color: #bae6fd;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22d3ee;
+
+            box-shadow:
+                0 0 13px #22d3ee;
+
+            animation:
+                pulse 1.6s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         .hero h1 {
-            font-size: 44px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+
+            font-size: 56px;
+            line-height: 1.07;
+
+            letter-spacing: -2px;
         }
 
-        .hero h1 span {
-            color: #7568ff;
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #22d3ee,
+                    #a78bfa,
+                    #60a5fa
+                );
+
+            background-size: 300% 300%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation:
+                titleGradient 7s linear infinite;
+        }
+
+        @keyframes titleGradient {
+            from {
+                background-position: 0% 50%;
+            }
+
+            to {
+                background-position: 300% 50%;
+            }
         }
 
         .hero p {
             max-width: 700px;
+
             margin: auto;
-            color: #aeb5c5;
-            line-height: 1.7;
+
+            color: #9da8bc;
+
             font-size: 16px;
+            line-height: 1.8;
         }
 
-        .count {
-            display: inline-block;
-            margin-top: 20px;
-            background: #211f45;
-            color: #9d96ff;
-            padding: 8px 14px;
-            border-radius: 7px;
-            font-size: 13px;
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 89%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-bottom: 100px;
         }
 
-        /* SEARCH */
+        .search-panel {
+            max-width: 800px;
 
-        .filters {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 35px;
+            margin:
+                10px auto
+                55px;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(12,18,32,0.72);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(17px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.20);
         }
 
-        .search-box,
-        .category-filter {
-            background: #121827;
-            border: 1px solid #252d40;
-            color: white;
-            border-radius: 9px;
-            padding: 14px 16px;
-            font-size: 14px;
-            outline: none;
+        .search-wrapper {
+            position: relative;
         }
 
-        .search-box {
-            flex: 1;
+        .search-icon {
+            position: absolute;
+
+            left: 17px;
+            top: 50%;
+
+            transform: translateY(-50%);
         }
 
-        .category-filter {
-            min-width: 210px;
-            cursor: pointer;
-        }
+        #toolSearch {
+            width: 100%;
+            height: 55px;
 
-        .search-box:focus,
-        .category-filter:focus {
-            border-color: #6c63ff;
-        }
+            padding: 0 50px;
 
-        .category-filter option {
-            background: #121827;
-            color: white;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .tool-card {
-            background: #121827;
-            border: 1px solid #252d40;
-            border-radius: 17px;
-            padding: 25px;
-            transition: 0.3s;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: #6c63ff;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: #1c2335;
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            margin-bottom: 18px;
-        }
 
-        .tool-card h2 {
-            font-size: 21px;
-            margin-bottom: 10px;
-        }
+            border:
+                1px solid rgba(255,255,255,0.10);
 
-        .category {
-            display: inline-block;
-            background: #211f45;
-            color: #9d96ff;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-bottom: 14px;
-        }
+            outline: none;
 
-        .tool-card p {
-            color: #9da6b8;
-            line-height: 1.65;
-            font-size: 14px;
-            min-height: 70px;
-            margin-bottom: 20px;
-        }
+            background:
+                rgba(3,7,18,0.72);
 
-        .button {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            background: #6c63ff;
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
+
+            font-size: 15px;
+        }
+
+        #toolSearch:focus {
+            border-color:
+                rgba(34,211,238,0.5);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(34,211,238,0.07);
+        }
+
+        #toolSearch::placeholder {
+            color: #687489;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 13px;
+
+            color: #748096;
+
+            font-size: 12px;
+        }
+
+        .count-number {
+            color: #67e8f9;
             font-weight: bold;
         }
 
-        .button:hover {
-            background: #584ee8;
+        /* =========================
+           TOOLS
+        ========================= */
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+
+            perspective: 1200px;
         }
 
-        .no-results {
-            display: none;
-            text-align: center;
-            padding: 50px 20px;
-            background: #121827;
-            border: 1px solid #252d40;
-            border-radius: 17px;
-            color: #9da6b8;
+        .tool-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 390px;
+
+            padding: 26px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 22px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,22,39,0.78),
+                    rgba(7,12,23,0.73)
+                );
+
+            backdrop-filter: blur(16px);
+
+            transition:
+                transform 0.38s ease,
+                border-color 0.38s ease,
+                box-shadow 0.38s ease;
         }
+
+        .tool-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 210px;
+            height: 210px;
+
+            right: -120px;
+            bottom: -120px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(34,211,238,0.14),
+                    transparent 70%
+                );
+
+            transition: 0.5s;
+        }
+
+        .tool-card:hover {
+            transform:
+                translateY(-10px)
+                rotateX(2deg)
+                rotateY(-2deg);
+
+            border-color:
+                rgba(34,211,238,0.34);
+
+            box-shadow:
+                0 28px 60px rgba(0,0,0,0.32);
+        }
+
+        .tool-card:hover::before {
+            transform: scale(1.6);
+        }
+
+        .tool-icon {
+            width: 64px;
+            height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 22px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(37,99,235,0.18),
+                    rgba(34,211,238,0.08)
+                );
+
+            border:
+                1px solid rgba(96,165,250,0.15);
+
+            font-size: 30px;
+
+            transition: 0.35s;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform:
+                translateY(-5px)
+                rotate(-5deg)
+                scale(1.08);
+        }
+
+        .tool-category {
+            align-self: flex-start;
+
+            margin-bottom: 13px;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(37,99,235,0.10);
+
+            border:
+                1px solid rgba(96,165,250,0.15);
+
+            color: #93c5fd;
+
+            font-size: 11px;
+        }
+
+        .tool-card h2 {
+            margin-bottom: 11px;
+            font-size: 21px;
+        }
+
+        .tool-description {
+            margin-bottom: 18px;
+
+            color: #96a1b5;
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-bottom: 22px;
+        }
+
+        .tag {
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            color: #8995aa;
+
+            font-size: 10px;
+        }
+
+        .tool-button {
+            position: relative;
+            overflow: hidden;
+
+            width: 100%;
+
+            margin-top: auto;
+
+            padding: 12px;
+
+            border-radius: 11px;
+
+            text-align: center;
+            text-decoration: none;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            transition: 0.3s;
+        }
+
+        .tool-button::before {
+            content: "";
+
+            position: absolute;
+
+            top: -80%;
+            left: -80%;
+
+            width: 45%;
+            height: 250%;
+
+            transform: rotate(24deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.32),
+                    transparent
+                );
+
+            transition: left 0.65s ease;
+        }
+
+        .tool-button:hover::before {
+            left: 140%;
+        }
+
+        .tool-button:hover {
+            transform: translateY(-2px);
+
+            border-color: transparent;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 12px 35px rgba(37,99,235,0.20);
+        }
+
+        #noResults {
+            display: none;
+
+            max-width: 650px;
+
+            margin: 40px auto;
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(15,22,39,0.72);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #929db0;
+        }
+
+        #noResults h3 {
+            color: white;
+            margin: 12px 0 8px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
-            border-top: 1px solid #202638;
-            padding: 35px 7%;
-            color: #7f8798;
+            padding: 40px 7%;
+
             text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+
+            background:
+                rgba(5,7,13,0.75);
+        }
+
+        .footer-logo {
+            margin-bottom: 16px;
+
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .footer-logo span {
+            color: #67e8f9;
         }
 
         .footer-links {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
         .footer-links a {
-            color: #9da6b8;
+            display: inline-block;
+
+            margin: 5px 9px;
+
+            color: #8792a6;
+
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
-        }
 
-        .footer-links a:hover {
-            color: white;
-        }
-
-        footer p {
             font-size: 13px;
         }
 
-        @media (max-width: 900px) {
+        .footer-links a:hover {
+            color: #67e8f9;
+        }
+
+        footer p {
+            color: #5f697c;
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .nav-link {
+                display: none;
+            }
 
             .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2,1fr);
             }
 
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             header {
-                padding: 18px 5%;
+                padding: 13px 4%;
             }
 
-            nav {
-                display: none;
+            .logo {
+                font-size: 19px;
             }
 
-            .container {
-                width: 90%;
-                padding-top: 40px;
+            .logo-box {
+                width: 34px;
+                height: 34px;
+            }
+
+            .small-button {
+                padding: 8px 9px;
+                font-size: 10px;
+            }
+
+            .hero {
+                padding:
+                    75px 18px
+                    45px;
             }
 
             .hero h1 {
-                font-size: 34px;
+                font-size: 39px;
+                letter-spacing: -1px;
             }
 
-            .filters {
-                flex-direction: column;
+            .hero p {
+                font-size: 14px;
             }
 
-            .category-filter {
-                width: 100%;
+            .container {
+                width: 91%;
             }
 
             .tools-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .tool-card {
+                min-height: auto;
+            }
+
+            .search-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+        }
+
+        @media (max-width: 390px) {
+
+            .logo-name {
+                display: none;
             }
 
         }
@@ -295,141 +1055,259 @@
 
 </head>
 
-
 <body>
+
+
+<div class="background">
+
+    <div class="mouse-glow"
+         id="mouseGlow"></div>
+
+    <div class="grid"></div>
+
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
+
+    <div class="floating-object object-one"></div>
+    <div class="floating-object object-two"></div>
+
+</div>
 
 
 <header>
 
-    <div class="logo">
-        Veylora <span>AI</span>
-    </div>
+    <a href="{% url 'home' %}"
+       class="logo">
+
+        <div class="logo-box">
+            V
+        </div>
+
+        <div class="logo-name">
+            Veylora <span>AI</span>
+        </div>
+
+    </a>
+
 
     <nav>
 
-        <a href="{% url 'home' %}">
+        <a href="{% url 'home' %}"
+           class="nav-link">
             Home
         </a>
 
-        <a href="{% url 'image_tools' %}">
+        <a href="{% url 'image_tools' %}"
+           class="nav-link">
             AI Image Tools
         </a>
 
-        <a href="{% url 'video_tools' %}">
+        <a href="{% url 'video_tools' %}"
+           class="nav-link">
             AI Video Tools
         </a>
+
+
+        <div class="auth-area">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}"
+                   class="small-button primary">
+                    My Account
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="small-button logout">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="small-button">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}"
+                   class="small-button primary">
+                    Create Account
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </nav>
 
 </header>
 
 
-<main class="container">
+<section class="hero">
 
+    <div class="hero-badge">
 
-    <a href="{% url 'home' %}" class="back">
-        ← Back to Home
-    </a>
+        <span class="live-dot"></span>
 
-
-    <section class="hero">
-
-        <h1>
-            AI <span>Image Tools</span>
-        </h1>
-
-        <p>
-            Discover powerful AI image generators, editors,
-            background removers, enhancers and creative tools
-            for your image projects.
-        </p>
-
-        <span class="count">
-            {{ tool_count }} AI Image Tools
-        </span>
-
-    </section>
-
-
-    <!-- FILTERS -->
-
-    <div class="filters">
-
-        <input
-            type="text"
-            id="searchInput"
-            class="search-box"
-            placeholder="🔍 Search image tools..."
-        >
-
-        <select id="categoryFilter" class="category-filter">
-
-            <option value="all">
-                All Categories
-            </option>
-
-            {% for tool in tools %}
-
-                <option value="{{ tool.category|lower }}">
-                    {{ tool.category }}
-                </option>
-
-            {% endfor %}
-
-        </select>
+        AI-powered creative tools
 
     </div>
 
 
-    <section class="tools-grid" id="toolsGrid">
+    <h1>
+
+        Discover Powerful
+
+        <span class="gradient-text">
+            AI Image Tools
+        </span>
+
+    </h1>
 
 
-        {% for tool in tools %}
+    <p>
 
-        <div class="tool-card"
-             data-name="{{ tool.name|lower }}"
-             data-category="{{ tool.category|lower }}"
-             data-description="{{ tool.description|lower }}">
+        Explore AI image generators, professional editors,
+        enhancers and creative platforms designed to make
+        visual creation faster and smarter.
 
-            <div class="tool-icon">
-                {{ tool.icon }}
-            </div>
+    </p>
 
-            <h2>
-                {{ tool.name }}
-            </h2>
+</section>
 
-            <span class="category">
-                {{ tool.category }}
+
+<main class="container">
+
+
+    <div class="search-panel">
+
+        <div class="search-wrapper">
+
+            <span class="search-icon">
+                🔎
             </span>
 
-            <p>
-                {{ tool.description }}
-            </p>
-
-            <a href="{% url 'tool_detail' tool.slug %}"
-               class="button">
-
-                View Details →
-
-            </a>
+            <input
+                type="text"
+                id="toolSearch"
+                placeholder="Search AI image tools..."
+                autocomplete="off"
+            >
 
         </div>
+
+
+        <div class="search-info">
+
+            <span>
+                Search by tool name, category or feature.
+            </span>
+
+            <span>
+
+                <span
+                    id="toolCount"
+                    class="count-number">
+
+                    {{ tools|length }}
+
+                </span>
+
+                tools available
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="tools-grid"
+         id="toolsGrid">
+
+
+        {% for slug, tool in tools.items %}
+
+
+            <article
+                class="tool-card"
+                data-search="{{ tool.name }} {{ tool.category }} {{ tool.description }} {{ tool.tags|join:' ' }}">
+
+
+                <div class="tool-icon">
+                    {{ tool.icon }}
+                </div>
+
+
+                <span class="tool-category">
+                    {{ tool.category }}
+                </span>
+
+
+                <h2>
+                    {{ tool.name }}
+                </h2>
+
+
+                <p class="tool-description">
+                    {{ tool.description }}
+                </p>
+
+
+                <div class="tags">
+
+                    {% for tag in tool.tags %}
+
+                        <span class="tag">
+                            {{ tag }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <a
+                    href="{% url 'tool_detail' slug %}"
+                    class="tool-button">
+
+                    View Tool Details →
+
+                </a>
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <div id="noServerTools">
+
+                No AI image tools are currently available.
+
+            </div>
+
 
         {% endfor %}
 
 
-    </section>
+    </div>
 
 
-    <div class="no-results" id="noResults">
+    <div id="noResults">
 
-        <h2>
-            No Tools Found
-        </h2>
+        <div style="font-size:35px;">
+            🔎
+        </div>
 
-        <p style="margin-top: 10px;">
-            Try another search or select a different category.
+        <h3>
+            No tools found
+        </h3>
+
+        <p>
+            Try another tool name or keyword.
         </p>
 
     </div>
@@ -440,16 +1318,39 @@
 
 <footer>
 
+    <div class="footer-logo">
+        Veylora <span>AI</span>
+    </div>
+
+
     <div class="footer-links">
 
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'privacy' %}">Privacy</a>
-        <a href="{% url 'terms' %}">Terms</a>
-        <a href="{% url 'disclaimer' %}">Disclaimer</a>
-        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'about' %}">
+            About
+        </a>
+
+        <a href="{% url 'privacy' %}">
+            Privacy
+        </a>
+
+        <a href="{% url 'terms' %}">
+            Terms
+        </a>
+
+        <a href="{% url 'disclaimer' %}">
+            Disclaimer
+        </a>
+
+        <a href="{% url 'contact' %}">
+            Contact
+        </a>
 
     </div>
+
 
     <p>
         © 2026 Veylora AI. All rights reserved.
@@ -460,65 +1361,109 @@
 
 <script>
 
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const toolCards = document.querySelectorAll(".tool-card");
-    const noResults = document.getElementById("noResults");
+    const searchInput =
+        document.getElementById("toolSearch");
 
-    function filterTools() {
+    const cards =
+        document.querySelectorAll(".tool-card");
 
-        const searchText = searchInput.value.toLowerCase().trim();
-        const selectedCategory = categoryFilter.value;
+    const toolCount =
+        document.getElementById("toolCount");
 
-        let visibleCount = 0;
+    const noResults =
+        document.getElementById("noResults");
 
-        toolCards.forEach(function(card) {
 
-            const name = card.dataset.name;
-            const category = card.dataset.category;
-            const description = card.dataset.description;
+    if (searchInput) {
 
-            const matchesSearch =
-                name.includes(searchText) ||
-                category.includes(searchText) ||
-                description.includes(searchText);
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-            const matchesCategory =
-                selectedCategory === "all" ||
-                category === selectedCategory;
+                const query =
+                    this.value
+                        .toLowerCase()
+                        .trim();
 
-            if (matchesSearch && matchesCategory) {
+                let visibleCount = 0;
 
-                card.style.display = "";
 
-                visibleCount++;
+                cards.forEach(
+                    function (card) {
 
-            } else {
+                        const searchText =
+                            (
+                                card.dataset.search || ""
+                            ).toLowerCase();
 
-                card.style.display = "none";
+
+                        if (
+                            searchText.includes(query)
+                        ) {
+
+                            card.style.display =
+                                "flex";
+
+                            visibleCount++;
+
+                        } else {
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+
+                if (toolCount) {
+
+                    toolCount.textContent =
+                        visibleCount;
+
+                }
+
+
+                if (noResults) {
+
+                    noResults.style.display =
+                        visibleCount === 0
+                            ? "block"
+                            : "none";
+
+                }
 
             }
-
-        });
-
-        if (visibleCount === 0) {
-
-            noResults.style.display = "block";
-
-        } else {
-
-            noResults.style.display = "none";
-
-        }
+        );
 
     }
 
-    searchInput.addEventListener("input", filterTools);
 
-    categoryFilter.addEventListener("change", filterTools);
+    const glow =
+        document.getElementById("mouseGlow");
+
+
+    if (glow) {
+
+        document.addEventListener(
+            "mousemove",
+            function (event) {
+
+                glow.style.left =
+                    event.clientX + "px";
+
+                glow.style.top =
+                    event.clientY + "px";
+
+            }
+        );
+
+    }
 
 </script>
 
 
 </body>
+
 </html>

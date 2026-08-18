@@ -2,13 +2,16 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AI Video Tools - Veylora AI</title>
 
     <meta name="description"
-          content="Discover powerful AI video generators, editors, avatar tools, animation platforms and image-to-video tools on Veylora AI.">
+          content="Discover AI video generators, animation tools, avatars and video creation platforms on Veylora AI.">
 
     <style>
 
@@ -18,295 +21,998 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #0b0f19;
-            color: #ffffff;
             min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #05070d;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(139,92,246,0.16),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    180deg,
+                    #05070d,
+                    #070b14,
+                    #05070d
+                );
+        }
+
+        .mouse-glow {
+            position: absolute;
+
+            width: 620px;
+            height: 620px;
+
+            left: 50%;
+            top: 20%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(139,92,246,0.12),
+                    rgba(34,211,238,0.05) 40%,
+                    transparent 72%
+                );
+
+            filter: blur(20px);
+
+            transition:
+                left 0.18s ease-out,
+                top 0.18s ease-out;
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            animation:
+                gridMove 22s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 60px 60px;
+            }
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.32;
+        }
+
+        .blob-one {
+            width: 500px;
+            height: 500px;
+
+            top: -220px;
+            left: -180px;
+
+            background: #7c3aed;
+
+            animation:
+                blobOne 16s ease-in-out infinite alternate;
+        }
+
+        .blob-two {
+            width: 520px;
+            height: 520px;
+
+            right: -250px;
+            top: 30%;
+
+            background: #2563eb;
+
+            animation:
+                blobTwo 19s ease-in-out infinite alternate;
+        }
+
+        .blob-three {
+            width: 430px;
+            height: 430px;
+
+            bottom: -220px;
+            left: 30%;
+
+            background: #0891b2;
+
+            animation:
+                blobThree 21s ease-in-out infinite alternate;
+        }
+
+        @keyframes blobOne {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(230px,120px) scale(1.15);
+            }
+        }
+
+        @keyframes blobTwo {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(-220px,100px) scale(1.15);
+            }
+        }
+
+        @keyframes blobThree {
+            from {
+                transform: translate(0,0) scale(1);
+            }
+
+            to {
+                transform: translate(-160px,-130px) scale(1.12);
+            }
+        }
+
+        .floating-object {
+            position: absolute;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.01)
+                );
+
+            backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.28);
+        }
+
+        .object-one {
+            width: 90px;
+            height: 90px;
+
+            left: 6%;
+            top: 25%;
+
+            border-radius: 25px;
+
+            animation:
+                floatOne 7s ease-in-out infinite;
+        }
+
+        .object-two {
+            width: 65px;
+            height: 65px;
+
+            right: 7%;
+            top: 42%;
+
+            border-radius: 50%;
+
+            animation:
+                floatTwo 8s ease-in-out infinite;
+        }
+
+        @keyframes floatOne {
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(20deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-25px)
+                    rotate(32deg);
+            }
+        }
+
+        @keyframes floatTwo {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(25px);
+            }
         }
 
         header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
             width: 100%;
-            padding: 20px 7%;
+
+            padding: 15px 6%;
+
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #202638;
-            background: #0b0f19;
+            justify-content: space-between;
+
+            background:
+                rgba(5,7,13,0.72);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+
+            backdrop-filter: blur(20px);
         }
 
         .logo {
-            color: #ffffff;
-            font-size: 25px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
             text-decoration: none;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo-box {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200% 200%;
+
+            box-shadow:
+                0 8px 28px rgba(37,99,235,0.35);
+
+            animation:
+                gradientMove 5s ease infinite;
         }
 
         .logo span {
-            color: #7568ff;
+            color: #67e8f9;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         nav {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 24px;
         }
 
-        nav a {
-            color: #cbd0dc;
+        .nav-link {
+            color: #adb6c8;
             text-decoration: none;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        .container {
-            width: 86%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 60px 0 80px;
-        }
-
-        .back {
-            display: inline-block;
-            color: #9da6b8;
-            text-decoration: none;
-            margin-bottom: 35px;
             font-size: 14px;
         }
 
-        .back:hover {
-            color: #ffffff;
+        .nav-link:hover {
+            color: white;
+        }
+
+        .auth-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .small-button {
+            padding: 9px 15px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,0.11);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            color: #e4e8f0;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.28s;
+        }
+
+        .small-button:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(139,92,246,0.45);
+        }
+
+        .small-button.primary {
+            border: none;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200% 200%;
+
+            animation:
+                gradientMove 5s ease infinite;
+        }
+
+        .small-button.logout {
+            color: #fda4af;
         }
 
         .hero {
+            max-width: 1050px;
+
+            margin: auto;
+
+            padding:
+                95px 25px
+                55px;
+
             text-align: center;
-            margin-bottom: 35px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(139,92,246,0.07);
+
+            border:
+                1px solid rgba(139,92,246,0.25);
+
+            color: #ddd6fe;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #a78bfa;
+
+            box-shadow:
+                0 0 13px #a78bfa;
+
+            animation:
+                pulse 1.6s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         .hero h1 {
-            color: #ffffff;
-            font-size: 44px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+
+            font-size: 56px;
+            line-height: 1.07;
+
+            letter-spacing: -2px;
         }
 
-        .hero h1 span {
-            color: #7568ff;
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #22d3ee,
+                    #a78bfa,
+                    #f472b6,
+                    #60a5fa
+                );
+
+            background-size: 300% 300%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation:
+                titleGradient 7s linear infinite;
+        }
+
+        @keyframes titleGradient {
+            from {
+                background-position: 0% 50%;
+            }
+
+            to {
+                background-position: 300% 50%;
+            }
         }
 
         .hero p {
-            max-width: 720px;
+            max-width: 700px;
+
             margin: auto;
-            color: #aeb5c5;
-            line-height: 1.7;
+
+            color: #9da8bc;
+
             font-size: 16px;
+            line-height: 1.8;
         }
 
-        .count {
-            display: inline-block;
-            margin-top: 20px;
-            background: #211f45;
-            color: #9d96ff;
-            padding: 8px 15px;
-            border-radius: 7px;
-            font-size: 13px;
+        .container {
+            width: 89%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-bottom: 100px;
         }
 
-        /* SEARCH BAR */
+        .search-panel {
+            max-width: 800px;
+
+            margin:
+                10px auto
+                55px;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(12,18,32,0.72);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(17px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.20);
+        }
 
         .search-wrapper {
-            width: 100%;
-            max-width: 650px;
-            margin: 0 auto 45px;
             position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            height: 54px;
-            padding: 0 55px 0 20px;
-            background: #121827;
-            border: 1px solid #252d40;
-            border-radius: 12px;
-            outline: none;
-            color: #ffffff;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .search-input::placeholder {
-            color: #7f8798;
-        }
-
-        .search-input:focus {
-            border-color: #6c63ff;
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
         }
 
         .search-icon {
             position: absolute;
-            right: 18px;
+
+            left: 17px;
             top: 50%;
+
             transform: translateY(-50%);
-            color: #8f98ad;
-            font-size: 20px;
-            pointer-events: none;
         }
 
-        /* TOOLS */
+        #toolSearch {
+            width: 100%;
+            height: 55px;
+
+            padding: 0 50px;
+
+            border-radius: 14px;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            outline: none;
+
+            background:
+                rgba(3,7,18,0.72);
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+        #toolSearch:focus {
+            border-color:
+                rgba(139,92,246,0.55);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(139,92,246,0.08);
+        }
+
+        #toolSearch::placeholder {
+            color: #687489;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 13px;
+
+            color: #748096;
+
+            font-size: 12px;
+        }
+
+        .count-number {
+            color: #c4b5fd;
+            font-weight: bold;
+        }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3,1fr);
+
             gap: 22px;
+
+            perspective: 1200px;
         }
 
         .tool-card {
-            background: #121827;
-            border: 1px solid #252d40;
-            border-radius: 17px;
-            padding: 25px;
-            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+
+            min-height: 390px;
+
+            padding: 26px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 22px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,22,39,0.78),
+                    rgba(7,12,23,0.73)
+                );
+
+            backdrop-filter: blur(16px);
+
+            transition:
+                transform 0.38s ease,
+                border-color 0.38s ease,
+                box-shadow 0.38s ease;
+        }
+
+        .tool-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 210px;
+            height: 210px;
+
+            right: -120px;
+            bottom: -120px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(139,92,246,0.17),
+                    transparent 70%
+                );
+
+            transition: 0.5s;
         }
 
         .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: #6c63ff;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transform:
+                translateY(-10px)
+                rotateX(2deg)
+                rotateY(-2deg);
+
+            border-color:
+                rgba(139,92,246,0.38);
+
+            box-shadow:
+                0 28px 60px rgba(0,0,0,0.32);
+        }
+
+        .tool-card:hover::before {
+            transform: scale(1.6);
         }
 
         .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: #1c2335;
-            border-radius: 14px;
+            width: 64px;
+            height: 64px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            margin-bottom: 22px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139,92,246,0.18),
+                    rgba(34,211,238,0.07)
+                );
+
+            border:
+                1px solid rgba(167,139,250,0.16);
+
             font-size: 30px;
-            margin-bottom: 18px;
+
+            transition: 0.35s;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform:
+                translateY(-5px)
+                rotate(-5deg)
+                scale(1.08);
+        }
+
+        .tool-category {
+            align-self: flex-start;
+
+            margin-bottom: 13px;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(139,92,246,0.10);
+
+            border:
+                1px solid rgba(167,139,250,0.16);
+
+            color: #c4b5fd;
+
+            font-size: 11px;
         }
 
         .tool-card h2 {
-            color: #ffffff;
+            margin-bottom: 11px;
             font-size: 21px;
-            margin-bottom: 10px;
         }
 
-        .category {
-            display: inline-block;
-            background: #211f45;
-            color: #9d96ff;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-bottom: 14px;
-        }
+        .tool-description {
+            margin-bottom: 18px;
 
-        .tool-card p {
-            color: #9da6b8;
-            line-height: 1.65;
+            color: #96a1b5;
+
             font-size: 14px;
-            min-height: 70px;
-            margin-bottom: 20px;
+            line-height: 1.7;
         }
 
-        .button {
-            display: block;
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-bottom: 22px;
+        }
+
+        .tag {
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            color: #8995aa;
+
+            font-size: 10px;
+        }
+
+        .tool-button {
+            position: relative;
+            overflow: hidden;
+
             width: 100%;
-            text-align: center;
+
+            margin-top: auto;
+
             padding: 12px;
-            background: #6c63ff;
-            color: #ffffff;
+
+            border-radius: 11px;
+
+            text-align: center;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            background:
+                rgba(255,255,255,0.045);
+
             transition: 0.3s;
         }
 
-        .button:hover {
-            background: #584ee8;
+        .tool-button::before {
+            content: "";
+
+            position: absolute;
+
+            top: -80%;
+            left: -80%;
+
+            width: 45%;
+            height: 250%;
+
+            transform: rotate(24deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.32),
+                    transparent
+                );
+
+            transition: left 0.65s ease;
         }
 
-        /* NO RESULTS */
+        .tool-button:hover::before {
+            left: 140%;
+        }
 
-        .no-results {
+        .tool-button:hover {
+            transform: translateY(-2px);
+
+            border-color: transparent;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #2563eb,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 12px 35px rgba(139,92,246,0.20);
+        }
+
+        #noResults {
             display: none;
+
+            max-width: 650px;
+
+            margin: 40px auto;
+
+            padding: 45px 25px;
+
             text-align: center;
-            padding: 45px 20px;
-            color: #8f98ad;
-            font-size: 16px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(15,22,39,0.72);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #929db0;
         }
 
-        /* FOOTER */
+        #noResults h3 {
+            color: white;
+            margin: 12px 0 8px;
+        }
 
         footer {
-            border-top: 1px solid #202638;
-            padding: 35px 7%;
-            color: #7f8798;
+            padding: 40px 7%;
+
             text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+
+            background:
+                rgba(5,7,13,0.75);
+        }
+
+        .footer-logo {
+            margin-bottom: 16px;
+
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .footer-logo span {
+            color: #67e8f9;
         }
 
         .footer-links {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
         .footer-links a {
-            color: #9da6b8;
+            display: inline-block;
+
+            margin: 5px 9px;
+
+            color: #8792a6;
+
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
-        }
 
-        .footer-links a:hover {
-            color: #ffffff;
-        }
-
-        footer p {
             font-size: 13px;
         }
 
-        /* TABLET */
+        .footer-links a:hover {
+            color: #67e8f9;
+        }
 
-        @media (max-width: 900px) {
+        footer p {
+            color: #5f697c;
+            font-size: 12px;
+        }
+
+        @media (max-width: 1000px) {
+
+            .nav-link {
+                display: none;
+            }
 
             .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2,1fr);
             }
 
         }
 
-        /* MOBILE */
-
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             header {
-                padding: 18px 5%;
+                padding: 13px 4%;
             }
 
-            nav {
-                display: none;
+            .logo {
+                font-size: 19px;
             }
 
-            .container {
-                width: 90%;
-                padding-top: 40px;
+            .logo-box {
+                width: 34px;
+                height: 34px;
+            }
+
+            .small-button {
+                padding: 8px 9px;
+                font-size: 10px;
+            }
+
+            .hero {
+                padding:
+                    75px 18px
+                    45px;
             }
 
             .hero h1 {
-                font-size: 34px;
+                font-size: 39px;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .container {
+                width: 91%;
             }
 
             .tools-grid {
                 grid-template-columns: 1fr;
             }
 
-            .search-wrapper {
-                margin-bottom: 35px;
+            .tool-card {
+                min-height: auto;
+            }
+
+            .search-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+        }
+
+        @media (max-width: 390px) {
+
+            .logo-name {
+                display: none;
             }
 
         }
@@ -315,153 +1021,259 @@
 
 </head>
 
-
 <body>
+
+
+<div class="background">
+
+    <div
+        class="mouse-glow"
+        id="mouseGlow"></div>
+
+    <div class="grid"></div>
+
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
+
+    <div class="floating-object object-one"></div>
+    <div class="floating-object object-two"></div>
+
+</div>
 
 
 <header>
 
-    <a href="/" class="logo">
-        Veylora <span>AI</span>
+    <a href="{% url 'home' %}"
+       class="logo">
+
+        <div class="logo-box">
+            V
+        </div>
+
+        <div class="logo-name">
+            Veylora <span>AI</span>
+        </div>
+
     </a>
+
 
     <nav>
 
-        <a href="/">
+        <a href="{% url 'home' %}"
+           class="nav-link">
             Home
         </a>
 
-        <a href="/ai-image-tools/">
+        <a href="{% url 'image_tools' %}"
+           class="nav-link">
             AI Image Tools
         </a>
 
-        <a href="/ai-video-tools/">
+        <a href="{% url 'video_tools' %}"
+           class="nav-link">
             AI Video Tools
         </a>
+
+
+        <div class="auth-area">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}"
+                   class="small-button primary">
+                    My Account
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="small-button logout">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="small-button">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}"
+                   class="small-button primary">
+                    Create Account
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </nav>
 
 </header>
 
 
-<main class="container">
+<section class="hero">
 
+    <div class="hero-badge">
 
-    <a href="/" class="back">
-        ← Back to Home
-    </a>
+        <span class="live-dot"></span>
 
-
-    <section class="hero">
-
-        <h1>
-            AI <span>Video Tools</span>
-        </h1>
-
-        <p>
-            Discover powerful AI video generators, editors,
-            avatar platforms, animation tools and image-to-video
-            solutions for your creative projects.
-        </p>
-
-        <span class="count">
-            {{ tool_count }} AI Video Tools
-        </span>
-
-    </section>
-
-
-    <!-- SEARCH BAR -->
-
-    <div class="search-wrapper">
-
-        <input
-            type="text"
-            id="toolSearch"
-            class="search-input"
-            placeholder="Search AI video tools..."
-            autocomplete="off"
-        >
-
-        <span class="search-icon">
-            🔍
-        </span>
+        Next-generation video creation
 
     </div>
 
 
-    <!-- TOOLS GRID -->
+    <h1>
 
-    <section class="tools-grid" id="toolsGrid">
+        Discover Powerful
 
+        <span class="gradient-text">
+            AI Video Tools
+        </span>
 
-        {% for tool in tools %}
-
-
-        <div class="tool-card"
-             data-search="{{ tool.name|lower }} {{ tool.category|lower }} {{ tool.description|lower }}">
-
-
-            <div class="tool-icon">
-                {{ tool.icon }}
-            </div>
+    </h1>
 
 
-            <h2>
-                {{ tool.name }}
-            </h2>
+    <p>
+
+        Explore AI video generators, animation tools,
+        avatars, image-to-video platforms and intelligent
+        video editing solutions from one place.
+
+    </p>
+
+</section>
 
 
-            <span class="category">
-                {{ tool.category }}
+<main class="container">
+
+
+    <div class="search-panel">
+
+        <div class="search-wrapper">
+
+            <span class="search-icon">
+                🔎
             </span>
 
-
-            <p>
-                {{ tool.description }}
-            </p>
-
-
-            <a href="{% url 'tool_detail' tool.slug %}"
-               class="button">
-
-                View Details →
-
-            </a>
-
+            <input
+                type="text"
+                id="toolSearch"
+                placeholder="Search AI video tools..."
+                autocomplete="off"
+            >
 
         </div>
+
+
+        <div class="search-info">
+
+            <span>
+                Search by tool name, category or feature.
+            </span>
+
+            <span>
+
+                <span
+                    id="toolCount"
+                    class="count-number">
+
+                    {{ tools|length }}
+
+                </span>
+
+                tools available
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="tools-grid"
+         id="toolsGrid">
+
+
+        {% for slug, tool in tools.items %}
+
+
+            <article
+                class="tool-card"
+                data-search="{{ tool.name }} {{ tool.category }} {{ tool.description }} {{ tool.tags|join:' ' }}">
+
+
+                <div class="tool-icon">
+                    {{ tool.icon }}
+                </div>
+
+
+                <span class="tool-category">
+                    {{ tool.category }}
+                </span>
+
+
+                <h2>
+                    {{ tool.name }}
+                </h2>
+
+
+                <p class="tool-description">
+                    {{ tool.description }}
+                </p>
+
+
+                <div class="tags">
+
+                    {% for tag in tool.tags %}
+
+                        <span class="tag">
+                            {{ tag }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <a
+                    href="{% url 'tool_detail' slug %}"
+                    class="tool-button">
+
+                    View Tool Details →
+
+                </a>
+
+
+            </article>
 
 
         {% empty %}
 
 
-        <div class="tool-card">
-
-            <div class="tool-icon">
-                ⚠️
-            </div>
-
-            <h2>
-                No Tools Found
-            </h2>
-
-            <p>
+            <div>
                 No AI video tools are currently available.
-            </p>
-
-        </div>
+            </div>
 
 
         {% endfor %}
 
 
-    </section>
+    </div>
 
 
-    <div class="no-results" id="noResults">
+    <div id="noResults">
 
-        No video tools found. Try a different search.
+        <div style="font-size:35px;">
+            🔎
+        </div>
+
+        <h3>
+            No tools found
+        </h3>
+
+        <p>
+            Try another tool name or keyword.
+        </p>
 
     </div>
 
@@ -471,33 +1283,39 @@
 
 <footer>
 
+    <div class="footer-logo">
+        Veylora <span>AI</span>
+    </div>
+
+
     <div class="footer-links">
 
-        <a href="/">
+        <a href="{% url 'home' %}">
             Home
         </a>
 
-        <a href="/about/">
+        <a href="{% url 'about' %}">
             About
         </a>
 
-        <a href="/privacy/">
+        <a href="{% url 'privacy' %}">
             Privacy
         </a>
 
-        <a href="/terms/">
+        <a href="{% url 'terms' %}">
             Terms
         </a>
 
-        <a href="/disclaimer/">
+        <a href="{% url 'disclaimer' %}">
             Disclaimer
         </a>
 
-        <a href="/contact/">
+        <a href="{% url 'contact' %}">
             Contact
         </a>
 
     </div>
+
 
     <p>
         © 2026 Veylora AI. All rights reserved.
@@ -508,44 +1326,105 @@
 
 <script>
 
-    const searchInput = document.getElementById("toolSearch");
-    const toolCards = document.querySelectorAll(".tool-card[data-search]");
-    const noResults = document.getElementById("noResults");
+    const searchInput =
+        document.getElementById("toolSearch");
 
-    searchInput.addEventListener("input", function () {
+    const cards =
+        document.querySelectorAll(".tool-card");
 
-        const searchText = this.value.toLowerCase().trim();
+    const toolCount =
+        document.getElementById("toolCount");
 
-        let visibleCount = 0;
+    const noResults =
+        document.getElementById("noResults");
 
-        toolCards.forEach(function (card) {
 
-            const searchableText = card.getAttribute("data-search");
+    if (searchInput) {
 
-            if (searchableText.includes(searchText)) {
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-                card.style.display = "block";
-                visibleCount++;
+                const query =
+                    this.value
+                        .toLowerCase()
+                        .trim();
 
-            } else {
+                let visibleCount = 0;
 
-                card.style.display = "none";
+
+                cards.forEach(
+                    function (card) {
+
+                        const searchText =
+                            (
+                                card.dataset.search || ""
+                            ).toLowerCase();
+
+
+                        if (
+                            searchText.includes(query)
+                        ) {
+
+                            card.style.display =
+                                "flex";
+
+                            visibleCount++;
+
+                        } else {
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+
+                if (toolCount) {
+
+                    toolCount.textContent =
+                        visibleCount;
+
+                }
+
+
+                if (noResults) {
+
+                    noResults.style.display =
+                        visibleCount === 0
+                            ? "block"
+                            : "none";
+
+                }
 
             }
+        );
 
-        });
+    }
 
-        if (searchText !== "" && visibleCount === 0) {
 
-            noResults.style.display = "block";
+    const glow =
+        document.getElementById("mouseGlow");
 
-        } else {
 
-            noResults.style.display = "none";
+    if (glow) {
 
-        }
+        document.addEventListener(
+            "mousemove",
+            function (event) {
 
-    });
+                glow.style.left =
+                    event.clientX + "px";
+
+                glow.style.top =
+                    event.clientY + "px";
+
+            }
+        );
+
+    }
 
 </script>
 

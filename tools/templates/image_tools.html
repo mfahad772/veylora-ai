@@ -17,11 +17,7 @@
         content="Explore AI image generators, editors, background removers, photo enhancers and creative image tools on Veylora AI."
     >
 
-    <link
-        rel="icon"
-        href="/favicon.ico"
-        type="image/svg+xml"
-    >
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
 
     <style>
 
@@ -35,16 +31,8 @@
             font-family: Arial, Helvetica, sans-serif;
 
             background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(0,212,255,0.07),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 85% 20%,
-                    rgba(123,92,255,0.1),
-                    transparent 30%
-                ),
+                radial-gradient(circle at 15% 10%, rgba(0,212,255,0.07), transparent 30%),
+                radial-gradient(circle at 85% 20%, rgba(123,92,255,0.1), transparent 30%),
                 #070b14;
 
             color: white;
@@ -72,13 +60,7 @@
 
         .logo span,
         .gradient-text {
-            background: linear-gradient(
-                90deg,
-                #00d4ff,
-                #7760ff,
-                #d946ef
-            );
-
+            background: linear-gradient(90deg, #00d4ff, #7760ff, #d946ef);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -152,12 +134,7 @@
             color: white;
             cursor: pointer;
             font-weight: 700;
-
-            background: linear-gradient(
-                90deg,
-                #6156ff,
-                #805bff
-            );
+            background: linear-gradient(90deg, #6156ff, #805bff);
         }
 
         .container {
@@ -276,12 +253,7 @@
             color: white;
             font-size: 13px;
             font-weight: 700;
-
-            background: linear-gradient(
-                90deg,
-                #5f55ff,
-                #7e5cff
-            );
+            background: linear-gradient(90deg, #5f55ff, #7e5cff);
         }
 
         .seo-content {
@@ -340,11 +312,9 @@
         }
 
         @media (max-width: 900px) {
-
             .tools-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
 
         @media (max-width: 650px) {
@@ -390,19 +360,13 @@
 
 <header>
 
-    <a
-        href="/"
-        class="logo"
-    >
+    <a href="/" class="logo">
         Veylora <span>AI</span>
     </a>
 
-
     <nav>
 
-        <a href="/">
-            Home
-        </a>
+        <a href="/">Home</a>
 
         <a href="/ai-image-tools/">
             AI Image Tools
@@ -412,22 +376,15 @@
             AI Video Tools
         </a>
 
-
         {% if user.is_authenticated %}
 
-            <a
-                href="/profile/"
-                class="account-button"
-            >
+            <a href="/profile/" class="account-button">
                 My Account
             </a>
 
         {% else %}
 
-            <a
-                href="/login/"
-                class="account-button"
-            >
+            <a href="/login/" class="account-button">
                 Login
             </a>
 
@@ -448,16 +405,12 @@
     </h1>
 
     <p>
-        Explore AI image generators, text-to-image tools,
-        AI photo editors, background removers, image enhancers
-        and creative design platforms in one directory.
+        Browse AI image generators, photo editors,
+        background removers and image enhancement tools.
+        Sign in when you choose a tool to continue.
     </p>
 
-
-    <form
-        method="get"
-        class="search-box"
-    >
+    <form method="get" class="search-box">
 
         <input
             type="text"
@@ -487,12 +440,11 @@
             </h2>
 
             <p>
-                Compare image generation, editing,
-                enhancement and design tools.
+                Choose any tool below.
+                Login is required to open it.
             </p>
 
         </div>
-
 
         <div class="tool-count">
             {{ tools|length }} Tools
@@ -502,7 +454,6 @@
 
 
     <div class="tools-grid">
-
 
         {% for slug, tool in tools.items %}
 
@@ -524,7 +475,6 @@
                     {{ tool.category }}
                 </span>
 
-
                 <div class="tags">
 
                     {% for tag in tool.tags %}
@@ -537,16 +487,14 @@
 
                 </div>
 
-
                 <a
-                    href="/tool/{{ slug }}/"
+                    href="{% url 'protected_tool_access' slug %}"
                     class="tool-button"
                 >
-                    Explore {{ tool.name }} →
+                    Open {{ tool.name }} →
                 </a>
 
             </article>
-
 
         {% empty %}
 
@@ -556,109 +504,77 @@
 
         {% endfor %}
 
-
     </div>
 
-
-    <!-- SEO CONTENT -->
 
     <section class="seo-content">
 
         <h2>
-            What Are the Best AI Image Tools?
+            What Are AI Image Tools?
         </h2>
 
         <p>
-            AI image tools use artificial intelligence
-            to generate, edit, enhance or transform visual
-            content. Different platforms are designed for
-            different workflows. Some focus on text-to-image
-            generation and AI artwork, while others specialize
-            in photo editing, background removal, product
-            photography or increasing image resolution.
+            AI image tools can generate, edit,
+            enhance or transform digital images.
+            Veylora AI helps users discover
+            different options for creative work.
         </p>
-
 
         <h3>
             AI Image Generators
         </h3>
 
         <p>
-            Text-to-image generators can turn written prompts
-            into new visual content. Veylora AI includes
-            popular image-generation platforms such as
-            ChatGPT Image Generator, Midjourney,
-            Adobe Firefly, Canva AI and Leonardo AI.
-            Users can explore each tool page to understand
-            its purpose, key features and common use cases.
+            Explore platforms for text-to-image
+            generation, AI artwork and visual
+            concept creation.
         </p>
 
-
         <h3>
-            AI Photo Editors and Image Enhancement Tools
+            Photo Editing and Enhancement
         </h3>
 
         <p>
-            Not every AI image tool is designed to generate
-            images from scratch. Tools such as Remove.bg
-            focus on automatic background removal,
-            PhotoRoom is useful for product photography,
-            Pixlr provides browser-based image editing,
-            and Upscale.media helps increase image resolution.
+            Other AI tools focus on background
+            removal, product photos, online editing
+            and image resolution enhancement.
         </p>
-
-
-        <h3>
-            How to Choose an AI Image Tool
-        </h3>
-
-        <p>
-            Choose an AI image platform based on the type
-            of content you want to create. AI artists may
-            prefer dedicated generators, online sellers
-            may need product photo tools, while designers
-            may want image editing and enhancement features.
-            Veylora AI provides separate tool pages so users
-            can compare different options before visiting
-            the official platform.
-        </p>
-
 
         <div class="quick-links">
 
-            <a href="/tool/chatgpt-image-generator/">
+            <a href="{% url 'protected_tool_access' 'chatgpt-image-generator' %}">
                 ChatGPT Image Generator
             </a>
 
-            <a href="/tool/midjourney/">
+            <a href="{% url 'protected_tool_access' 'midjourney' %}">
                 Midjourney
             </a>
 
-            <a href="/tool/adobe-firefly/">
+            <a href="{% url 'protected_tool_access' 'adobe-firefly' %}">
                 Adobe Firefly
             </a>
 
-            <a href="/tool/canva-ai/">
+            <a href="{% url 'protected_tool_access' 'canva-ai' %}">
                 Canva AI
             </a>
 
-            <a href="/tool/leonardo-ai/">
+            <a href="{% url 'protected_tool_access' 'leonardo-ai' %}">
                 Leonardo AI
             </a>
 
-            <a href="/tool/remove-bg/">
+            <a href="{% url 'protected_tool_access' 'remove-bg' %}">
                 Remove.bg
             </a>
 
-            <a href="/tool/photoroom/">
+            <a href="{% url 'protected_tool_access' 'photoroom' %}">
                 PhotoRoom
             </a>
 
-            <a href="/tool/pixlr/">
+            <a href="{% url 'protected_tool_access' 'pixlr' %}">
                 Pixlr
             </a>
 
-            <a href="/tool/upscale-media/">
+            <a href="{% url 'protected_tool_access' 'upscale-media' %}">
                 Upscale.media
             </a>
 
@@ -669,7 +585,6 @@
         </div>
 
     </section>
-
 
 </main>
 

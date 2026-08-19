@@ -10,17 +10,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>My Saved AI Tools | Veylora AI</title>
+    <title>Saved Tools | Veylora AI</title>
 
     <meta
-        name="robots"
-        content="noindex, nofollow"
-    >
-
-    <link
-        rel="icon"
-        href="/favicon.ico"
-        type="image/svg+xml"
+        name="description"
+        content="View and manage your saved AI tools on Veylora AI."
     >
 
     <style>
@@ -43,34 +37,41 @@
 
             background:
                 radial-gradient(
-                    circle at 15% 5%,
+                    circle at 15% 10%,
                     rgba(0,212,255,0.08),
                     transparent 28%
                 ),
                 radial-gradient(
-                    circle at 85% 15%,
+                    circle at 85% 10%,
                     rgba(123,92,255,0.12),
                     transparent 30%
                 ),
                 radial-gradient(
-                    circle at 50% 100%,
-                    rgba(217,70,239,0.06),
+                    circle at 50% 90%,
+                    rgba(217,70,239,0.07),
                     transparent 30%
                 ),
                 #070b14;
         }
+
 
         a {
             text-decoration: none;
         }
 
 
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
-            padding: 18px 6%;
+            min-height: 72px;
+
+            padding: 17px 6%;
 
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
 
             border-bottom:
                 1px solid rgba(255,255,255,0.08);
@@ -78,8 +79,7 @@
             background:
                 rgba(7,11,20,0.84);
 
-            backdrop-filter:
-                blur(15px);
+            backdrop-filter: blur(15px);
 
             position: sticky;
             top: 0;
@@ -89,15 +89,14 @@
 
 
         .logo {
+            color: white;
+
             font-size: 24px;
             font-weight: 800;
-
-            color: white;
         }
 
 
-        .logo span,
-        .gradient-text {
+        .logo span {
             background:
                 linear-gradient(
                     90deg,
@@ -114,14 +113,16 @@
         nav {
             display: flex;
             align-items: center;
-
-            gap: 21px;
+            gap: 22px;
         }
 
 
         nav a {
-            color: #aab4c7;
+            color: #aeb8cc;
+
             font-size: 14px;
+
+            transition: 0.2s;
         }
 
 
@@ -130,7 +131,7 @@
         }
 
 
-        .account-button {
+        .account-btn {
             padding: 9px 14px;
 
             border-radius: 10px;
@@ -139,100 +140,152 @@
                 1px solid rgba(123,92,255,0.35);
 
             background:
-                rgba(123,92,255,0.09);
+                rgba(123,92,255,0.1);
+
+            color: white;
         }
 
+
+        /* =========================
+           PAGE
+        ========================= */
 
         .container {
             width: 88%;
-            max-width: 1180px;
+            max-width: 1200px;
 
-            margin: auto;
-
-            padding:
-                65px 0 90px;
+            margin:
+                55px auto 80px;
         }
 
 
-        .page-header {
-            margin-bottom: 38px;
+        .page-heading {
+            text-align: center;
+
+            margin-bottom: 45px;
         }
 
 
         .page-badge {
             display: inline-block;
 
-            padding: 7px 12px;
+            padding: 7px 13px;
 
-            margin-bottom: 16px;
+            margin-bottom: 15px;
 
             border-radius: 999px;
 
-            color: #b8aeff;
-
-            font-size: 11px;
-            font-weight: 700;
-
             border:
-                1px solid rgba(123,92,255,0.25);
+                1px solid rgba(123,92,255,0.28);
 
             background:
-                rgba(123,92,255,0.07);
+                rgba(123,92,255,0.08);
+
+            color: #bcb1ff;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
 
-        .page-header h1 {
+        .page-heading h1 {
             font-size:
-                clamp(38px, 6vw, 58px);
+                clamp(37px, 6vw, 56px);
 
-            margin-bottom: 14px;
+            letter-spacing: -1.7px;
 
-            letter-spacing: -1.5px;
+            margin-bottom: 15px;
         }
 
 
-        .page-header p {
-            color: #9faabd;
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
+                );
 
-            font-size: 15px;
-
-            line-height: 1.75;
-
-            max-width: 720px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
 
-        .stats {
+        .page-heading p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #96a1b5;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           SUMMARY BAR
+        ========================= */
+
+        .summary-bar {
             display: flex;
-            flex-wrap: wrap;
 
-            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
 
-            margin-top: 25px;
-        }
+            gap: 20px;
 
+            padding: 20px 24px;
 
-        .stat-box {
-            padding: 12px 16px;
+            margin-bottom: 25px;
 
-            border-radius: 11px;
-
-            color: #bac3d4;
+            border-radius: 16px;
 
             border:
                 1px solid rgba(255,255,255,0.08);
 
             background:
-                rgba(255,255,255,0.035);
+                rgba(255,255,255,0.025);
+        }
+
+
+        .summary-info h2 {
+            font-size: 20px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .summary-info p {
+            color: #8f9bad;
 
             font-size: 13px;
         }
 
 
-        .stat-box strong {
-            color: white;
+        .count-badge {
+            padding: 9px 14px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(0,212,255,0.07);
+
+            border:
+                1px solid rgba(0,212,255,0.18);
+
+            color: #73dcf4;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            white-space: nowrap;
         }
 
+
+        /* =========================
+           TOOLS GRID
+        ========================= */
 
         .tools-grid {
             display: grid;
@@ -240,26 +293,38 @@
             grid-template-columns:
                 repeat(3, 1fr);
 
-            gap: 18px;
+            gap: 20px;
         }
 
 
         .tool-card {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            min-height: 330px;
+
             padding: 25px;
 
-            border-radius: 19px;
+            border-radius: 20px;
 
             border:
-                1px solid rgba(255,255,255,0.08);
+                1px solid rgba(255,255,255,0.085);
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(17,24,40,0.94),
-                    rgba(10,15,28,0.94)
+                    rgba(17,24,40,0.91),
+                    rgba(10,15,28,0.93)
                 );
 
-            transition: 0.3s;
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.2);
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s;
         }
 
 
@@ -268,23 +333,7 @@
                 translateY(-5px);
 
             border-color:
-                rgba(123,92,255,0.28);
-
-            box-shadow:
-                0 20px 45px
-                rgba(0,0,0,0.25);
-        }
-
-
-        .tool-top {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            gap: 15px;
-
-            margin-bottom: 18px;
+                rgba(123,92,255,0.3);
         }
 
 
@@ -296,107 +345,93 @@
             align-items: center;
             justify-content: center;
 
-            border-radius: 15px;
+            margin-bottom: 18px;
 
             font-size: 29px;
 
-            background:
-                rgba(255,255,255,0.05);
+            border-radius: 15px;
 
             border:
-                1px solid rgba(255,255,255,0.06);
+                1px solid rgba(255,255,255,0.1);
+
+            background:
+                rgba(255,255,255,0.045);
         }
 
 
-        .heart {
-            width: 36px;
-            height: 36px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background:
-                rgba(217,70,239,0.08);
-
-            border:
-                1px solid rgba(217,70,239,0.16);
-
-            font-size: 17px;
-        }
-
-
-        .tool-card h2 {
+        .tool-card h3 {
             font-size: 20px;
 
-            margin-bottom: 10px;
+            margin-bottom: 11px;
         }
 
 
-        .tool-card p {
-            color: #98a3b7;
-
-            line-height: 1.7;
+        .tool-description {
+            color: #929daf;
 
             font-size: 14px;
+            line-height: 1.7;
 
-            min-height: 72px;
+            margin-bottom: 16px;
+
+            flex-grow: 1;
         }
 
 
-        .category {
+        .tool-category {
             display: inline-block;
 
-            margin-top: 15px;
+            align-self: flex-start;
 
             padding: 6px 9px;
 
+            margin-bottom: 9px;
+
             border-radius: 7px;
 
-            color: #aaa0ff;
+            font-size: 11px;
+            font-weight: 700;
+
+            color: #b9aeff;
 
             background:
-                rgba(123,92,255,0.07);
+                rgba(123,92,255,0.08);
 
             border:
                 1px solid rgba(123,92,255,0.18);
-
-            font-size: 11px;
         }
 
 
         .saved-date {
-            margin-top: 12px;
-
-            color: #707b90;
+            color: #687386;
 
             font-size: 11px;
+
+            margin-bottom: 17px;
         }
 
 
-        .actions {
+        .card-actions {
             display: grid;
 
             grid-template-columns:
                 1fr auto;
 
             gap: 9px;
-
-            margin-top: 19px;
         }
 
 
-        .open-button {
+        .open-btn {
             display: flex;
 
             align-items: center;
             justify-content: center;
 
-            padding: 11px 12px;
+            min-height: 43px;
 
-            border-radius: 9px;
+            padding: 11px 15px;
+
+            border-radius: 10px;
 
             color: white;
 
@@ -406,9 +441,20 @@
             background:
                 linear-gradient(
                     90deg,
-                    #5f55ff,
-                    #805cff
+                    #6156ff,
+                    #8259ff
                 );
+
+            transition: 0.2s;
+        }
+
+
+        .open-btn:hover {
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 12px 25px rgba(103,87,255,0.25);
         }
 
 
@@ -417,44 +463,65 @@
         }
 
 
-        .remove-button {
-            height: 100%;
+        .remove-btn {
+            width: 44px;
+            height: 43px;
 
-            padding: 10px 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(255,80,100,0.2);
+
+            background:
+                rgba(255,80,100,0.055);
+
+            color: #ff8795;
+
+            font-size: 17px;
 
             cursor: pointer;
 
-            border-radius: 9px;
-
-            color: #ff9cad;
-
-            border:
-                1px solid rgba(255,86,116,0.2);
-
-            background:
-                rgba(255,86,116,0.07);
-
-            font-weight: 700;
+            transition: 0.2s;
         }
 
 
+        .remove-btn:hover {
+            background:
+                rgba(255,80,100,0.12);
+
+            border-color:
+                rgba(255,80,100,0.35);
+        }
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
         .empty-state {
-            padding: 70px 25px;
+            grid-column: 1 / -1;
+
+            padding:
+                65px 25px;
 
             text-align: center;
 
             border-radius: 22px;
 
             border:
-                1px solid rgba(255,255,255,0.08);
+                1px dashed rgba(255,255,255,0.12);
 
             background:
-                rgba(255,255,255,0.025);
+                rgba(255,255,255,0.018);
         }
 
 
         .empty-icon {
-            font-size: 52px;
+            font-size: 55px;
 
             margin-bottom: 18px;
         }
@@ -463,46 +530,96 @@
         .empty-state h2 {
             font-size: 25px;
 
-            margin-bottom: 11px;
+            margin-bottom: 10px;
         }
 
 
         .empty-state p {
-            color: #99a4b7;
+            max-width: 520px;
 
-            line-height: 1.7;
+            margin:
+                0 auto 24px;
 
-            margin-bottom: 25px;
+            color: #8f9bad;
+
+            line-height: 1.75;
+
+            font-size: 14px;
         }
 
 
-        .explore-button {
-            display: inline-block;
+        .explore-btn {
+            display: inline-flex;
 
-            padding: 13px 19px;
+            padding: 13px 20px;
 
             border-radius: 10px;
 
             color: white;
 
-            font-size: 13px;
             font-weight: 700;
+            font-size: 13px;
 
             background:
                 linear-gradient(
                     90deg,
-                    #5f55ff,
-                    #805cff
+                    #6156ff,
+                    #8259ff
                 );
         }
 
 
+        /* =========================
+           BOTTOM ACTIONS
+        ========================= */
+
+        .bottom-actions {
+            display: flex;
+
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 35px;
+        }
+
+
+        .secondary-btn {
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            background:
+                rgba(255,255,255,0.03);
+
+            color: #aeb8ca;
+
+            font-size: 13px;
+        }
+
+
+        .secondary-btn:hover {
+            color: white;
+
+            border-color:
+                rgba(123,92,255,0.25);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
-            padding: 33px 6%;
+            padding: 34px 6%;
 
             text-align: center;
 
-            color: #737e92;
+            color: #707b90;
 
             font-size: 13px;
 
@@ -511,7 +628,28 @@
         }
 
 
-        @media (max-width: 900px) {
+        .footer-links {
+            display: flex;
+
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 17px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .footer-links a {
+            color: #8b96a9;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
 
             .tools-grid {
                 grid-template-columns:
@@ -523,26 +661,39 @@
 
         @media (max-width: 650px) {
 
-            nav a:not(.account-button) {
+            nav a:not(.account-btn) {
                 display: none;
             }
+
 
             .container {
                 width: 91%;
 
-                padding-top: 45px;
+                margin-top: 35px;
             }
+
+
+            .summary-bar {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
 
             .tools-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
-            .actions {
-                grid-template-columns: 1fr;
+
+            .tool-card {
+                min-height: auto;
             }
 
-            .remove-button {
-                width: 100%;
+
+            .card-actions {
+                grid-template-columns:
+                    1fr auto;
             }
 
         }
@@ -581,13 +732,9 @@
 
         <a
             href="/profile/"
-            class="account-button"
+            class="account-btn"
         >
             My Account
-        </a>
-
-        <a href="/logout/">
-            Logout
         </a>
 
     </nav>
@@ -598,11 +745,11 @@
 <main class="container">
 
 
-    <section class="page-header">
+    <section class="page-heading">
 
-        <span class="page-badge">
-            My Collection
-        </span>
+        <div class="page-badge">
+            Your Veylora AI Library
+        </div>
 
         <h1>
             My
@@ -612,163 +759,230 @@
         </h1>
 
         <p>
-            Keep your favorite AI tools in one place
-            and return to them whenever you need them.
+            Keep your favourite AI tools in one place
+            so you can quickly find and open them again.
         </p>
 
+    </section>
 
-        <div class="stats">
 
-            <div class="stat-box">
-                Saved Tools:
-                <strong>
-                    {{ saved_count }}
-                </strong>
-            </div>
+    <section class="summary-bar">
 
-            <div class="stat-box">
-                Account:
-                <strong>
-                    {{ user.username }}
-                </strong>
-            </div>
+        <div class="summary-info">
+
+            <h2>
+                Saved AI Tools
+            </h2>
+
+            <p>
+                Tools saved to your Veylora AI account.
+            </p>
+
+        </div>
+
+
+        <div class="count-badge">
+
+            {{ saved_count }}
+
+            {% if saved_count == 1 %}
+
+                Saved Tool
+
+            {% else %}
+
+                Saved Tools
+
+            {% endif %}
 
         </div>
 
     </section>
 
 
-    {% if saved_tools %}
+    <section class="tools-grid">
 
 
-        <section class="tools-grid">
+        {% for item in saved_tools %}
 
 
-            {% for item in saved_tools %}
+            <article class="tool-card">
 
 
-                <article class="tool-card">
+                <div class="tool-icon">
+                    {{ item.tool.icon }}
+                </div>
 
 
-                    <div class="tool-top">
-
-                        <div class="tool-icon">
-                            {{ item.tool.icon }}
-                        </div>
-
-                        <div class="heart">
-                            ❤️
-                        </div>
-
-                    </div>
+                <h3>
+                    {{ item.tool.name }}
+                </h3>
 
 
-                    <h2>
-                        {{ item.tool.name }}
-                    </h2>
+                <p class="tool-description">
+                    {{ item.tool.description }}
+                </p>
 
 
-                    <p>
-                        {{ item.tool.description }}
-                    </p>
+                <span class="tool-category">
+                    {{ item.tool.category }}
+                </span>
 
 
-                    <span class="category">
-                        {{ item.tool.category }}
-                    </span>
+                <div class="saved-date">
+
+                    Saved:
+                    {{ item.saved_at|date:"M d, Y" }}
+
+                </div>
 
 
-                    <div class="saved-date">
-
-                        Saved:
-                        {{ item.saved_at|date:"M d, Y" }}
-
-                    </div>
+                <div class="card-actions">
 
 
-                    <div class="actions">
+                    <a
+                        href="{% url 'protected_tool_access' item.slug %}"
+                        class="open-btn"
+                    >
+                        Open Tool →
+                    </a>
 
 
-                        <a
-                            href="{% url 'protected_tool_access' item.slug %}"
-                            class="open-button"
-                        >
-                            Open Tool →
-                        </a>
+                    <form
+                        method="post"
+                        action="{% url 'toggle_saved_tool' item.slug %}"
+                        class="remove-form"
+                    >
 
+                        {% csrf_token %}
 
-                        <form
-                            method="post"
-                            action="{% url 'toggle_saved_tool' item.slug %}"
-                            class="remove-form"
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{% url 'saved_tools' %}"
                         >
 
-                            {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="remove-btn"
+                            title="Remove saved tool"
+                        >
+                            ×
+                        </button>
 
-                            <input
-                                type="hidden"
-                                name="next"
-                                value="{% url 'saved_tools' %}"
-                            >
-
-                            <button
-                                type="submit"
-                                class="remove-button"
-                            >
-                                Remove
-                            </button>
-
-                        </form>
+                    </form>
 
 
-                    </div>
+                </div>
 
 
-                </article>
+            </article>
 
 
-            {% endfor %}
+        {% empty %}
 
 
-        </section>
+            <div class="empty-state">
 
 
-    {% else %}
+                <div class="empty-icon">
+                    ♡
+                </div>
 
 
-        <section class="empty-state">
+                <h2>
+                    No Saved Tools Yet
+                </h2>
 
-            <div class="empty-icon">
-                ❤️
+
+                <p>
+                    When you find an AI tool you like,
+                    press the Save Tool button and it
+                    will appear here.
+                </p>
+
+
+                <a
+                    href="/ai-image-tools/"
+                    class="explore-btn"
+                >
+                    Explore AI Tools
+                </a>
+
+
             </div>
 
-            <h2>
-                No saved tools yet
-            </h2>
 
-            <p>
-                Save AI tools you like and
-                they will appear here.
-            </p>
-
-            <a
-                href="/ai-image-tools/"
-                class="explore-button"
-            >
-                Explore AI Tools →
-            </a>
-
-        </section>
+        {% endfor %}
 
 
-    {% endif %}
+    </section>
+
+
+    <div class="bottom-actions">
+
+        <a
+            href="/ai-image-tools/"
+            class="secondary-btn"
+        >
+            Explore Image Tools
+        </a>
+
+        <a
+            href="/ai-video-tools/"
+            class="secondary-btn"
+        >
+            Explore Video Tools
+        </a>
+
+        <a
+            href="/profile/"
+            class="secondary-btn"
+        >
+            My Account
+        </a>
+
+    </div>
 
 
 </main>
 
 
 <footer>
+
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/">
+            About
+        </a>
+
+        <a href="/privacy/">
+            Privacy
+        </a>
+
+        <a href="/terms/">
+            Terms
+        </a>
+
+        <a href="/disclaimer/">
+            Disclaimer
+        </a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+    </div>
+
+
     © 2026 Veylora AI. All rights reserved.
+
+
 </footer>
 
 

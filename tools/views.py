@@ -4,6 +4,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
+from .models import SavedTool
+
 
 # =========================================================
 # AI TOOLS DATA
@@ -978,11 +980,21 @@ def tool_detail(request, slug):
     if not tool:
         return redirect("home")
 
+    is_saved = False
+
+    if request.user.is_authenticated:
+
+        is_saved = SavedTool.objects.filter(
+            user=request.user,
+            tool_slug=slug,
+        ).exists()
+
     return render(
         request,
         "tool_detail.html",
         {
             "tool": tool,
+            "is_saved": is_saved,
         },
     )
 

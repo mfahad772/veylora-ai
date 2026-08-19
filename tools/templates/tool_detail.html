@@ -275,6 +275,8 @@
             gap: 12px;
 
             margin-top: 30px;
+
+            align-items: stretch;
         }
 
 
@@ -332,6 +334,74 @@
 
             background:
                 rgba(255,255,255,0.035);
+        }
+
+
+        .save-form {
+            margin: 0;
+            display: flex;
+        }
+
+
+        .save-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 13px 20px;
+
+            color: #b5bfd1;
+
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,0.1);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .save-btn:hover {
+            color: white;
+
+            border-color:
+                rgba(123,92,255,0.35);
+
+            background:
+                rgba(123,92,255,0.1);
+
+            transform: translateY(-1px);
+        }
+
+
+        .save-btn.saved {
+            color: #8cf4bc;
+
+            border-color:
+                rgba(54,211,153,0.25);
+
+            background:
+                rgba(54,211,153,0.07);
+        }
+
+
+        .save-btn.saved:hover {
+            color: #b8ffd7;
+
+            border-color:
+                rgba(54,211,153,0.42);
+
+            background:
+                rgba(54,211,153,0.12);
         }
 
 
@@ -589,7 +659,9 @@
             }
 
             .primary-btn,
-            .secondary-btn {
+            .secondary-btn,
+            .save-form,
+            .save-btn {
                 width: 100%;
             }
 
@@ -739,6 +811,47 @@
             >
                 Visit Official Website ↗
             </a>
+
+
+            {% if user.is_authenticated %}
+
+                <form
+                    method="post"
+                    action="{% url 'toggle_saved_tool' tool.slug %}"
+                    class="save-form"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ request.path }}"
+                    >
+
+                    {% if is_saved %}
+
+                        <button
+                            type="submit"
+                            class="save-btn saved"
+                        >
+                            ✓ Saved Tool
+                        </button>
+
+                    {% else %}
+
+                        <button
+                            type="submit"
+                            class="save-btn"
+                        >
+                            ♡ Save Tool
+                        </button>
+
+                    {% endif %}
+
+                </form>
+
+            {% endif %}
 
 
             {% if tool.type == "image" %}
@@ -893,6 +1006,35 @@
                 </ul>
 
             </aside>
+
+
+            {% if user.is_authenticated %}
+
+                <aside class="info-card">
+
+                    <h2>
+                        Your <span>Tools</span>
+                    </h2>
+
+                    <p>
+                        View the AI tools you have saved
+                        to your Veylora AI account.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="{% url 'saved_tools' %}"
+                            class="secondary-btn"
+                        >
+                            ♡ View Saved Tools
+                        </a>
+
+                    </div>
+
+                </aside>
+
+            {% endif %}
 
 
             <aside class="info-card">

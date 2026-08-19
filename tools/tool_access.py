@@ -1,11 +1,58 @@
 from django.shortcuts import redirect, render
+from django.utils import timezone
 
+from .models import RecentViewedTool
 from .views import TOOLS
 
 
 # =========================================================
+# RECORD RECENTLY VIEWED TOOL
+# =========================================================
+
+def _record_recent_tool(user, slug):
+
+    if not user.is_authenticated:
+        return
+
+    recent_tool, created = (
+        RecentViewedTool.objects.get_or_create(
+            user=user,
+            tool_slug=slug,
+        )
+    )
+
+    if not created:
+
+        recent_tool.viewed_at = timezone.now()
+
+        recent_tool.save(
+            update_fields=[
+                "viewed_at",
+            ]
+        )
+
+    # Keep only latest 20 tools
+    old_ids = list(
+        RecentViewedTool.objects.filter(
+            user=user,
+        )
+        .order_by("-viewed_at")
+        .values_list(
+            "id",
+            flat=True,
+        )[20:]
+    )
+
+    if old_ids:
+
+        RecentViewedTool.objects.filter(
+            id__in=old_ids,
+        ).delete()
+
+
+# =========================================================
 # PROTECTED TOOL ACCESS
-# User clicks a tool -> login first -> selected tool page
+# User clicks tool -> login first -> selected tool
 # =========================================================
 
 def protected_tool_access(request, slug):
@@ -15,15 +62,23 @@ def protected_tool_access(request, slug):
     if not tool:
         return redirect("home")
 
-    # User is not logged in
     if not request.user.is_authenticated:
 
-        request.session["pending_tool_slug"] = slug
-        request.session["pending_tool_action"] = "detail"
+        request.session[
+            "pending_tool_slug"
+        ] = slug
+
+        request.session[
+            "pending_tool_action"
+        ] = "detail"
 
         return redirect("login")
 
-    # User already logged in
+    _record_recent_tool(
+        request.user,
+        slug,
+    )
+
     return redirect(
         "tool_detail",
         slug=slug,
@@ -32,7 +87,6 @@ def protected_tool_access(request, slug):
 
 # =========================================================
 # PROTECTED OFFICIAL WEBSITE ACCESS
-# Visit Official Website -> login first -> official website
 # =========================================================
 
 def protected_official_access(request, slug):
@@ -42,15 +96,23 @@ def protected_official_access(request, slug):
     if not tool:
         return redirect("home")
 
-    # User is not logged in
     if not request.user.is_authenticated:
 
-        request.session["pending_tool_slug"] = slug
-        request.session["pending_tool_action"] = "official"
+        request.session[
+            "pending_tool_slug"
+        ] = slug
+
+        request.session[
+            "pending_tool_action"
+        ] = "official"
 
         return redirect("login")
 
-    # User is logged in
+    _record_recent_tool(
+        request.user,
+        slug,
+    )
+
     return redirect(
         tool["official_url"]
     )
@@ -58,19 +120,15 @@ def protected_official_access(request, slug):
 
 # =========================================================
 # AFTER LOGIN ROUTER
-#
-# Works with:
-# - Normal username/password login
-# - Google login
-#
-# Existing login system redirects users to /welcome/.
-# This view checks whether the user originally clicked a tool.
 # =========================================================
 
 def welcome_router(request):
 
     if not request.user.is_authenticated:
-        return redirect("login")
+
+        return redirect(
+            "login"
+        )
 
     pending_slug = request.session.pop(
         "pending_tool_slug",
@@ -82,10 +140,16 @@ def welcome_router(request):
         None,
     )
 
-    # User originally clicked a tool
-    if pending_slug and pending_slug in TOOLS:
+    if (
+        pending_slug
+        and pending_slug in TOOLS
+    ):
 
-        # User originally clicked Visit Official Website
+        _record_recent_tool(
+            request.user,
+            pending_slug,
+        )
+
         if pending_action == "official":
 
             return redirect(
@@ -93,13 +157,11 @@ def welcome_router(request):
                 slug=pending_slug,
             )
 
-        # User originally clicked a tool card
         return redirect(
             "tool_detail",
             slug=pending_slug,
         )
 
-    # Normal login without clicking a tool first
     return render(
         request,
         "welcome.html",

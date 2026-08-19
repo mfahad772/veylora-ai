@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recently Viewed Tools | Veylora AI</title>
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(0,212,255,0.08),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(123,92,255,0.12),
+                    transparent 30%
+                ),
+                #070b14;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            padding: 18px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            background:
+                rgba(7,11,20,0.88);
+        }
+
+        .logo {
+            color: white;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span,
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7b5cff,
+                    #d946ef
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #aeb8ca;
+            font-size: 14px;
+        }
+
+        .account-btn {
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(123,92,255,0.35);
+
+            background:
+                rgba(123,92,255,0.1);
+
+            color: white;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1180px;
+
+            margin: 55px auto 80px;
+        }
+
+        .heading {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            margin-bottom: 15px;
+
+            border-radius: 999px;
+
+            color: #a7ddf0;
+
+            background:
+                rgba(0,212,255,0.05);
+
+            border:
+                1px solid rgba(0,212,255,0.17);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .heading h1 {
+            font-size:
+                clamp(37px, 6vw, 56px);
+
+            margin-bottom: 15px;
+        }
+
+        .heading p {
+            max-width: 620px;
+
+            margin: auto;
+
+            color: #96a1b5;
+
+            line-height: 1.8;
+        }
+
+        .summary {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 20px 23px;
+
+            margin-bottom: 25px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .summary h2 {
+            font-size: 19px;
+            margin-bottom: 5px;
+        }
+
+        .summary p {
+            color: #8894a8;
+            font-size: 13px;
+        }
+
+        .count {
+            padding: 8px 13px;
+
+            border-radius: 999px;
+
+            color: #8de5f7;
+
+            border:
+                1px solid rgba(0,212,255,0.18);
+
+            background:
+                rgba(0,212,255,0.06);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .tool-card {
+            display: flex;
+            flex-direction: column;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(255,255,255,0.085);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,24,40,0.91),
+                    rgba(10,15,28,0.93)
+                );
+
+            transition: 0.25s;
+        }
+
+        .tool-card:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(123,92,255,0.3);
+        }
+
+        .tool-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            font-size: 29px;
+        }
+
+        .tool-card h3 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #929daf;
+
+            font-size: 14px;
+            line-height: 1.7;
+
+            margin-bottom: 16px;
+
+            flex-grow: 1;
+        }
+
+        .category {
+            display: inline-block;
+
+            align-self: flex-start;
+
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            margin-bottom: 10px;
+
+            color: #b9aeff;
+
+            background:
+                rgba(123,92,255,0.08);
+
+            border:
+                1px solid rgba(123,92,255,0.18);
+
+            font-size: 11px;
+        }
+
+        .view-time {
+            color: #687386;
+
+            font-size: 11px;
+
+            margin-bottom: 17px;
+        }
+
+        .open-btn {
+            display: block;
+
+            padding: 11px 15px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6156ff,
+                    #8259ff
+                );
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+
+            padding: 65px 25px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            border:
+                1px dashed rgba(255,255,255,0.12);
+        }
+
+        .empty-icon {
+            font-size: 52px;
+
+            margin-bottom: 18px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #8f9bad;
+
+            margin-bottom: 22px;
+        }
+
+        .explore-btn {
+            display: inline-block;
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6156ff,
+                    #8259ff
+                );
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bottom-actions {
+            display: flex;
+
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 35px;
+        }
+
+        .secondary-btn,
+        .clear-btn {
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .secondary-btn {
+            color: #abb6ca;
+
+            background:
+                rgba(255,255,255,0.03);
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+        }
+
+        .clear-form {
+            margin: 0;
+        }
+
+        .clear-btn {
+            color: #ff8f9d;
+
+            background:
+                rgba(255,70,90,0.05);
+
+            border:
+                1px solid rgba(255,70,90,0.2);
+        }
+
+        footer {
+            padding: 34px 6%;
+
+            text-align: center;
+
+            color: #707b90;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+
+            .tools-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            nav a:not(.account-btn) {
+                display: none;
+            }
+
+            .container {
+                width: 91%;
+            }
+
+            .summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a
+        href="/"
+        class="logo"
+    >
+        Veylora <span>AI</span>
+    </a>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="{% url 'saved_tools' %}">
+            Saved Tools
+        </a>
+
+        <a
+            href="/profile/"
+            class="account-btn"
+        >
+            My Account
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+
+    <section class="heading">
+
+        <div class="badge">
+            Your Browsing History
+        </div>
+
+        <h1>
+
+            Recently
+
+            <span class="gradient-text">
+                Viewed Tools
+            </span>
+
+        </h1>
+
+        <p>
+            Quickly return to AI tools you recently
+            explored on Veylora AI.
+        </p>
+
+    </section>
+
+
+    <section class="summary">
+
+        <div>
+
+            <h2>
+                Recent AI Tools
+            </h2>
+
+            <p>
+                Your latest viewed tools are shown first.
+            </p>
+
+        </div>
+
+
+        <div class="count">
+
+            {{ recent_count }}
+
+            {% if recent_count == 1 %}
+                Recent Tool
+            {% else %}
+                Recent Tools
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <section class="tools-grid">
+
+
+        {% for item in recent_tools %}
+
+
+            <article class="tool-card">
+
+
+                <div class="tool-icon">
+                    {{ item.tool.icon }}
+                </div>
+
+
+                <h3>
+                    {{ item.tool.name }}
+                </h3>
+
+
+                <p class="description">
+                    {{ item.tool.description }}
+                </p>
+
+
+                <span class="category">
+                    {{ item.tool.category }}
+                </span>
+
+
+                <div class="view-time">
+
+                    Viewed:
+                    {{ item.viewed_at|date:"M d, Y - h:i A" }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'protected_tool_access' item.slug %}"
+                    class="open-btn"
+                >
+                    Open Again →
+                </a>
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <div class="empty">
+
+
+                <div class="empty-icon">
+                    🕘
+                </div>
+
+
+                <h2>
+                    No Recently Viewed Tools
+                </h2>
+
+
+                <p>
+                    Open an AI tool and it will
+                    automatically appear here.
+                </p>
+
+
+                <a
+                    href="/ai-image-tools/"
+                    class="explore-btn"
+                >
+                    Explore AI Tools
+                </a>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    </section>
+
+
+    <div class="bottom-actions">
+
+
+        <a
+            href="{% url 'saved_tools' %}"
+            class="secondary-btn"
+        >
+            ♡ Saved Tools
+        </a>
+
+
+        <a
+            href="/"
+            class="secondary-btn"
+        >
+            Home
+        </a>
+
+
+        {% if recent_count > 0 %}
+
+            <form
+                method="post"
+                action="{% url 'clear_recent_tools' %}"
+                class="clear-form"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="clear-btn"
+                >
+                    Clear History
+                </button>
+
+            </form>
+
+        {% endif %}
+
+
+    </div>
+
+
+</main>
+
+
+<footer>
+    © 2026 Veylora AI. All rights reserved.
+</footer>
+
+
+</body>
+
+</html>

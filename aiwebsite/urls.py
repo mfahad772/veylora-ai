@@ -16,6 +16,11 @@ from tools.saved_tools import (
     saved_tools_view,
 )
 
+from tools.recent_tools import (
+    recent_tools_view,
+    clear_recent_tools,
+)
+
 
 BASE_URL = "https://veyloraai.online"
 
@@ -33,6 +38,7 @@ def favicon_view(request):
          viewBox="0 0 64 64">
 
         <defs>
+
             <linearGradient
                 id="gradient"
                 x1="0%"
@@ -40,6 +46,7 @@ def favicon_view(request):
                 x2="100%"
                 y2="100%"
             >
+
                 <stop
                     offset="0%"
                     stop-color="#00d4ff"
@@ -54,7 +61,9 @@ def favicon_view(request):
                     offset="100%"
                     stop-color="#d946ef"
                 />
+
             </linearGradient>
+
         </defs>
 
         <rect
@@ -93,6 +102,8 @@ Disallow: /profile/
 Disallow: /welcome/
 Disallow: /saved-tools/
 Disallow: /save-tool/
+Disallow: /recent-tools/
+Disallow: /clear-recent-tools/
 
 Sitemap: https://veyloraai.online/sitemap.xml
 """
@@ -125,7 +136,10 @@ def sitemap_xml(request):
     for page_name in public_pages:
 
         urls.append(
-            BASE_URL + reverse(page_name)
+            BASE_URL
+            + reverse(
+                page_name
+            )
         )
 
     for slug in TOOLS.keys():
@@ -139,8 +153,7 @@ def sitemap_xml(request):
         )
 
     xml = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 """
 
     for url in urls:
@@ -218,10 +231,7 @@ urlpatterns = [
     ),
 
 
-    # =====================================================
-    # PUBLIC TOOL DETAIL PAGE
-    # =====================================================
-
+    # TOOL DETAIL
     path(
         "tool/<slug:slug>/",
         views.tool_detail,
@@ -229,10 +239,7 @@ urlpatterns = [
     ),
 
 
-    # =====================================================
-    # LOGIN REQUIRED TOOL ACCESS
-    # =====================================================
-
+    # PROTECTED TOOL
     path(
         "access-tool/<slug:slug>/",
         protected_tool_access,
@@ -240,10 +247,7 @@ urlpatterns = [
     ),
 
 
-    # =====================================================
-    # LOGIN REQUIRED OFFICIAL WEBSITE
-    # =====================================================
-
+    # OFFICIAL WEBSITE
     path(
         "go/<slug:slug>/",
         protected_official_access,
@@ -251,10 +255,7 @@ urlpatterns = [
     ),
 
 
-    # =====================================================
     # SAVED TOOLS
-    # =====================================================
-
     path(
         "saved-tools/",
         saved_tools_view,
@@ -265,6 +266,20 @@ urlpatterns = [
         "save-tool/<slug:slug>/",
         toggle_saved_tool,
         name="toggle_saved_tool",
+    ),
+
+
+    # RECENTLY VIEWED TOOLS
+    path(
+        "recent-tools/",
+        recent_tools_view,
+        name="recent_tools",
+    ),
+
+    path(
+        "clear-recent-tools/",
+        clear_recent_tools,
+        name="clear_recent_tools",
     ),
 
 
@@ -351,7 +366,9 @@ urlpatterns = [
     # GOOGLE LOGIN
     path(
         "accounts/",
-        include("allauth.urls"),
+        include(
+            "allauth.urls"
+        ),
     ),
 
 ]

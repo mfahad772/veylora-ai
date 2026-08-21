@@ -17,14 +17,13 @@ SECRET_KEY = os.environ.get(
 )
 
 DEBUG = (
-    os.environ.get("DJANGO_DEBUG", "False").lower()
+    os.environ.get(
+        "DJANGO_DEBUG",
+        "False",
+    ).lower()
     == "true"
 )
 
-
-# =========================================================
-# HOSTS
-# =========================================================
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -34,6 +33,7 @@ ALLOWED_HOSTS = [
     "veyloraai.online",
     "www.veyloraai.online",
 ]
+
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get(
     "RENDER_EXTERNAL_HOSTNAME"
@@ -52,16 +52,18 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 if RENDER_EXTERNAL_HOSTNAME:
+
     CSRF_TRUSTED_ORIGINS.append(
         f"https://{RENDER_EXTERNAL_HOSTNAME}"
     )
 
 
 # =========================================================
-# APPS
+# APPLICATIONS
 # =========================================================
 
 INSTALLED_APPS = [
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -75,6 +77,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
 
     "tools",
+
 ]
 
 
@@ -83,6 +86,7 @@ INSTALLED_APPS = [
 # =========================================================
 
 MIDDLEWARE = [
+
     "django.middleware.security.SecurityMiddleware",
 
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -95,26 +99,31 @@ MIDDLEWARE = [
 
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 
+    # Veylora visitor analytics
+    "tools.analytics_middleware.AnalyticsMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
 
     "allauth.account.middleware.AccountMiddleware",
 
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    # Veylora AI SEO
     "tools.seo_middleware.SEOMiddleware",
+
 ]
 
+
+# =========================================================
+# URL / TEMPLATE
+# =========================================================
 
 ROOT_URLCONF = "aiwebsite.urls"
 
 
-# =========================================================
-# TEMPLATES
-# =========================================================
-
 TEMPLATES = [
+
     {
+
         "BACKEND":
             "django.template.backends.django.DjangoTemplates",
 
@@ -123,13 +132,21 @@ TEMPLATES = [
         "APP_DIRS": True,
 
         "OPTIONS": {
+
             "context_processors": [
+
                 "django.template.context_processors.request",
+
                 "django.contrib.auth.context_processors.auth",
+
                 "django.contrib.messages.context_processors.messages",
+
             ],
+
         },
+
     },
+
 ]
 
 
@@ -144,26 +161,37 @@ DATABASE_URL = os.environ.get(
     "DATABASE_URL"
 )
 
+
 if DATABASE_URL:
 
     DATABASES = {
+
         "default": dj_database_url.parse(
+
             DATABASE_URL,
+
             conn_max_age=600,
+
             ssl_require=True,
+
         )
+
     }
 
 else:
 
     DATABASES = {
+
         "default": {
+
             "ENGINE":
                 "django.db.backends.sqlite3",
 
             "NAME":
                 BASE_DIR / "db.sqlite3",
+
         }
+
     }
 
 
@@ -172,35 +200,50 @@ else:
 # =========================================================
 
 AUTHENTICATION_BACKENDS = [
+
     "django.contrib.auth.backends.ModelBackend",
+
     "allauth.account.auth_backends.AuthenticationBackend",
+
 ]
 
 
 AUTH_PASSWORD_VALIDATORS = [
+
     {
+
         "NAME":
             "django.contrib.auth.password_validation.MinimumLengthValidator",
 
         "OPTIONS": {
+
             "min_length": 6,
+
         },
+
     },
 
     {
+
         "NAME":
             "django.contrib.auth.password_validation.CommonPasswordValidator",
+
     },
 
     {
+
         "NAME":
             "django.contrib.auth.password_validation.NumericPasswordValidator",
+
     },
+
 ]
 
 
 LOGIN_URL = "/login/"
+
 LOGIN_REDIRECT_URL = "/welcome/"
+
 LOGOUT_REDIRECT_URL = "/"
 
 
@@ -209,8 +252,11 @@ LOGOUT_REDIRECT_URL = "/"
 # =========================================================
 
 SOCIALACCOUNT_PROVIDERS = {
+
     "google": {
+
         "APP": {
+
             "client_id":
                 os.environ.get(
                     "GOOGLE_CLIENT_ID",
@@ -224,6 +270,7 @@ SOCIALACCOUNT_PROVIDERS = {
                 ),
 
             "key": "",
+
         },
 
         "SCOPE": [
@@ -232,16 +279,24 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
 
         "AUTH_PARAMS": {
-            "access_type": "online",
+
+            "access_type":
+                "online",
+
         },
 
-        "OAUTH_PKCE_ENABLED": True,
+        "OAUTH_PKCE_ENABLED":
+            True,
+
     },
+
 }
 
 
 SOCIALACCOUNT_QUERY_EMAIL = True
+
 SOCIALACCOUNT_STORE_TOKENS = False
+
 SOCIALACCOUNT_AUTO_SIGNUP = True
 
 
@@ -254,6 +309,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 
 USE_I18N = True
+
 USE_TZ = True
 
 
@@ -264,19 +320,27 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATIC_ROOT = (
-    BASE_DIR / "staticfiles"
+    BASE_DIR
+    / "staticfiles"
 )
 
+
 STORAGES = {
+
     "default": {
+
         "BACKEND":
             "django.core.files.storage.FileSystemStorage",
+
     },
 
     "staticfiles": {
+
         "BACKEND":
             "whitenoise.storage.CompressedManifestStaticFilesStorage",
+
     },
+
 }
 
 
@@ -290,7 +354,7 @@ EMAIL_BACKEND = (
 
 
 # =========================================================
-# PRODUCTION SECURITY
+# SECURITY SETTINGS
 # =========================================================
 
 SESSION_COOKIE_SECURE = not DEBUG
@@ -305,7 +369,7 @@ SECURE_REFERRER_POLICY = "same-origin"
 
 
 # =========================================================
-# DEFAULT ID
+# DEFAULT PRIMARY KEY
 # =========================================================
 
 DEFAULT_AUTO_FIELD = (

@@ -21,6 +21,10 @@ from tools.recent_tools import (
     clear_recent_tools,
 )
 
+from tools.admin_panel import (
+    admin_dashboard,
+)
+
 
 BASE_URL = "https://veyloraai.online"
 
@@ -97,6 +101,7 @@ def robots_txt(request):
 Allow: /
 
 Disallow: /admin/
+Disallow: /control-panel/
 Disallow: /accounts/
 Disallow: /profile/
 Disallow: /welcome/
@@ -200,7 +205,18 @@ urlpatterns = [
     ),
 
 
-    # ADMIN
+    # =====================================================
+    # VEYLORA CONTROL PANEL
+    # =====================================================
+
+    path(
+        "control-panel/",
+        admin_dashboard,
+        name="veylora_admin",
+    ),
+
+
+    # DJANGO ADMIN
     path(
         "admin/",
         admin.site.urls,
@@ -239,7 +255,7 @@ urlpatterns = [
     ),
 
 
-    # PROTECTED TOOL
+    # PROTECTED TOOL ACCESS
     path(
         "access-tool/<slug:slug>/",
         protected_tool_access,

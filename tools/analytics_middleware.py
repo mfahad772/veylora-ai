@@ -11,15 +11,7 @@ def detect_device(user_agent):
 
     ua = user_agent.lower()
 
-    if any(
-        word in ua
-        for word in [
-            "bot",
-            "crawler",
-            "spider",
-            "slurp",
-        ]
-    ):
+    if detect_bot(user_agent):
         return "Bot"
 
     if any(
@@ -88,6 +80,10 @@ def detect_os(user_agent):
     return "Other"
 
 
+# =========================================================
+# BOT DETECTION
+# =========================================================
+
 def detect_bot(user_agent):
 
     ua = user_agent.lower()
@@ -99,11 +95,48 @@ def detect_bot(user_agent):
         "slurp",
         "googlebot",
         "bingbot",
+        "duckduckbot",
+        "yandexbot",
+        "baiduspider",
+        "facebookexternalhit",
+        "twitterbot",
+        "linkedinbot",
+        "semrushbot",
+        "ahrefsbot",
     ]
 
     return any(
         word in ua
         for word in bot_words
+    )
+
+
+# =========================================================
+# HOSTING / HEALTH CHECK DETECTION
+# =========================================================
+
+def is_internal_probe(user_agent):
+
+    ua = user_agent.lower()
+
+    probe_words = [
+        "render/1.0",
+        "render/",
+        "go-http-client",
+        "kube-probe",
+        "healthcheck",
+        "health-check",
+        "uptimerobot",
+        "statuscake",
+        "pingdom",
+        "curl/",
+        "wget/",
+        "python-requests",
+    ]
+
+    return any(
+        word in ua
+        for word in probe_words
     )
 
 
@@ -118,7 +151,6 @@ def get_client_ip(request):
     )
 
     if forwarded_for:
-
         return forwarded_for.split(",")[0].strip()
 
     return request.META.get(
@@ -175,9 +207,13 @@ class AnalyticsMiddleware:
             "/admin/",
             "/control-panel/",
             "/static/",
+            "/media/",
             "/favicon.ico",
             "/robots.txt",
             "/sitemap.xml",
+            "/health/",
+            "/healthz",
+            "/metrics/",
 
         ]
 
@@ -188,10 +224,32 @@ class AnalyticsMiddleware:
             return
 
 
-        # Only normal GET page visits
+        # =================================================
+        # ONLY REAL GET PAGE REQUESTS
+        # =================================================
+
         if request.method != "GET":
             return
 
+
+        # Do not count error pages as views
+        if response.status_code >= 400:
+            return
+
+
+        # Only count HTML pages
+        content_type = response.get(
+            "Content-Type",
+            "",
+        ).lower()
+
+        if "text/html" not in content_type:
+            return
+
+
+        # =================================================
+        # USER AGENT
+        # =================================================
 
         user_agent = request.META.get(
             "HTTP_USER_AGENT",
@@ -200,20 +258,43 @@ class AnalyticsMiddleware:
 
 
         # =================================================
+        # IGNORE RENDER / HOSTING HEALTH CHECKS COMPLETELY
+        # =================================================
+
+        if is_internal_probe(user_agent):
+            return
+
+
+        # =================================================
+        # BOT STATUS
+        # =================================================
+
+        is_bot_visit = detect_bot(
+            user_agent
+        )
+
+
+        # =================================================
         # VISITOR SESSION
         # =================================================
 
-        analytics_id = request.session.get(
-            "analytics_id"
-        )
+        if is_bot_visit:
 
-        if not analytics_id:
+            analytics_id = ""
 
-            analytics_id = uuid.uuid4().hex
+        else:
 
-            request.session[
+            analytics_id = request.session.get(
                 "analytics_id"
-            ] = analytics_id
+            )
+
+            if not analytics_id:
+
+                analytics_id = uuid.uuid4().hex
+
+                request.session[
+                    "analytics_id"
+                ] = analytics_id
 
 
         # =================================================
@@ -276,8 +357,6 @@ class AnalyticsMiddleware:
                 is_authenticated
             ),
 
-            is_bot=detect_bot(
-                user_agent
-            ),
+            is_bot=is_bot_visit,
 
         )

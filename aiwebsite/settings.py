@@ -99,7 +99,7 @@ MIDDLEWARE = [
 
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 
-    # Veylora visitor analytics
+    # Visitor analytics
     "tools.analytics_middleware.AnalyticsMiddleware",
 
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -108,6 +108,10 @@ MIDDLEWARE = [
 
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
+    # Global one-click Veylora AI theme engine
+    "tools.theme_middleware.ThemeMiddleware",
+
+    # SEO
     "tools.seo_middleware.SEOMiddleware",
 
 ]
@@ -140,6 +144,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
 
                 "django.contrib.messages.context_processors.messages",
+
+                "tools.context_processors.site_theme",
 
             ],
 

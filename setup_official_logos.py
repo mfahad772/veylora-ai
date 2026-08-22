@@ -1,48 +1,28 @@
 from pathlib import Path
 from urllib.request import Request, urlopen
-import re
 
-
-# =========================================================
-# PROJECT PATHS
-# =========================================================
 
 BASE_DIR = Path(__file__).resolve().parent
+LOGO_DIR = BASE_DIR / "tools" / "static" / "tools" / "logos"
+TEMPLATE_DIR = BASE_DIR / "tools" / "templates"
 
-LOGO_DIR = (
-    BASE_DIR
-    / "tools"
-    / "static"
-    / "tools"
-    / "logos"
-)
+LOGO_DIR.mkdir(parents=True, exist_ok=True)
 
-TEMPLATE_DIR = (
-    BASE_DIR
-    / "tools"
-    / "templates"
-)
-
-
-# =========================================================
-# TOOL -> OFFICIAL DOMAIN
-# =========================================================
-
-TOOLS = {
-
-    # VIDEO TOOLS
+# Each slug is mapped to the official provider domain.
+PROVIDERS = {
+    # Video tools
     "flow-ai": "labs.google",
     "ai-video-generator": "canva.com",
     "image-to-video-ai": "pika.art",
     "ai-video-editor": "capcut.com",
-    "ai-avatar-video": "heygen.com",
+    "ai-avatar-video": "d-id.com",
     "ai-voice-video": "synthesia.io",
-    "ai-animation-generator": "runwayml.com",
+    "ai-animation-generator": "lumalabs.ai",
     "runway": "runwayml.com",
     "pika": "pika.art",
     "heygen": "heygen.com",
 
-    # IMAGE TOOLS
+    # Image tools
     "chatgpt-image-generator": "chatgpt.com",
     "midjourney": "midjourney.com",
     "adobe-firefly": "firefly.adobe.com",
@@ -54,217 +34,102 @@ TOOLS = {
     "upscale-media": "upscale.media",
 }
 
+TEMPLATES = [
+    "image_tools.html",
+    "video_tools.html",
+    "tool_detail.html",
+    "home.html",
+]
 
-# =========================================================
-# CREATE LOGO DIRECTORY
-# =========================================================
+OLD_ICON_BLOCK = '<div class="tool-icon">{{ tool.icon }}</div>'
+NEW_ICON_BLOCK = '''<div class="tool-icon">
+    <img
+        src="/static/tools/logos/{{ tool.slug }}.png"
+        alt="{{ tool.name }} official logo"
+        loading="lazy"
+    >
+</div>'''
 
-LOGO_DIR.mkdir(
-    parents=True,
-    exist_ok=True,
-)
+LOGO_CSS = '''
+.tool-icon img {
+    width: 44px;
+    height: 44px;
+    display: block;
+    object-fit: contain;
+    border-radius: 10px;
+}
+'''
 
 
-# =========================================================
-# DOWNLOAD OFFICIAL-SITE ICONS
-# =========================================================
-
-print("\nDownloading brand logos...\n")
-
-for slug, domain in TOOLS.items():
-
-    output_file = (
-        LOGO_DIR
-        / f"{slug}.png"
+def download_logo(slug, domain):
+    url = f"https://www.google.com/s2/favicons?domain={domain}&sz=128"
+    request = Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 Chrome/151 Safari/537.36"
+            )
+        },
     )
 
-    url = (
-        "https://www.google.com/s2/favicons"
-        f"?domain={domain}&sz=128"
-    )
+    destination = LOGO_DIR / f"{slug}.png"
 
     try:
-
-        request = Request(
-            url,
-            headers={
-                "User-Agent": (
-                    "Mozilla/5.0 "
-                    "Veylora-AI-Logo-Setup"
-                )
-            },
-        )
-
-        with urlopen(
-            request,
-            timeout=20,
-        ) as response:
-
+        with urlopen(request, timeout=20) as response:
             data = response.read()
 
-        if len(data) < 100:
-            raise ValueError(
-                "Downloaded logo is too small"
-            )
+        if not data:
+            raise RuntimeError("empty response")
 
-        output_file.write_bytes(
-            data
-        )
+        destination.write_bytes(data)
+        print(f"[OK] {slug}")
 
-        print(
-            f"[OK] {slug}"
-        )
+    except Exception as exc:
+        print(f"[ERROR] {slug}: {exc}")
 
-    except Exception as error:
-
-        print(
-            f"[ERROR] {slug}: {error}"
-        )
-
-
-# =========================================================
-# TEMPLATE LOGO HTML
-# =========================================================
-
-NEW_ICON_HTML = """<div class="tool-icon">
-                    <img
-                        src="/static/tools/logos/{{ tool.slug }}.png"
-                        alt="{{ tool.name }} official logo"
-                        loading="lazy"
-                    >
-                </div>"""
-
-
-# =========================================================
-# LOGO CSS
-# =========================================================
-
-LOGO_CSS = """
-
-        /* =========================================
-           OFFICIAL TOOL LOGOS
-        ========================================= */
-
-        .tool-icon img {
-            width: 44px;
-            height: 44px;
-
-            display: block;
-
-            object-fit: contain;
-
-            border-radius: 10px;
-        }
-
-"""
-
-
-# =========================================================
-# UPDATE TEMPLATE
-# =========================================================
 
 def update_template(filename):
-
-    path = (
-        TEMPLATE_DIR
-        / filename
-    )
+    path = TEMPLATE_DIR / filename
 
     if not path.exists():
-
-        print(
-            f"[SKIP] {filename} not found"
-        )
-
+        print(f"[SKIP] {filename} not found")
         return
 
+    text = path.read_text(encoding="utf-8")
+    original = text
 
-    html = path.read_text(
-        encoding="utf-8"
-    )
+    # Convert the old emoji block only if it still exists.
+    icon_replacements = text.count(OLD_ICON_BLOCK)
+    if icon_replacements:
+        text = text.replace(OLD_ICON_BLOCK, NEW_ICON_BLOCK)
 
+    # Add logo CSS once if it is not already present.
+    if ".tool-icon img" not in text:
+        style_close = text.find("</style>")
+        if style_close != -1:
+            text = text[:style_close] + LOGO_CSS + "\n" + text[style_close:]
 
-    # -----------------------------------------------------
-    # Replace emoji tool.icon block
-    # -----------------------------------------------------
-
-    pattern = re.compile(
-        r'<div\s+class="tool-icon"\s*>\s*'
-        r'\{\{\s*tool\.icon\s*\}\}'
-        r'\s*</div>',
-        flags=re.IGNORECASE,
-    )
-
-    html, replacements = (
-        pattern.subn(
-            NEW_ICON_HTML,
-            html,
-        )
-    )
+    if text != original:
+        path.write_text(text, encoding="utf-8")
+        print(f"[UPDATED] {filename} ({icon_replacements} icon block(s))")
+    else:
+        print(f"[UNCHANGED] {filename}")
 
 
-    # -----------------------------------------------------
-    # Add CSS once
-    # -----------------------------------------------------
+def main():
+    print("\nDownloading brand logos...\n")
 
-    if (
-        "OFFICIAL TOOL LOGOS"
-        not in html
-    ):
+    for slug, domain in PROVIDERS.items():
+        download_logo(slug, domain)
 
-        html = html.replace(
-            "</style>",
-            LOGO_CSS
-            + "\n    </style>",
-            1,
-        )
+    for filename in TEMPLATES:
+        update_template(filename)
+
+    print("\n====================================")
+    print("Official logo setup completed.")
+    print("====================================")
 
 
-    path.write_text(
-        html,
-        encoding="utf-8",
-    )
-
-
-    print(
-        f"[UPDATED] {filename} "
-        f"({replacements} icon block(s))"
-    )
-
-
-# =========================================================
-# UPDATE PUBLIC PAGES
-# =========================================================
-
-update_template(
-    "image_tools.html"
-)
-
-update_template(
-    "video_tools.html"
-)
-
-update_template(
-    "tool_detail.html"
-)
-
-update_template(
-    "home.html"
-)
-
-
-# =========================================================
-# FINISH
-# =========================================================
-
-print(
-    "\n===================================="
-)
-
-print(
-    "Official logo setup completed."
-)
-
-print(
-    "====================================\n"
-)
+if __name__ == "__main__":
+    main()

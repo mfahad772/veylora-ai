@@ -4,8 +4,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
-from .models import SavedTool
-
 
 # =========================================================
 # AI TOOLS DATA
@@ -190,44 +188,44 @@ TOOLS = {
 
 
     "ai-avatar-video": {
-        "name": "AI Avatar Video",
+        "name": "D-ID AI Avatar Video",
         "icon": "👤",
-        "category": "AI Avatar",
+        "category": "AI Avatar Video",
         "description": (
-            "Create talking AI avatar videos and digital presenter content "
-            "using HeyGen's AI avatar video platform."
+            "Create talking avatar videos and digital-human content using "
+            "D-ID's AI video and avatar tools."
         ),
         "overview": (
-            "AI avatar video tools allow users to create presenter-style "
-            "videos without recording a traditional on-camera presentation. "
-            "HeyGen is commonly used for business communication, explainers, "
-            "marketing content and digital presenter workflows."
+            "D-ID provides AI-powered video and digital-human tools for "
+            "creating talking avatars from images, scripts and audio. "
+            "It is useful for personalized presentations, training, "
+            "marketing content and avatar-led communication."
         ),
         "best_for": (
             "Businesses, educators, marketers and creators who want "
-            "presenter-style videos using AI avatars."
+            "talking-avatar and digital-presenter video workflows."
         ),
         "features": [
-            "AI avatar presenters",
-            "Talking video workflows",
-            "AI voice integration",
+            "Talking AI avatars",
+            "Digital-human video creation",
+            "Text and audio driven workflows",
             "Presenter-style content",
-            "Business video creation",
+            "Personalized video creation",
         ],
         "use_cases": [
             "Creating explainer videos",
             "Building training content",
-            "Creating marketing presentations",
-            "Producing avatar-led social content",
+            "Creating personalized presentations",
+            "Producing avatar-led marketing content",
         ],
         "tags": [
+            "D-ID",
             "AI Avatar",
-            "HeyGen",
             "Talking Avatar",
-            "AI Presenter",
+            "Digital Human",
             "AI Video",
         ],
-        "official_url": "https://www.heygen.com/",
+        "official_url": "https://www.d-id.com/ai-videos/",
         "type": "video",
     },
 
@@ -276,44 +274,44 @@ TOOLS = {
 
 
     "ai-animation-generator": {
-        "name": "AI Animation Generator",
+        "name": "Luma AI Video",
         "icon": "✨",
-        "category": "AI Animation",
+        "category": "AI Video & Animation",
         "description": (
-            "Generate animated visual scenes and experiment with "
-            "AI-powered video and animation workflows using Runway."
+            "Create generative AI video and animated visual content using "
+            "Luma's current creative AI video platform."
         ),
         "overview": (
-            "AI animation generators can help creators add motion to "
-            "visual ideas without building every frame manually. Runway "
-            "provides generative tools for creating, transforming and "
-            "editing visual content with artificial intelligence."
+            "Luma provides generative video tools for turning creative ideas "
+            "into moving visual content. Its current video generation stack "
+            "is built around the Ray family of models and can support "
+            "cinematic video, motion and creative visual experimentation."
         ),
         "best_for": (
-            "Digital artists, filmmakers, designers and creators "
-            "experimenting with AI animation and generative video."
+            "Filmmakers, designers, digital artists and creators who want "
+            "AI-generated motion and cinematic video workflows."
         ),
         "features": [
-            "Generative video workflows",
-            "AI visual transformation",
-            "Creative animation tools",
-            "Video generation",
-            "AI-assisted editing",
+            "Generative AI video",
+            "Text-to-video workflows",
+            "Image-to-video workflows",
+            "Creative motion generation",
+            "Cinematic visual creation",
         ],
         "use_cases": [
-            "Creating animated concepts",
-            "Generating experimental visuals",
-            "Producing creative video scenes",
-            "Transforming existing video content",
+            "Creating animated visual concepts",
+            "Generating cinematic AI clips",
+            "Animating still-image ideas",
+            "Developing creative motion content",
         ],
         "tags": [
-            "AI Animation",
-            "Runway",
-            "Generative Video",
+            "Luma AI",
             "AI Video",
-            "Animation Generator",
+            "Generative Video",
+            "AI Animation",
+            "Ray",
         ],
-        "official_url": "https://runwayml.com/",
+        "official_url": "https://app.lumalabs.ai/",
         "type": "video",
     },
 
@@ -980,21 +978,11 @@ def tool_detail(request, slug):
     if not tool:
         return redirect("home")
 
-    is_saved = False
-
-    if request.user.is_authenticated:
-
-        is_saved = SavedTool.objects.filter(
-            user=request.user,
-            tool_slug=slug,
-        ).exists()
-
     return render(
         request,
         "tool_detail.html",
         {
             "tool": tool,
-            "is_saved": is_saved,
         },
     )
 

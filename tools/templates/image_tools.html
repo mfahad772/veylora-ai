@@ -720,6 +720,24 @@
 
         }
 
+    
+
+        /* =========================================
+           OFFICIAL TOOL LOGOS
+        ========================================= */
+
+        .tool-icon img {
+            width: 44px;
+            height: 44px;
+
+            display: block;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+        }
+
+
     </style>
 
 </head>
@@ -877,7 +895,11 @@
 
 
                 <div class="tool-icon">
-                    {{ tool.icon }}
+                    <img
+                        src="/static/tools/logos/{{ tool.slug }}.png"
+                        alt="{{ tool.name }} official logo"
+                        loading="lazy"
+                    >
                 </div>
 
 

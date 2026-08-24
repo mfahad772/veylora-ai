@@ -698,6 +698,102 @@
 
     </style>
 
+
+<style>
+/* VEYLORA CURSOR STABILITY FIX START */
+
+/* Keep clickable cursor completely stable */
+a.tool-button,
+a.category-button,
+a.hero-button,
+a.account-button,
+.quick-links a,
+button {
+    cursor: pointer !important;
+}
+
+/* Child text/icons must not take pointer control */
+a.tool-button *,
+a.category-button *,
+a.hero-button *,
+a.account-button *,
+.quick-links a *,
+button * {
+    cursor: inherit !important;
+    pointer-events: none !important;
+}
+
+/* Pseudo elements must not sit over the link */
+a.tool-button::before,
+a.tool-button::after,
+a.category-button::before,
+a.category-button::after,
+a.hero-button::before,
+a.hero-button::after,
+a.account-button::before,
+a.account-button::after,
+.quick-links a::before,
+.quick-links a::after {
+    pointer-events: none !important;
+}
+
+/* Tool cards must never move under the mouse */
+.tool-card,
+.tool-card:hover,
+.tool-card:focus-within {
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+}
+
+/* Buttons must never move/change hit position */
+.tool-button,
+.tool-button:hover,
+.tool-button:focus,
+.tool-button:active,
+.category-button,
+.category-button:hover,
+.category-button:focus,
+.category-button:active,
+.hero-button,
+.hero-button:hover,
+.hero-button:focus,
+.hero-button:active,
+.account-button,
+.account-button:hover,
+.account-button:focus,
+.account-button:active,
+.quick-links a,
+.quick-links a:hover,
+.quick-links a:focus,
+.quick-links a:active {
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+}
+
+/* Only visual properties are allowed to animate */
+.tool-button,
+.category-button,
+.hero-button,
+.account-button,
+.quick-links a {
+    transition-property:
+        background-color,
+        border-color,
+        color,
+        box-shadow !important;
+
+    transition-duration: 0.15s !important;
+    transition-timing-function: ease !important;
+
+    position: relative;
+    z-index: 2;
+}
+
+/* VEYLORA CURSOR STABILITY FIX END */
+</style>
+
 </head>
 
 

@@ -183,7 +183,17 @@ def sitemap_xml(request):
 # URLS
 # =========================================================
 
+
 urlpatterns = [
+    path(
+        "ads.txt",
+        lambda request: HttpResponse(
+            "google.com, pub-9101955435716307, DIRECT, f08c47fec0942fa0\n",
+            content_type="text/plain",
+        ),
+        name="ads_txt",
+    ),
+
 
     # SEO
     path(

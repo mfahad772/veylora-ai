@@ -1,0 +1,9 @@
+{% extends "base_public.html" %}
+{% block title %}{{ guide.title }} | Veylora AI{% endblock %}
+{% block meta_description %}{{ guide.description }}{% endblock %}
+{% block content %}
+<div class="crumbs"><a href="/">Home</a> › <a href="/guides/">Guides</a> › {{ guide.title }}</div>
+<section class="hero"><span class="eyebrow">Updated {{ guide.updated }}</span><h1>{{ guide.title }}</h1><p>{{ guide.intro }}</p></section>
+<article class="article">{% for section in guide.sections %}<h2>{{ section.heading }}</h2><p>{{ section.body }}</p>{% endfor %}<h2>Key takeaways</h2><ul>{% for item in guide.takeaways %}<li>{{ item }}</li>{% endfor %}</ul><div class="note"><strong>Editorial note:</strong> Veylora AI uses official provider information for factual product descriptions and adds independent workflow analysis. Features, plans and availability can change, so verify current commercial details with the provider before purchasing.</div></article>
+<section><div class="actions"><a class="btn secondary" href="/guides/">← All guides</a><a class="btn secondary" href="/ai-image-tools/">Image tools</a><a class="btn secondary" href="/ai-video-tools/">Video tools</a></div></section>
+{% endblock %}

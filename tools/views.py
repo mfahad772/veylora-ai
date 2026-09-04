@@ -3,6 +3,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from .editorial_data import EDITORIAL_DATA
+from .guides_data import GUIDES
 
 
 # =========================================================
@@ -836,6 +838,14 @@ TOOLS = {
 }
 
 
+
+# =========================================================
+# VEYLORA EDITORIAL DATA
+# =========================================================
+for _slug, _editorial in EDITORIAL_DATA.items():
+    if _slug in TOOLS:
+        TOOLS[_slug].update(_editorial)
+
 # =========================================================
 # ADD SLUG TO EACH TOOL
 # =========================================================
@@ -985,6 +995,21 @@ def tool_detail(request, slug):
             "tool": tool,
         },
     )
+
+
+
+# =========================================================
+# EDITORIAL GUIDES
+# =========================================================
+def guides(request):
+    return render(request, "guides.html", {"guides": GUIDES})
+
+
+def guide_detail(request, slug):
+    guide = GUIDES.get(slug)
+    if not guide:
+        return redirect("guides")
+    return render(request, "guide_detail.html", {"guide": guide})
 
 
 # =========================================================

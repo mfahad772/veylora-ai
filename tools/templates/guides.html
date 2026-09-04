@@ -1,0 +1,7 @@
+{% extends "base_public.html" %}
+{% block title %}AI Tool Guides & Comparisons | Veylora AI{% endblock %}
+{% block meta_description %}Read practical AI tool comparisons and workflow guides for image generation, video creation, avatars, product photos and short-form content.{% endblock %}
+{% block content %}
+<section class="hero"><span class="eyebrow">Veylora Guides</span><h1>Practical guides for <span class="grad">choosing and using AI tools.</span></h1><p>These articles focus on decisions and workflows: what type of tool to choose, where each category fits and what trade-offs to consider before paying for a plan.</p></section>
+<section><div class="grid two">{% for slug, guide in guides.items %}<article class="card"><span class="tag">{{ guide.updated }}</span><h3 style="margin-top:12px">{{ guide.title }}</h3><p>{{ guide.description }}</p><a class="btn secondary" href="{% url 'guide_detail' slug %}">Read guide →</a></article>{% endfor %}</div></section>
+{% endblock %}

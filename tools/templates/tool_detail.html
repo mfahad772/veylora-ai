@@ -1138,7 +1138,9 @@ a.account-button::after,
         <div class="hero-actions">
 
             <a
-                href="{% url 'protected_official_access' tool.slug %}"
+                href="{{ tool.official_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="primary-btn"
             >
                 Visit Official Website ↗
@@ -1166,18 +1168,7 @@ a.account-button::after,
             {% endif %}
 
         </div>
-
-
-        {% if not user.is_authenticated %}
-
-            <p class="login-note">
-                🔒 Login or create a free account before
-                continuing to the official {{ tool.name }} website.
-            </p>
-
-        {% endif %}
-
-    </section>
+</section>
 
 
     <!-- =================================================
@@ -1364,144 +1355,73 @@ a.account-button::after,
     </section>
 
 
-    <!-- =================================================
+        <!-- =================================================
          EDITORIAL VALUE SECTION
     ================================================== -->
 
     <section class="editorial-section">
 
         <span class="section-label">
-            Veylora AI Guide
+            Veylora AI Editorial Review
         </span>
 
         <h2>
-            Is {{ tool.name }} the right tool
-            for your workflow?
+            Practical view of {{ tool.name }}
         </h2>
 
         <p>
-            {{ tool.name }} belongs to the
-            <strong>{{ tool.category }}</strong>
-            category. It may be useful when your project
-            matches the workflows and use cases listed
-            above, but the right AI platform depends on
-            the type of output you need, how much control
-            you want and the amount of time you are willing
-            to spend learning a new tool.
+            {{ tool.review_summary }}
         </p>
-
-        <p>
-            Before choosing an AI platform, compare its
-            current features with your actual project.
-            A creator producing occasional social content
-            may have different requirements from a designer,
-            filmmaker, business team or professional studio.
-            It is usually better to choose a tool because
-            its workflow fits your work rather than simply
-            because the platform is popular.
-        </p>
-
 
         <div class="decision-grid">
 
             <div class="decision-card">
-
-                <strong>
-                    Main category
-                </strong>
-
-                <p>
-                    {{ tool.category }}
-                </p>
-
+                <strong>Good choice when</strong>
+                <p>{{ tool.choose_if }}</p>
             </div>
 
-
             <div class="decision-card">
-
-                <strong>
-                    Recommended audience
-                </strong>
-
-                <p>
-                    {{ tool.best_for }}
-                </p>
-
+                <strong>Consider another option when</strong>
+                <p>{{ tool.avoid_if }}</p>
             </div>
 
-
             <div class="decision-card">
-
-                <strong>
-                    Before you subscribe
-                </strong>
-
-                <p>
-                    Check the provider's latest pricing,
-                    usage limits and licensing terms.
-                </p>
-
+                <strong>Practical tip</strong>
+                <p>{{ tool.practical_tip }}</p>
             </div>
 
         </div>
 
+        <h3>Strengths worth considering</h3>
+
+        <ul class="feature-list">
+            {% for item in tool.strengths %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Limitations worth considering</h3>
+
+        <ul class="feature-list use-list">
+            {% for item in tool.limitations %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
 
         <h3>
-            What should you check before using
-            {{ tool.name }}?
+            How to evaluate {{ tool.name }} before paying
         </h3>
 
         <p>
-            Features and pricing on AI platforms can change
-            quickly. Before paying for a plan or using generated
-            material commercially, review the official provider's
-            current pricing, generation limits, supported formats,
-            commercial-use terms and privacy policy.
+            Match the tool to a real project before choosing a paid plan.
+            Check the provider's current pricing, generation limits,
+            export quality, supported formats, commercial-use terms and
+            privacy policy. AI products change frequently, so Veylora AI
+            treats provider pricing and feature availability as information
+            that should be confirmed on the official website.
         </p>
-
-        <p>
-            You should also consider whether the platform
-            supports the output quality and workflow you need.
-            For example, some users prioritize fast generation,
-            while others care more about editing control,
-            consistency, resolution, collaboration features
-            or commercial licensing.
-        </p>
-
-
-        {% if tool.type == "image" %}
-
-            <h3>
-                Choosing an AI image tool
-            </h3>
-
-            <p>
-                For AI image workflows, useful comparison points
-                include prompt control, image quality, editing
-                options, output resolution, style flexibility,
-                background or enhancement features and the rights
-                provided for generated content.
-            </p>
-
-        {% else %}
-
-            <h3>
-                Choosing an AI video tool
-            </h3>
-
-            <p>
-                For AI video workflows, useful comparison points
-                include generation length, motion quality,
-                image-to-video support, editing controls,
-                resolution, rendering speed, audio or avatar
-                functionality and the usage rights attached
-                to exported videos.
-            </p>
-
-        {% endif %}
 
     </section>
-
 
     <!-- =================================================
          FAQ

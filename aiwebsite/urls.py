@@ -185,8 +185,6 @@ def sitemap_xml(request):
 
 
 urlpatterns = [
-    path("guides/", views.guides, name="guides"),
-    path("guides/<slug:slug>/", views.guide_detail, name="guide_detail"),
     path(
         "ads.txt",
         lambda request: HttpResponse(

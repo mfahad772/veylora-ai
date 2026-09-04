@@ -1,11 +1,2078 @@
-{% extends "base_public.html" %}
-{% block title %}Veylora AI | Independent AI Tool Reviews & Practical Guides{% endblock %}
-{% block meta_description %}Compare AI image and video tools with independent workflow notes, strengths, limitations and practical guides from Veylora AI.{% endblock %}
-{% block content %}
-<section class="hero"><span class="eyebrow">Independent AI tool research</span><h1>Choose AI tools by <span class="grad">workflow, not hype.</span></h1><p>Veylora AI helps creators compare image and video tools using practical editorial summaries, strengths, limitations and use-case guidance. Read the analysis first, then decide whether a provider fits your project.</p><div class="actions"><a class="btn primary" href="/guides/">Read AI Guides</a><a class="btn secondary" href="/ai-image-tools/">Compare Image Tools</a><a class="btn secondary" href="/ai-video-tools/">Compare Video Tools</a></div></section>
-<section><div class="section-head"><h2>What Veylora adds</h2><p>This site is not just a list of outbound links. Each tool page explains where a product fits, where it can be a poor fit, and what type of user benefits from its workflow.</p></div><div class="grid"><article class="card"><h3>Workflow-first reviews</h3><p>We separate generators, editors, avatar platforms and single-purpose utilities so users compare products that actually solve the same job.</p></article><article class="card"><h3>Strengths and limitations</h3><p>Tool pages include positive use cases and practical limitations instead of repeating only provider marketing language.</p></article><article class="card"><h3>Decision guides</h3><p>Our guides explain how to combine AI generation with editing, product photography, short-form video and other real workflows.</p></article></div></section>
-<section><div class="section-head"><h2>Explore by category</h2></div><div class="grid two"><article class="card"><h3>AI Image Tools</h3><p>Compare image generators, design tools, product-photo editors, background removers and upscalers.</p><a class="btn secondary" href="/ai-image-tools/">Explore image tools →</a></article><article class="card"><h3>AI Video Tools</h3><p>Compare generative video, image-to-video, editing, avatar and presenter workflows.</p><a class="btn secondary" href="/ai-video-tools/">Explore video tools →</a></article></div></section>
-<section><div class="section-head"><h2>Featured tool analysis</h2></div><div class="grid">{% for slug, tool in featured_tools.items %}<article class="card tool-card"><img src="/static/tools/logos/{{ tool.slug }}.png" alt="{{ tool.name }} logo" onerror="this.style.display='none'"><h3>{{ tool.name }}</h3><p>{{ tool.description }}</p><span class="tag">{{ tool.category }}</span><br><a class="btn secondary" href="{% url 'tool_detail' tool.slug %}">Read analysis →</a></article>{% endfor %}</div></section>
-<section><div class="section-head"><h2>Popular practical guides</h2></div><div class="grid"><article class="card"><h3>How to Choose an AI Image Tool</h3><p>Choose between generators, editors, background removers and upscalers by the task you actually need.</p><a class="btn secondary" href="/guides/how-to-choose-an-ai-image-tool/">Read guide →</a></article><article class="card"><h3>ChatGPT vs Midjourney vs Firefly</h3><p>Compare conversational iteration, art-direction workflows and Adobe-oriented production.</p><a class="btn secondary" href="/guides/chatgpt-vs-midjourney-vs-firefly/">Read comparison →</a></article><article class="card"><h3>Runway vs Pika vs Luma</h3><p>Understand production depth, fast short clips and cinematic motion exploration.</p><a class="btn secondary" href="/guides/runway-vs-pika-vs-luma/">Read comparison →</a></article></div><div class="actions"><a class="btn primary" href="/guides/">View all guides</a></div></section>
-<section><div class="section-head"><h2>How we evaluate tools</h2><p>Veylora reviews the problem a tool is designed to solve, the workflow it expects, the control a creator gets, common limitations, and how the product compares with adjacent categories. We use official provider information for factual product descriptions and add independent workflow analysis. We do not claim hands-on laboratory testing where we have not performed it.</p></div><a class="btn secondary" href="/about/">Read our editorial method →</a></section>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Veylora AI - Discover the Best AI Tools</title>
+
+    <meta
+        name="description"
+        content="Discover the best AI image and video tools with Veylora AI. Explore AI generators, editors, animation tools and creative platforms."
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(0,212,255,0.06),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(123,92,255,0.09),
+                    transparent 30%
+                ),
+                #0b0f19;
+
+            color: #ffffff;
+
+            min-height: 100vh;
+
+            line-height: 1.5;
+        }
+
+
+        a {
+            text-decoration: none;
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        /* =================================================
+           HEADER
+        ================================================= */
+
+        header {
+            width: 100%;
+
+            padding:
+                18px 7%;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+            border-bottom:
+                1px solid #202638;
+
+            background:
+                rgba(11,15,25,0.94);
+
+            backdrop-filter:
+                blur(14px);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+            color: #ffffff;
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                -0.4px;
+
+            white-space: nowrap;
+        }
+
+
+        .logo span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7568ff,
+                    #d946ef
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        nav {
+            display: flex;
+
+            align-items: center;
+
+            justify-content:
+                flex-end;
+
+            gap: 17px;
+
+            flex-wrap: wrap;
+        }
+
+
+        nav a {
+            color: #cbd0dc;
+
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        .user-nav {
+            padding:
+                8px 12px;
+
+            border-radius:
+                9px;
+
+            border:
+                1px solid
+                rgba(123,92,255,0.27);
+
+            background:
+                rgba(123,92,255,0.07);
+
+            color:
+                #c4bdff;
+        }
+
+
+        .recent-nav {
+            border-color:
+                rgba(0,212,255,0.25);
+
+            background:
+                rgba(0,212,255,0.055);
+
+            color:
+                #9eeafb;
+        }
+
+
+        .account-nav {
+            padding:
+                9px 14px;
+
+            border-radius:
+                9px;
+
+            border:
+                1px solid
+                rgba(123,92,255,0.38);
+
+            background:
+                rgba(123,92,255,0.12);
+
+            color:
+                #ffffff;
+        }
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        .hero {
+            text-align: center;
+
+            padding:
+                95px 20px 85px;
+        }
+
+
+        .hero-badge {
+            display:
+                inline-block;
+
+            margin-bottom:
+                18px;
+
+            padding:
+                7px 13px;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(123,92,255,0.25);
+
+            background:
+                rgba(123,92,255,0.07);
+
+            color:
+                #bdb5ff;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+        }
+
+
+        .hero h1 {
+            max-width:
+                850px;
+
+            margin:
+                0 auto 20px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                clamp(
+                    38px,
+                    6vw,
+                    56px
+                );
+
+            font-weight:
+                800;
+
+            line-height:
+                1.12;
+
+            letter-spacing:
+                -1.5px;
+        }
+
+
+        .hero h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #7568ff,
+                    #d946ef
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .hero p {
+            max-width:
+                720px;
+
+            margin: auto;
+
+            color:
+                #aeb5c5;
+
+            font-size:
+                17px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .hero-buttons {
+            margin-top:
+                34px;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                13px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .hero-button {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-width:
+                185px;
+
+            padding:
+                14px 22px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6258ff,
+                    #8061ff
+                );
+
+            color:
+                #ffffff;
+
+            border:
+                1px solid
+                #6c63ff;
+        }
+
+
+        .hero-button:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(108,99,255,0.25);
+        }
+
+
+        .hero-button.secondary {
+            background:
+                #171d2b;
+
+            border-color:
+                #30384d;
+
+            color:
+                #e4e7ef;
+        }
+
+
+        .hero-button.secondary:hover {
+            background:
+                #20283a;
+
+            border-color:
+                #6c63ff;
+        }
+
+
+        .hero-button.saved {
+            background:
+                rgba(123,92,255,0.08);
+
+            border:
+                1px solid
+                rgba(123,92,255,0.35);
+
+            color:
+                #c9c3ff;
+        }
+
+
+        .hero-button.recent {
+            background:
+                rgba(0,212,255,0.055);
+
+            border:
+                1px solid
+                rgba(0,212,255,0.25);
+
+            color:
+                #9eeafb;
+        }
+
+
+        /* =================================================
+           MAIN
+        ================================================= */
+
+        .container {
+            width:
+                86%;
+
+            max-width:
+                1200px;
+
+            margin: auto;
+
+            padding-bottom:
+                90px;
+        }
+
+
+        .section-title {
+            text-align:
+                center;
+
+            margin-bottom:
+                36px;
+        }
+
+
+        .section-title h2 {
+            color:
+                #ffffff;
+
+            font-size:
+                30px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .section-title p {
+            color:
+                #8f98aa;
+
+            font-size:
+                15px;
+        }
+
+
+        /* =================================================
+           CATEGORY CARDS
+        ================================================= */
+
+        .category-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(
+                        250px,
+                        1fr
+                    )
+                );
+
+            gap: 22px;
+
+            margin-bottom:
+                80px;
+        }
+
+
+        .category-card {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #121827,
+                    #101624
+                );
+
+            border:
+                1px solid
+                #252d40;
+
+            border-radius:
+                18px;
+
+            padding:
+                30px;
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .category-card:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                #6c63ff;
+
+            box-shadow:
+                0 16px 38px
+                rgba(0,0,0,0.28);
+        }
+
+
+        .category-icon {
+            width:
+                60px;
+
+            height:
+                60px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #1c2335;
+
+            border:
+                1px solid
+                #293247;
+
+            border-radius:
+                14px;
+
+            font-size:
+                29px;
+
+            margin-bottom:
+                21px;
+        }
+
+
+        .category-card h3 {
+            color:
+                #ffffff;
+
+            font-size:
+                22px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .category-card p {
+            color:
+                #9da6b8;
+
+            line-height:
+                1.75;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                23px;
+
+            flex-grow: 1;
+        }
+
+
+        .category-button {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            align-self:
+                flex-start;
+
+            padding:
+                11px 18px;
+
+            background:
+                #6c63ff;
+
+            color:
+                #ffffff;
+
+            border:
+                1px solid
+                #6c63ff;
+
+            border-radius:
+                9px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+        }
+
+
+        .category-button:hover {
+            background:
+                #584ee8;
+
+            border-color:
+                #584ee8;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .saved-card {
+            border-color:
+                rgba(123,92,255,0.28);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(123,92,255,0.08),
+                    #101624
+                );
+        }
+
+
+        .recent-card {
+            border-color:
+                rgba(0,212,255,0.22);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0,212,255,0.055),
+                    #101624
+                );
+        }
+
+
+        .saved-card
+        .category-icon {
+            background:
+                rgba(123,92,255,0.12);
+
+            border-color:
+                rgba(123,92,255,0.25);
+        }
+
+
+        .recent-card
+        .category-icon {
+            background:
+                rgba(0,212,255,0.08);
+
+            border-color:
+                rgba(0,212,255,0.2);
+        }
+
+
+        /* =================================================
+           USER DASHBOARD
+        ================================================= */
+
+        .account-section {
+            margin-bottom:
+                80px;
+        }
+
+
+        .account-panel {
+            padding:
+                32px;
+
+            border-radius:
+                21px;
+
+            border:
+                1px solid
+                rgba(123,92,255,0.22);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(123,92,255,0.07),
+                    rgba(18,24,39,0.95)
+                );
+        }
+
+
+        .account-heading {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom:
+                26px;
+        }
+
+
+        .account-icon {
+            width:
+                60px;
+
+            height:
+                60px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius:
+                15px;
+
+            background:
+                rgba(123,92,255,0.12);
+
+            border:
+                1px solid
+                rgba(123,92,255,0.22);
+
+            font-size:
+                29px;
+        }
+
+
+        .account-title h2 {
+            font-size:
+                23px;
+
+            margin-bottom:
+                6px;
+        }
+
+
+        .account-title p {
+            color:
+                #98a4b8;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                15px;
+        }
+
+
+        .dashboard-item {
+            padding:
+                20px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.075);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            transition:
+                0.25s;
+        }
+
+
+        .dashboard-item:hover {
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(123,92,255,0.28);
+        }
+
+
+        .dashboard-item-icon {
+            font-size:
+                25px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .dashboard-item h3 {
+            font-size:
+                16px;
+
+            margin-bottom:
+                7px;
+
+            color:
+                #ffffff;
+        }
+
+
+        .dashboard-item p {
+            color:
+                #8f9bad;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.6;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .dashboard-link {
+            color:
+                #b9b1ff;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+        }
+
+
+        .recent-dashboard
+        .dashboard-link {
+            color:
+                #83e5f5;
+        }
+
+
+        /* =================================================
+           FEATURED TOOLS
+        ================================================= */
+
+        .tools-section {
+            margin-bottom:
+                75px;
+        }
+
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                21px;
+        }
+
+
+        .tool-card {
+            display: flex;
+
+            flex-direction:
+                column;
+
+            background:
+                #121827;
+
+            border:
+                1px solid
+                #252d40;
+
+            border-radius:
+                16px;
+
+            padding:
+                25px;
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .tool-card:hover {
+
+            border-color:
+                #6c63ff;
+
+            box-shadow:
+                0 14px 32px
+                rgba(0,0,0,0.24);
+        }
+
+
+        .tool-icon {
+            width:
+                55px;
+
+            height:
+                55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #1c2335;
+
+            border:
+                1px solid
+                #293247;
+
+            border-radius:
+                13px;
+
+            font-size:
+                27px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .tool-card h3 {
+            color:
+                #ffffff;
+
+            font-size:
+                20px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .tool-card p {
+            color:
+                #9da6b8;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.65;
+
+            min-height:
+                68px;
+
+            margin-bottom:
+                16px;
+        }
+
+
+        .tool-category {
+            align-self:
+                flex-start;
+
+            display:
+                inline-block;
+
+            background:
+                #211f45;
+
+            color:
+                #9d96ff;
+
+            padding:
+                6px 10px;
+
+            border:
+                1px solid
+                #302d5e;
+
+            border-radius:
+                6px;
+
+            font-size:
+                12px;
+
+            margin-bottom:
+                17px;
+        }
+
+
+        .tool-button {
+            display: block;
+
+            width: 100%;
+
+            margin-top: auto;
+
+            text-align:
+                center;
+
+            padding:
+                11px;
+
+            background:
+                #6c63ff;
+
+            color:
+                #ffffff;
+
+            border:
+                1px solid
+                #6c63ff;
+
+            border-radius:
+                9px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+        }
+
+
+        .tool-button:hover {
+            background:
+                #584ee8;
+        }
+
+
+        /* =================================================
+           ABOUT
+        ================================================= */
+
+        .info-box {
+            background:
+                #121827;
+
+            border:
+                1px solid
+                #252d40;
+
+            border-radius:
+                18px;
+
+            padding:
+                38px 35px;
+
+            text-align:
+                center;
+        }
+
+
+        .info-box h2 {
+            color:
+                #ffffff;
+
+            font-size:
+                27px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .info-box p {
+            max-width:
+                760px;
+
+            margin: auto;
+
+            color:
+                #9da6b8;
+
+            line-height:
+                1.8;
+
+            font-size:
+                15px;
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        footer {
+            border-top:
+                1px solid
+                #202638;
+
+            padding:
+                36px 7%;
+
+            color:
+                #7f8798;
+
+            text-align:
+                center;
+
+            background:
+                #0b0f19;
+        }
+
+
+        .footer-links {
+            margin-bottom:
+                18px;
+
+            display: flex;
+
+            justify-content:
+                center;
+
+            flex-wrap: wrap;
+
+            gap:
+                16px;
+        }
+
+
+        .footer-links a {
+            color:
+                #9da6b8;
+
+            font-size:
+                14px;
+        }
+
+
+        .footer-links a:hover {
+            color:
+                #ffffff;
+        }
+
+
+        footer p {
+            color:
+                #70798c;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =================================================
+           TABLET
+        ================================================= */
+
+        @media (
+            max-width: 950px
+        ) {
+
+            .dashboard-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .tools-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+        }
+
+
+        /* =================================================
+           MOBILE
+        ================================================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            header {
+                padding:
+                    15px 5%;
+            }
+
+
+            nav a:not(
+                .user-nav
+            ):not(
+                .recent-nav
+            ):not(
+                .account-nav
+            ) {
+                display: none;
+            }
+
+
+            nav {
+                gap: 6px;
+            }
+
+
+            .user-nav,
+            .recent-nav,
+            .account-nav {
+                font-size:
+                    11px;
+
+                padding:
+                    7px 8px;
+            }
+
+
+            .hero {
+                padding:
+                    65px 20px 60px;
+            }
+
+
+            .hero p {
+                font-size:
+                    15px;
+            }
+
+
+            .hero-button {
+                width:
+                    100%;
+
+                max-width:
+                    310px;
+            }
+
+
+            .container {
+                width:
+                    90%;
+
+                padding-bottom:
+                    70px;
+            }
+
+
+            .dashboard-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .account-heading {
+                flex-direction:
+                    column;
+
+                text-align:
+                    center;
+            }
+
+
+            .tools-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .section-title h2 {
+                font-size:
+                    26px;
+            }
+
+
+            .category-card,
+            .info-box,
+            .account-panel {
+                padding:
+                    25px;
+            }
+
+        }
+
+    
+
+        /* =========================================
+           OFFICIAL TOOL LOGOS
+        ========================================= */
+
+        .tool-icon img {
+            width: 44px;
+            height: 44px;
+
+            display: block;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+        }
+
+
+    </style>
+
+
+<style>
+/* VEYLORA CURSOR STABILITY FIX START */
+
+/* Keep clickable cursor completely stable */
+a.tool-button,
+a.category-button,
+a.hero-button,
+a.account-button,
+.quick-links a,
+button {
+    cursor: pointer !important;
+}
+
+/* Child text/icons must not take pointer control */
+a.tool-button *,
+a.category-button *,
+a.hero-button *,
+a.account-button *,
+.quick-links a *,
+button * {
+    cursor: inherit !important;
+    pointer-events: none !important;
+}
+
+/* Pseudo elements must not sit over the link */
+a.tool-button::before,
+a.tool-button::after,
+a.category-button::before,
+a.category-button::after,
+a.hero-button::before,
+a.hero-button::after,
+a.account-button::before,
+a.account-button::after,
+.quick-links a::before,
+.quick-links a::after {
+    pointer-events: none !important;
+}
+
+/* Tool cards must never move under the mouse */
+.tool-card,
+.tool-card:hover,
+.tool-card:focus-within {
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+}
+
+/* Buttons must never move/change hit position */
+.tool-button,
+.tool-button:hover,
+.tool-button:focus,
+.tool-button:active,
+.category-button,
+.category-button:hover,
+.category-button:focus,
+.category-button:active,
+.hero-button,
+.hero-button:hover,
+.hero-button:focus,
+.hero-button:active,
+.account-button,
+.account-button:hover,
+.account-button:focus,
+.account-button:active,
+.quick-links a,
+.quick-links a:hover,
+.quick-links a:focus,
+.quick-links a:active {
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+}
+
+/* Only visual properties are allowed to animate */
+.tool-button,
+.category-button,
+.hero-button,
+.account-button,
+.quick-links a {
+    transition-property:
+        background-color,
+        border-color,
+        color,
+        box-shadow !important;
+
+    transition-duration: 0.15s !important;
+    transition-timing-function: ease !important;
+
+    position: relative;
+    z-index: 2;
+}
+
+/* VEYLORA CURSOR STABILITY FIX END */
+</style>
+
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9101955435716307"
+        crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a
+        href="/"
+        class="logo"
+    >
+        Veylora <span>AI</span>
+    </a>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/ai-image-tools/">
+            AI Image Tools
+        </a>
+
+        <a href="/ai-video-tools/">
+            AI Video Tools
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+            <a
+                href="{% url 'saved_tools' %}"
+                class="user-nav"
+            >
+                ♡ Saved
+            </a>
+
+            <a
+                href="{% url 'recent_tools' %}"
+                class="user-nav recent-nav"
+            >
+                🕘 Recent
+            </a>
+
+            <a
+                href="/profile/"
+                class="account-nav"
+            >
+                My Account
+            </a>
+
+        {% else %}
+
+            <a
+                href="/login/"
+                class="account-nav"
+            >
+                Login
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-badge">
+        AI Tools Directory
+    </div>
+
+
+    <h1>
+
+        Discover the Best
+
+        <span>
+            AI Tools
+        </span>
+
+    </h1>
+
+
+    <p>
+
+        Explore powerful AI tools for image generation,
+        video creation, editing, animation and other
+        creative workflows — all in one place.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <a
+            href="/ai-image-tools/"
+            class="hero-button"
+        >
+            Explore Image Tools
+        </a>
+
+
+        <a
+            href="/ai-video-tools/"
+            class="hero-button secondary"
+        >
+            Explore Video Tools
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+            <a
+                href="{% url 'saved_tools' %}"
+                class="hero-button saved"
+            >
+                ♡ My Saved Tools
+            </a>
+
+
+            <a
+                href="{% url 'recent_tools' %}"
+                class="hero-button recent"
+            >
+                🕘 Recently Viewed
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<main class="container">
+
+
+    <!-- =================================================
+         CATEGORIES
+    ================================================== -->
+
+    <section>
+
+
+        <div class="section-title">
+
+            <h2>
+                Explore AI Tools
+            </h2>
+
+            <p>
+                Find the right AI tools for your creative projects.
+            </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🖼️
+                </div>
+
+                <h3>
+                    AI Image Tools
+                </h3>
+
+                <p>
+                    Discover AI-powered image generators,
+                    editors, background removers, enhancers
+                    and creative image platforms.
+                </p>
+
+                <a
+                    href="/ai-image-tools/"
+                    class="category-button"
+                >
+                    Explore Image Tools →
+                </a>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🎬
+                </div>
+
+                <h3>
+                    AI Video Tools
+                </h3>
+
+                <p>
+                    Explore AI video generators,
+                    editors, avatar platforms,
+                    animation tools and
+                    image-to-video solutions.
+                </p>
+
+                <a
+                    href="/ai-video-tools/"
+                    class="category-button"
+                >
+                    Explore Video Tools →
+                </a>
+
+            </div>
+
+
+            {% if user.is_authenticated %}
+
+
+                <div
+                    class="
+                        category-card
+                        saved-card
+                    "
+                >
+
+                    <div class="category-icon">
+                        ♡
+                    </div>
+
+                    <h3>
+                        My Saved Tools
+                    </h3>
+
+                    <p>
+                        Keep your favourite AI tools
+                        in one place and quickly
+                        return to them anytime.
+                    </p>
+
+                    <a
+                        href="{% url 'saved_tools' %}"
+                        class="category-button"
+                    >
+                        View Saved Tools →
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="
+                        category-card
+                        recent-card
+                    "
+                >
+
+                    <div class="category-icon">
+                        🕘
+                    </div>
+
+                    <h3>
+                        Recently Viewed
+                    </h3>
+
+                    <p>
+                        Quickly return to the AI tools
+                        you recently explored on
+                        Veylora AI.
+                    </p>
+
+                    <a
+                        href="{% url 'recent_tools' %}"
+                        class="category-button"
+                    >
+                        View Recent Tools →
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         USER DASHBOARD
+    ================================================== -->
+
+    {% if user.is_authenticated %}
+
+
+        <section class="account-section">
+
+
+            <div class="account-panel">
+
+
+                <div class="account-heading">
+
+
+                    <div class="account-icon">
+                        👤
+                    </div>
+
+
+                    <div class="account-title">
+
+                        <h2>
+                            Your Veylora AI Account
+                        </h2>
+
+                        <p>
+                            Manage your saved tools,
+                            recently viewed tools and
+                            account from one place.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <a
+                        href="{% url 'saved_tools' %}"
+                        class="dashboard-item"
+                    >
+
+                        <div class="dashboard-item-icon">
+                            ♡
+                        </div>
+
+                        <h3>
+                            Saved Tools
+                        </h3>
+
+                        <p>
+                            Open and manage the AI tools
+                            you have saved.
+                        </p>
+
+                        <span class="dashboard-link">
+                            View Saved Tools →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'recent_tools' %}"
+                        class="
+                            dashboard-item
+                            recent-dashboard
+                        "
+                    >
+
+                        <div class="dashboard-item-icon">
+                            🕘
+                        </div>
+
+                        <h3>
+                            Recently Viewed
+                        </h3>
+
+                        <p>
+                            Return to AI tools
+                            you recently opened.
+                        </p>
+
+                        <span class="dashboard-link">
+                            View Recent Tools →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/profile/"
+                        class="dashboard-item"
+                    >
+
+                        <div class="dashboard-item-icon">
+                            ⚙️
+                        </div>
+
+                        <h3>
+                            My Account
+                        </h3>
+
+                        <p>
+                            View your Veylora AI
+                            account information.
+                        </p>
+
+                        <span class="dashboard-link">
+                            Open Account →
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    {% endif %}
+
+
+    <!-- =================================================
+         FEATURED TOOLS
+    ================================================== -->
+
+    <section class="tools-section">
+
+
+        <div class="section-title">
+
+            <h2>
+                Featured AI Tools
+            </h2>
+
+            <p>
+                Explore popular tools available
+                on Veylora AI.
+            </p>
+
+        </div>
+
+
+        <div class="tools-grid">
+
+
+            {% for slug, tool in featured_tools.items %}
+
+
+                <div class="tool-card">
+
+
+                    <div class="tool-icon">
+                    <img
+                        src="/static/tools/logos/{{ tool.slug }}.png"
+                        alt="{{ tool.name }} official logo"
+                        loading="lazy"
+                    >
+                </div>
+
+
+                    <h3>
+                        {{ tool.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ tool.description }}
+                    </p>
+
+
+                    <span class="tool-category">
+                        {{ tool.category }}
+                    </span>
+
+
+                    <a
+                        href="{% url 'tool_detail' tool.slug %}"
+                        class="tool-button"
+                    >
+                        View Details →
+                    </a>
+
+
+                </div>
+
+
+            {% empty %}
+
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        No Tools Available
+                    </h3>
+
+                    <p>
+                        No featured AI tools
+                        are currently available.
+                    </p>
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ABOUT
+    ================================================== -->
+
+    <section>
+
+
+        <div class="info-box">
+
+
+            <h2>
+                What is Veylora AI?
+            </h2>
+
+
+            <p>
+
+                Veylora AI is an independent AI tools
+                directory designed to help creators
+                discover useful artificial intelligence
+                tools for images, videos and creative
+                workflows.
+
+                Browse different categories,
+                explore tool information and visit
+                the official platforms to learn more.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/">
+            About
+        </a>
+
+        <a href="/privacy/">
+            Privacy
+        </a>
+
+        <a href="/terms/">
+            Terms
+        </a>
+
+        <a href="/disclaimer/">
+            Disclaimer
+        </a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'saved_tools' %}">
+                Saved Tools
+            </a>
+
+            <a href="{% url 'recent_tools' %}">
+                Recently Viewed
+            </a>
+
+            <a href="/profile/">
+                My Account
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <p>
+        © 2026 Veylora AI. All rights reserved.
+    </p>
+
+
+</footer>
+
+
+</body>
+</html>
